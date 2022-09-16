@@ -18,7 +18,7 @@ The above copyright notice and this permission notice shall be included in all c
     <link rel="icon" type="image/png" href="<?php echo site_url('assets/'); ?>images/icon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Nipindo Travel - Admin
+        Cetak ID
     </title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -45,6 +45,8 @@ The above copyright notice and this permission notice shall be included in all c
         </div>
     </div>
     <!--   Core JS Files   -->
+    <script src="<?php echo site_url('assets/'); ?>js/core/html2canvas.js" type="text/javascript"></script>
+    <!-- <script src="<?php echo site_url('assets/'); ?>js/html2canvas.js"></script> -->
     <script src="<?php echo site_url('assets/'); ?>js/core/jquery.min.js"></script>
     <script src="<?php echo site_url('assets/'); ?>js/core/popper.min.js"></script>
     <script src="<?php echo site_url('assets/'); ?>js/core/bootstrap-material-design.min.js"></script>

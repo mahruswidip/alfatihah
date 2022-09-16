@@ -153,8 +153,49 @@ class Jamaah extends CI_Controller
                 $data['_view'] = 'jamaah/edit';
                 $this->load->view('layouts/main', $data);
             }
-        } else
+        } else {
             show_error('The jamaah you are trying to edit does not exist.');
+        }
+    }
+
+    function cetak_id_card($id_jamaah)
+    {
+        // check if the luasan exists before trying to edit it
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+
+        if (isset($data['jamaah']['id_jamaah'])) {
+            if (isset($_POST) && count($_POST) > 0) {
+                $params = array(
+                    'qr_code' => $this->input->post('qr_code'),
+                    'nama_jamaah' => $this->input->post('nama_jamaah'),
+                );
+
+                $this->Jamaah_model->update_jamaah($id_jamaah, $params);
+                redirect('jamaah/index');
+            } else {
+                $data['_view'] = 'jamaah/cetak';
+                $this->load->view('layouts/main_card', $data);
+            }
+        } else {
+            show_error('The jamaah you are trying to edit does not exist.');
+        }
+
+        // if (isset($data['jamaah']['id_jamaah'])) {
+        //     if (isset($_POST) && count($_POST) > 0) {
+        //         $params = array(
+        //             'nik' => $this->input->post('nik'),
+        //             'nama_jamaah' => $this->input->post('nama_jamaah'),
+        //             'jamaah_img' => $this->input->post('jamaah_img'),
+        //         );
+
+        //         $this->Jamaah_model->update_jamaah($id_jamaah, $params);
+        //         redirect('jamaah/index');
+        //     } else {
+        //         $data['_view'] = 'jamaah/index';
+        //         $this->load->view('layouts/main', $data);
+        //     }
+        // } else
+        //     show_error('The jamaah you are trying to edit does not exist.');
     }
 
     function edit_kehadiran($id_jamaah)
