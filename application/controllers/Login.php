@@ -48,7 +48,7 @@ class Login extends CI_Controller
         redirect('dashboard/index');
       }
     } else {
-      echo $this->session->set_flashdata('msg', 'Username or Password is Wrong');
+      echo $this->session->set_flashdata('err', 'Username or Password is Wrong');
       redirect('login');
     }
   }

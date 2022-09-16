@@ -26,7 +26,16 @@ class Jamaah extends CI_Controller
         $config['total_rows'] = $this->Jamaah_model->get_all_jamaah_count();
         $this->pagination->initialize($config);
 
-        $data['jamaah'] = $this->Jamaah_model->get_all_jamaah($params);
+        $user_level = $this->session->userdata('user_level');
+        $user_id = $this->session->userdata('user_id');
+        // $data['jamaah'] = $this->Jamaah_model->get_all_jamaah($params);
+
+        $data['jamaah'] = '';
+        if ($user_level == '2') {
+            $data['jamaah'] = $this->Jamaah_model->get_all_jamaah_by_cabang($user_id);
+        } elseif ($user_level == '1') {
+            $data['jamaah'] = $this->Jamaah_model->get_all_jamaah($params);
+        }
 
         $data['_view'] = 'jamaah/index';
         $this->load->view('layouts/main', $data);
@@ -73,6 +82,8 @@ class Jamaah extends CI_Controller
                     'nomor_telepon' => $this->input->post('nomor_telepon'),
                     'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
                     'paket' => $this->input->post('paket'),
+                    'alamat' => $this->input->post('alamat'),
+                    'nomor_paspor' => $this->input->post('nomor_paspor'),
                     'created_by' => $user_id,
                 );
 
@@ -144,7 +155,12 @@ class Jamaah extends CI_Controller
                 $params = array(
                     'nik' => $this->input->post('nik'),
                     'nama_jamaah' => $this->input->post('nama_jamaah'),
-                    'jamaah_img' => $this->input->post('jamaah_img'),
+                    'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                    'nomor_telepon' => $this->input->post('nomor_telepon'),
+                    'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
+                    'paket' => $this->input->post('paket'),
+                    'alamat' => $this->input->post('alamat'),
+                    'nomor_paspor' => $this->input->post('nomor_paspor'),
                 );
 
                 $this->Jamaah_model->update_jamaah($id_jamaah, $params);
@@ -174,7 +190,7 @@ class Jamaah extends CI_Controller
                 redirect('jamaah/index');
             } else {
                 $data['_view'] = 'jamaah/cetak';
-                $this->load->view('layouts/main_card', $data);
+                $this->load->view('layouts/main', $data);
             }
         } else {
             show_error('The jamaah you are trying to edit does not exist.');

@@ -40,6 +40,7 @@ The above copyright notice and this permission notice shall be included in all c
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
+                <?php if ($this->session->userdata('user_level') === '1') : ?>
                     <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
                                             echo 'active';
                                         } ?>">
@@ -78,6 +79,30 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Keluar</p>
                         </a>
                     </li>
+                    <?php else : ?>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
+                                            echo 'active';
+                                        } ?>">
+                        <a class="nav-link" href="<?php echo site_url(''); ?>dashboard/index">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
+                                            echo 'active';
+                                        } ?>">
+                        <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
+                            <i class="material-icons">persons</i>
+                            <p>Jamaah</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('login/logout'); ?>">
+                            <i class="material-icons">archive</i>
+                            <p>Keluar</p>
+                        </a>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -95,6 +120,7 @@ The above copyright notice and this permission notice shall be included in all c
         </div>
     </div>
     <!--   Core JS Files   -->
+    <script src="<?php echo site_url('assets/'); ?>js/core/html2canvas.js" type="text/javascript"></script>
     <script src="<?php echo site_url('assets/'); ?>js/core/jquery.min.js"></script>
     <script src="<?php echo site_url('assets/'); ?>js/core/popper.min.js"></script>
     <script src="<?php echo site_url('assets/'); ?>js/core/bootstrap-material-design.min.js"></script>

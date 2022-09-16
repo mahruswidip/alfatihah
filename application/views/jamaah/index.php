@@ -73,7 +73,6 @@
 <script type="text/javascript">
     window.addEventListener('load', function() {
         $('#myModal').modal('hide')
-        $('#myModal').modal('show');
         setTimeout(function() {
             $('#myModal').modal('hide');
         }, 2500);
