@@ -28,7 +28,6 @@ class Jamaah extends CI_Controller
 
         $user_level = $this->session->userdata('user_level');
         $user_id = $this->session->userdata('user_id');
-        // $data['jamaah'] = $this->Jamaah_model->get_all_jamaah($params);
 
         $data['jamaah'] = '';
         if ($user_level == '2') {

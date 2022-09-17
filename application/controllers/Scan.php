@@ -130,29 +130,6 @@ class Scan extends CI_Controller
         // 	redirect('scan/index');
         // }
     }
-    function edit($id_jamaah)
-    {
-        // check if the luasan exists before trying to edit it
-        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
-
-        if (isset($data['jamaah']['id_jamaah'])) {
-            if (isset($_POST) && count($_POST) > 0) {
-                $params = array(
-                    'nik' => $this->input->post('nik'),
-                    'nama_jamaah' => $this->input->post('nama_jamaah'),
-                    'jamaah_img' => $this->input->post('jamaah_img'),
-                );
-
-                $this->Jamaah_model->update_jamaah($id_jamaah, $params);
-                redirect('jamaah/index');
-            } else {
-                $data['_view'] = 'jamaah/edit';
-                // $this->load->view('layouts/main', $data);
-            }
-        } else
-            show_error('The jamaah you are trying to edit does not exist.');
-    }
-
     function remove($id_kehadiran)
     {
         $kehadiran = $this->Scan_model->get_kehadiran($id_kehadiran);
