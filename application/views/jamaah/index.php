@@ -38,7 +38,12 @@
                             <th>Nama Jamaah</th>
                             <th>Grup Keberangkatan</th>
                             <th>Paket</th>
-                            <th>QR Code</th>
+                            <?php if ($this->session->userdata('user_level') == '1') {
+                                echo '<th>QR Code</th>';
+                            } else {
+                                echo '';
+                            }
+                            ?>
                             <th>Actions</th>
                         </thead>
                         <tbody>
@@ -52,7 +57,12 @@
                                     <td><?php echo $j['nama_jamaah']; ?></td>
                                     <td><?php echo $j['grup_keberangkatan']; ?></td>
                                     <td><?php echo $j['paket']; ?></td>
-                                    <td><img style="width: 100px;" src="<?php echo base_url() . 'assets/images/qr/' . $j['qr_code']; ?>"></td>
+                                    <?php if ($this->session->userdata('user_level') == '1') {
+                                        echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr/' . $j['qr_code'] . '"></td>';
+                                    } else {
+                                        echo '';
+                                    }
+                                    ?>
                                     <td>
                                         <a href="<?php echo site_url('jamaah/cetak_id_card/' . $j['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span></a>
                                         <a href="<?php echo site_url('jamaah/edit/' . $j['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
