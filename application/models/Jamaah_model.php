@@ -39,9 +39,6 @@ class Jamaah_model extends CI_Model
     function get_all_jamaah($params = array())
     {
         $this->db->order_by('jamaah.id_jamaah', 'desc');
-        if (isset($params) && !empty($params)) {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
        return $this->db->get('jamaah')->result_array();
     }
 
