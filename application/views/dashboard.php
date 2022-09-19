@@ -5,7 +5,7 @@
 </div>
 <div class="content">
     <div class="container-fluid">
-        <?php if ($this->session->userdata('user_id') == '1') : ?>
+        <?php if ($this->session->userdata('user_id') == '7') : ?>
             <h3>Kantor Pusat Pasuruan </h3>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -16,7 +16,7 @@
                             </div>
                             <p class="card-category">Jumlah Jamaah</p>
                             <!-- <h3 class="card-title"><?php echo $this->db->from("jamaah")->count_all_results(); ?></h3> -->
-                            <h3 class="card-title"><?php $this->db->where('created_by =', 1);
+                            <h3 class="card-title"><?php $this->db->where('created_by =', 7);
                                                     $query = $this->db->get('jamaah');
                                                     echo $query->num_rows(); ?></h3>
                         </div>
@@ -30,7 +30,7 @@
                             </div>
                             <p class="card-category">Belum Manasik</p>
                             <h3 class="card-title"><?php $this->db->where('kehadiran !=', 'Hadir');
-                                                    $this->db->where('created_by =', 1);
+                                                    $this->db->where('created_by =', 7);
                                                     $query = $this->db->get('jamaah');
                                                     echo $query->num_rows(); ?></h3>
                         </div>
