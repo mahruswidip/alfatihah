@@ -1,3 +1,4 @@
+
 <!--Modal Form Login with Avatar Demo-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered cascading-modal modal-avatar modal-sm" role="document">
@@ -30,6 +31,8 @@
                 </div>
             </div>
             <div class="card-body">
+                <!-- <?php echo '<pre>';
+                print_r($jamaah) ?> -->
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
@@ -59,7 +62,13 @@
                                     <td class="col-2"><?php echo $j['alamat']; ?></td>
                                     <td><?php echo $j['grup_keberangkatan']; ?></td>
                                     <td><?php echo $j['paket']; ?></td>
-                                    <td><?php echo $j['user_name']; ?></td>
+                                    <?php if ($this->session->userdata('user_level') == '2') {
+                                        echo '<td>'. $this->session->userdata('user_name').'</td>';
+                                    } else {
+                                        echo '<td>'.$j['user_name'].'</td>';
+                                    }
+                                    ?>
+                                    <!-- <td><?php echo $j['user_name']; ?></td> -->
                                     <?php if ($this->session->userdata('user_level') == '1') {
                                         echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr/' . $j['qr_code'] . '"></td>';
                                     } else {
