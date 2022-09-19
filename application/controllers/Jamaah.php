@@ -155,11 +155,11 @@ class Jamaah extends CI_Controller
                     'nik' => $this->input->post('nik'),
                     'nama_jamaah' => $this->input->post('nama_jamaah'),
                     'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                    'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
                     'paket' => $this->input->post('paket'),
                     'alamat' => $this->input->post('alamat'),
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
+                    'nomor_telepon' => $this->input->post('nomor_telepon'),
+                    'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
                 );
 
                 $this->Jamaah_model->update_jamaah($id_jamaah, $params);

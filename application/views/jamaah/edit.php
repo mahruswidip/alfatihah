@@ -66,7 +66,7 @@
 								<div class="form-group">
 									<div class="form-group">
 										<label class="bmd-label-floating">Alamat</label>
-										<textarea name="alamat" rows="6" class="form-control" id="alamat"><?php echo ($this->input->post('alamat') ? $this->input->post('alamat') : $jamaah['alamat']); ?></textarea>
+										<input type="text" name="alamat" value="<?php echo ($this->input->post('alamat') ? $this->input->post('alamat') : $jamaah['alamat']); ?>" class="form-control" id="alamat" />
 									</div>
 								</div>
 							</div>
