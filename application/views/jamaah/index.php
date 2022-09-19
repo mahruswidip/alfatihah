@@ -33,9 +33,10 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
-                            <th>NIK</th>
+                            <th>Nomor Paspor</th>
                             <th>Foto</th>
                             <th>Nama Jamaah</th>
+                            <th class="col-2">Alamat</th>
                             <th>Grup Keberangkatan</th>
                             <th>Paket</th>
                             <th>Input Oleh</th>
@@ -50,12 +51,12 @@
                         <tbody>
                             <?php foreach ($jamaah as $j) { ?>
                                 <tr>
-                                    <!-- <td><?php echo $j['nik']; ?></td> -->
-                                    <td></td>
+                                    <td><?php echo $j['nomor_paspor']; ?></td>
                                     <td>
                                         <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $j['jamaah_img']; ?>" alt="">
                                     </td>
                                     <td><?php echo $j['nama_jamaah']; ?></td>
+                                    <td class="col-2"><?php echo $j['alamat']; ?></td>
                                     <td><?php echo $j['grup_keberangkatan']; ?></td>
                                     <td><?php echo $j['paket']; ?></td>
                                     <td><?php echo $j['user_name']; ?></td>
