@@ -38,6 +38,7 @@
                             <th>Nama Jamaah</th>
                             <th>Grup Keberangkatan</th>
                             <th>Paket</th>
+                            <th>Input Oleh</th>
                             <?php if ($this->session->userdata('user_level') == '1') {
                                 echo '<th>QR Code</th>';
                             } else {
@@ -57,6 +58,7 @@
                                     <td><?php echo $j['nama_jamaah']; ?></td>
                                     <td><?php echo $j['grup_keberangkatan']; ?></td>
                                     <td><?php echo $j['paket']; ?></td>
+                                    <td><?php echo $j['created_by']; ?></td>
                                     <?php if ($this->session->userdata('user_level') == '1') {
                                         echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr/' . $j['qr_code'] . '"></td>';
                                     } else {
