@@ -60,6 +60,8 @@ class Jamaah_model extends CI_Model
         $this->db->set('nomor_telepon', $params['nomor_telepon']);
         $this->db->set('jenis_kelamin', $params['jenis_kelamin']);
         $this->db->set('grup_keberangkatan', $params['grup_keberangkatan']);
+        $this->db->set('alamat', $params['alamat']);
+        $this->db->set('nomor_paspor', $params['nomor_paspor']);
         $this->db->set('paket', $params['paket']);
         $this->db->set('jamaah_img', $gambar);
         $this->db->set('qr_code', $qr_code);
