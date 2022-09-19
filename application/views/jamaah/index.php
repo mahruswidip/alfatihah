@@ -58,7 +58,7 @@
                                     <td><?php echo $j['nama_jamaah']; ?></td>
                                     <td><?php echo $j['grup_keberangkatan']; ?></td>
                                     <td><?php echo $j['paket']; ?></td>
-                                    <td><?php echo $j['created_by']; ?></td>
+                                    <td><?php echo $j['user_name']; ?></td>
                                     <?php if ($this->session->userdata('user_level') == '1') {
                                         echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr/' . $j['qr_code'] . '"></td>';
                                     } else {
