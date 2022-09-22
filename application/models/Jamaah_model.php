@@ -30,8 +30,12 @@ class Jamaah_model extends CI_Model
 
     function get_jamaah_by_nik($nik)
     {
-        $this->db->order_by('jamaah.id_jamaah', 'asc');
         return $this->db->get_where('jamaah', array('nik' => $nik))->row_array();
+    }
+
+    function get_jamaah_by_uuid($uuid)
+    {
+        return $this->db->get_where('jamaah', array('uuid' => $uuid))->row_array();
     }
 
     /*
@@ -39,7 +43,7 @@ class Jamaah_model extends CI_Model
      */
     function get_all_jamaah($params = array())
     {
-        $this->db->order_by('jamaah.id_jamaah', 'asc');
+        $this->db->order_by('jamaah.created_at', 'desc');
         $this->db->join('tbl_users', 'tbl_users.user_id=jamaah.created_by', 'left');
         return $this->db->get('jamaah')->result_array();
     }
@@ -80,7 +84,7 @@ class Jamaah_model extends CI_Model
 
     function update_scan($result_code, $params)
     {
-        $this->db->where('nik', $result_code);
+        $this->db->where('uuid', $result_code);
         return $this->db->update('jamaah', $params);
     }
 
