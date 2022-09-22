@@ -5,6 +5,9 @@
             <div style="margin-top: 20px;">
                 <button type="button" id="btn_convert" class="btn btn-success"><span class="fa fa-download"></span> Halaman Depan</button>
             </div>
+            <div style="margin-top: 20px;">
+                <button type="button" id="btn_convert2" class="btn btn-success"><span class="fa fa-download"></span> Halaman Belakang</button>
+            </div>
             <div id="html-content-holder" style="width: 639px; height: 1016px;">
                 <img src="<?php echo base_url() . 'assets/images/id_card_template/depan.png'; ?>">
                 <img style="border-radius: 20px; width: 280px; height: 385px; margin-top: -977px; margin-left: 180px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>">
@@ -21,9 +24,6 @@
             </div>
         </div>
         <div class="col">
-            <div style="margin-top: 20px;">
-                <button type="button" id="btn_convert2" class="btn btn-success"><span class="fa fa-download"></span> Halaman Belakang</button>
-            </div>
             <div id="html-content-holder-belakang" style="width: 639px; height: 1016px;">
                 <img src="<?php echo base_url() . 'assets/images/id_card_template/belakang.png'; ?>">
                 <img style="border-radius: 30px; width: 510px; height: 510px; margin-top: -1305px; margin-left: 64px;" src="<?php echo base_url() . 'assets/images/qr_uuid/' . $jamaah['qr_code_benar']; ?>">
@@ -44,7 +44,7 @@
                 var anchorTag = document.createElement("a");
                 document.body.appendChild(anchorTag);
                 document.getElementById("previewImg").appendChild(canvas);
-                anchorTag.download = "<?php echo $jamaah['nama_jamaah'].'_Depan' ?>.png";
+                anchorTag.download = "<?php echo $jamaah['nama_jamaah'] . '_Depan' ?>.png";
                 anchorTag.href = canvas.toDataURL();
                 anchorTag.target = '_blank';
                 anchorTag.click();
@@ -58,7 +58,7 @@
                 var anchorTag = document.createElement("a");
                 document.body.appendChild(anchorTag);
                 document.getElementById("previewImg2").appendChild(canvas);
-                anchorTag.download = "<?php echo $jamaah['nama_jamaah'].'_Belakang' ?>.png";
+                anchorTag.download = "<?php echo $jamaah['nama_jamaah'] . '_Belakang' ?>.png";
                 anchorTag.href = canvas.toDataURL();
                 anchorTag.target = '_blank';
                 anchorTag.click();
