@@ -26,7 +26,7 @@
             </div>
             <div id="html-content-holder-belakang" style="width: 639px; height: 1016px;">
                 <img src="<?php echo base_url() . 'assets/images/id_card_template/belakang.png'; ?>">
-                <img style="border-radius: 30px; width: 510px; height: 510px; margin-top: -1305px; margin-left: 64px;" src="<?php echo base_url() . 'assets/images/qr/' . $jamaah['qr_code']; ?>">
+                <img style="border-radius: 30px; width: 510px; height: 510px; margin-top: -1305px; margin-left: 64px;" src="<?php echo base_url() . 'assets/images/qr_uuid/' . $jamaah['qr_code_benar']; ?>">
             </div>
 
             <div id="previewImg2" style="display: none;">

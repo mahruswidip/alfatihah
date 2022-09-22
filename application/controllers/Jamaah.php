@@ -173,6 +173,54 @@ class Jamaah extends CI_Controller
         }
     }
 
+    function updateqr($id_jamaah)
+    {
+
+        $config['upload_path'] = './assets/images/'; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
+        $user_id = $this->session->userdata('user_id');
+        $this->load->library('ciqrcode');
+        // check if the luasan exists before trying to edit it
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+
+        if (isset($data['jamaah']['id_jamaah'])) {
+            if (isset($_POST) && count($_POST) > 0) {
+                $params = array(
+                    'qr_code_benar' => $this->input->post('uuid').'.png',
+                );
+
+                $config['cacheable']    = true; //boolean, the default is true
+                $config['cachedir']     = './assets/'; //string, the default is application/cache/
+                $config['errorlog']     = './assets/'; //string, the default is application/logs/
+                $config['imagedir']     = './assets/images/qr_uuid/'; //direktori penyimpanan qr code
+                $config['quality']      = true; //boolean, the default is true
+                $config['size']         = '1024'; //interger, the default is 1024
+                $config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
+                $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+                $this->ciqrcode->initialize($config);
+
+                $nama = $this->input->post('uuid');
+
+                $qr_code = $nama . '.png'; //buat name dari qr code sesuai dengan nim
+
+                $params1['data'] = $nama; //data yang akan di jadikan QR CODE
+                $params1['level'] = 'H'; //H=High
+                $params1['size'] = 10;
+                $params1['savename'] = FCPATH . $config['imagedir'] . $qr_code; //simpan image QR CODE ke folder assets/images/
+                $this->ciqrcode->generate($params1); // fungsi untuk generate QR CODE
+
+                $this->Jamaah_model->update_jamaah($id_jamaah, $params);
+                redirect('jamaah/index');
+            } else {
+                $data['_view'] = 'jamaah/updateqr';
+                $this->load->view('layouts/main', $data);
+            }
+        } else {
+            show_error('The jamaah you are trying to edit does not exist.');
+        }
+    }
+
     function cetak_id_card($id_jamaah)
     {
         // check if the luasan exists before trying to edit it
