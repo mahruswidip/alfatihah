@@ -34,6 +34,12 @@ class Jamaah_model extends CI_Model
         return $this->db->get_where('jamaah', array('nik' => $nik))->row_array();
     }
 
+    function get_jamaah_by_uuid($uuid)
+    {
+        $this->db->order_by('jamaah.id_jamaah', 'asc');
+        return $this->db->get_where('jamaah', array('uuid' => $uuid))->row_array();
+    }
+
     /*
      * Get all jamaah
      */
@@ -80,7 +86,7 @@ class Jamaah_model extends CI_Model
 
     function update_scan($result_code, $params)
     {
-        $this->db->where('nik', $result_code);
+        $this->db->where('uuid', $result_code);
         return $this->db->update('jamaah', $params);
     }
 
