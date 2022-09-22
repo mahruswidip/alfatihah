@@ -44,7 +44,7 @@
                 var anchorTag = document.createElement("a");
                 document.body.appendChild(anchorTag);
                 document.getElementById("previewImg").appendChild(canvas);
-                anchorTag.download = "<?php echo $jamaah['nama_jamaah'].'_Depan' ?>.jpg";
+                anchorTag.download = "<?php echo $jamaah['nama_jamaah'].'_Depan' ?>.png";
                 anchorTag.href = canvas.toDataURL();
                 anchorTag.target = '_blank';
                 anchorTag.click();
@@ -58,7 +58,7 @@
                 var anchorTag = document.createElement("a");
                 document.body.appendChild(anchorTag);
                 document.getElementById("previewImg2").appendChild(canvas);
-                anchorTag.download = "<?php echo $jamaah['nama_jamaah'].'_Belakang' ?>.jpg";
+                anchorTag.download = "<?php echo $jamaah['nama_jamaah'].'_Belakang' ?>.png";
                 anchorTag.href = canvas.toDataURL();
                 anchorTag.target = '_blank';
                 anchorTag.click();
