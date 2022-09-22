@@ -50,7 +50,7 @@
     <div>
         <video id="video" width="500" height="400" style="border: 1px solid gray"></video>
     </div>
-    <textarea style="display: none;" name="uuid" id="result" readonly></textarea>
+    <textarea style="display: none;" name="nik" id="result" readonly></textarea>
     <span> <input style="display: none;" type="submit" id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
     <?php echo form_close(); ?>
     <div class="col-md-12">
@@ -60,9 +60,9 @@
                     <div class="col-md-9">
                         <h3 class="card-title ">Scan Kehadiran</h3>
                     </div>
-                    <!-- <div class="col-auto">
+                    <div class="col-auto">
                         <a style="display: none;" href="<?php echo site_url(''); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="card-body">
