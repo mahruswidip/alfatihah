@@ -63,11 +63,11 @@ class Scan extends CI_Controller
 
     function cek_id()
     {
-        $result_code = $this->input->post('nik');
+        $result_code = $this->input->post('uuid');
         $tgl = date('Y-m-d');
         $jam_msk = date('h:i:s');
         $jam_klr = date('h:i:s');
-        $get_jamaah = $this->Jamaah_model->get_jamaah_by_nik($result_code);
+        $get_jamaah = $this->Jamaah_model->get_jamaah_by_uuid($result_code);
         if ($get_jamaah != null) {
             $params = array(
                 'kehadiran' => 'Hadir',
