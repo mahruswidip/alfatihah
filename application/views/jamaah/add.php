@@ -51,7 +51,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-6">
-									<label class="bmd-label-floating text-danger">Foto Jamaah</label>
+									<label class="bmd-label-floating text-danger">Foto Jamaah (Ukuran Max 250kb)</label>
 									<br>
 									<input type="file" name="jamaah_img" required>
 									<br>
