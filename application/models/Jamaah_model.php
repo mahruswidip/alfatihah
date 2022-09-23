@@ -30,13 +30,11 @@ class Jamaah_model extends CI_Model
 
     function get_jamaah_by_nik($nik)
     {
-        $this->db->order_by('jamaah.id_jamaah', 'asc');
         return $this->db->get_where('jamaah', array('nik' => $nik))->row_array();
     }
 
     function get_jamaah_by_uuid($uuid)
     {
-        $this->db->order_by('jamaah.id_jamaah', 'asc');
         return $this->db->get_where('jamaah', array('uuid' => $uuid))->row_array();
     }
 
@@ -45,7 +43,7 @@ class Jamaah_model extends CI_Model
      */
     function get_all_jamaah($params = array())
     {
-        $this->db->order_by('jamaah.id_jamaah', 'asc');
+        $this->db->order_by('jamaah.updated_at', 'desc');
         $this->db->join('tbl_users', 'tbl_users.user_id=jamaah.created_by', 'left');
         return $this->db->get('jamaah')->result_array();
     }
@@ -59,7 +57,7 @@ class Jamaah_model extends CI_Model
     /*
      * function to add new jamaah
      */
-    function add_jamaah($params, $qr_code, $gambar)
+    function add_jamaah($params, $gambar)
     {
         $this->db->set('nik', $params['nik']);
         $this->db->set('nama_jamaah', $params['nama_jamaah']);
@@ -70,8 +68,8 @@ class Jamaah_model extends CI_Model
         $this->db->set('nomor_paspor', $params['nomor_paspor']);
         $this->db->set('paket', $params['paket']);
         $this->db->set('jamaah_img', $gambar);
-        $this->db->set('qr_code', $qr_code);
         $this->db->set('created_by', $params['created_by']);
+        $this->db->set('uuid', 'UUID()', FALSE);
         $this->db->insert('jamaah');
     }
 
