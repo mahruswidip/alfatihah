@@ -70,7 +70,7 @@
                                     ?>
                                     <!-- <td><?php echo $j['user_name']; ?></td> -->
                                     <?php if ($this->session->userdata('user_level') == '1') {
-                                        echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr/' . $j['qr_code'] . '"></td>';
+                                        echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr_uuid/' . $j['qr_code_benar'] . '"></td>';
                                     } else {
                                         echo '';
                                     }
