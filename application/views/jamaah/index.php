@@ -80,7 +80,7 @@
                                         <a href="<?php echo site_url('jamaah/edit/' . $j['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
                                         <a href="<?php echo site_url('jamaah/remove/' . $j['id_jamaah']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a>
                                         <?php if ($j['qr_code_benar']== null) {
-                                            echo '<a href="'.site_url('jamaah/updateqr/' . $j['id_jamaah']).'" class="btn btn-dark"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="'.site_url('jamaah/updateqr/' . $j['id_jamaah']).'" class="btn btn-dark"><span class="fa fa-qrcode"></span></a>';
                                         } else {
                                             echo '';
                                         }
