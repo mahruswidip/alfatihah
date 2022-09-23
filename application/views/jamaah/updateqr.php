@@ -11,12 +11,12 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="bmd-label-floating text-danger">UUID</label>
-									<input type="text" name="uuid" value="<?php echo ($this->input->post('uuid') ? $this->input->post('uuid') : $jamaah['uuid']); ?>" class="form-control" id="uuid" />
+									<!-- <label class="bmd-label-floating text-danger">UUID</label> -->
+									<input type="text" name="uuid" style="display: none;" value="<?php echo ($this->input->post('uuid') ? $this->input->post('uuid') : $jamaah['uuid']); ?>" class="form-control" id="uuid" />
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-info pull-right">Simpan</button>
+						<button type="submit" class="btn btn-info pull-right">Buat QR</button>
 						<div class="clearfix"></div>
 						<?php echo form_close(); ?>
 					</div>
