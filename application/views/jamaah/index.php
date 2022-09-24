@@ -27,6 +27,13 @@
                     </div>
                     <div class="col-auto">
                         <a href="<?php echo site_url('jamaah/bukatambah'); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
+                        <?php
+                        if ($this->session->userdata('user_level') == '1') {
+                            echo '<a href="' . site_url('jamaah/export') . '" class="btn btn-info"><span class="fa fa-download"></span>&nbsp; Export</a>';
+                        } else {
+                            echo '';
+                        } ?>
+                        
                     </div>
                 </div>
             </div>
