@@ -47,6 +47,7 @@ class Jamaah_model extends CI_Model
         $this->db->join('tbl_users', 'tbl_users.user_id=jamaah.created_by', 'left');
         return $this->db->get('jamaah')->result_array();
     }
+
     function get_all_jamaah_pure($params = array())
     {
         $this->db->order_by('jamaah.grup_keberangkatan', 'asc');

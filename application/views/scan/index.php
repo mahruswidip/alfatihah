@@ -145,6 +145,6 @@
 
         setTimeout(function() {
             $('#myModal').modal('hide');
-        }, 2500);
+        }, 1800);
     })
 </script>
