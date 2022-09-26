@@ -6,10 +6,7 @@
         <label for="sourceSelect">Change video source:</label>
         <select id="sourceSelect" style="max-width:800px"></select>
     </div>
-    <!-- <div>
-        <video id="video" width="700" height="600" style="border: 1px solid gray"></video>
-    </div> -->
-    <textarea style="display: none;" name="uuid" id="result" readonly></textarea>
+    <textarea style="display: block;" name="uuid" id="result" readonly></textarea>
     <span> <input style="display: none;" type="submit" id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
     <div class="col">
         <video id="video" width="100%" height="420" style="border: 0.2rem solid grey; border-radius: 2rem;-webkit-transform: scaleX(-1);
