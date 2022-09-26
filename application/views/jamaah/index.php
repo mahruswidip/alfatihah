@@ -38,8 +38,6 @@
                 </div>
             </div>
             <div class="card-body">
-                <!-- <?php echo '<pre>';
-                print_r($jamaah) ?> -->
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
