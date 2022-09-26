@@ -39,6 +39,8 @@ class Scan extends CI_Controller
         $data['_view'] = 'scan/public';
         $result_code = $this->input->post('uuid');
         $data['jamaah'] = $this->Jamaah_model->get_jamaah_by_uuid($result_code);
+        var_dump($data['jamaah']);
+        exit();
         $this->load->view('layouts/main', $data);
     }
 
