@@ -18,7 +18,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label class="bmd-label-floating text-danger">Nama Jamaah</label>
+										<label class="bmd-label-floating text-danger">Nama Jamaah (KTP)</label>
 										<input type="text" name="nama_jamaah" value="<?php echo $this->input->post('nama_jamaah'); ?>" class="form-control" id="nama_jamaah" />
 									</div>
 								</div>
@@ -26,7 +26,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label class="bmd-label-floating text-danger">Nomor Telepon</label>
+										<label class="bmd-label-floating text-danger">Nomor Telepon (Whatsapp)</label>
 										<input type="text" name="nomor_telepon" value="<?php echo $this->input->post('nomor_telepon'); ?>" class="form-control" id="nomor_telepon" />
 									</div>
 								</div>
@@ -80,9 +80,15 @@
 										<input type="text" name="grup_keberangkatan" value="<?php echo $this->input->post('grup_keberangkatan'); ?>" class="form-control" id="grup_keberangkatan" />
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="form-group">
-										<label class="bmd-label-floating">Paket</label>
+										<label class="bmd-label-floating">Paket <span style="font-size: x-small;">Ekonomi, VIP, VVIP</span></label>
+										<input type="text" name="paket" value="<?php echo $this->input->post('paket'); ?>" class="form-control" id="paket" />
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<label class="bmd-label-floating">Lama Hari <span style="font-size: x-small;">9, 10, 13, 16</span></label>
 										<input type="text" name="paket" value="<?php echo $this->input->post('paket'); ?>" class="form-control" id="paket" />
 									</div>
 								</div>
