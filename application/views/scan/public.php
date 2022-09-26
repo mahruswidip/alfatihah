@@ -13,7 +13,7 @@
     <span> <input style="display: none;" type="submit" id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
     <div class="col">
         <video id="video" width="100%" height="420" style="border: 0.2rem solid grey; border-radius: 2rem;-webkit-transform: scaleX(-1);
-  transform: scaleX(-1);"></video>
+  transform: scaleX(1);"></video>
     </div>
     <?php echo form_close(); ?>
     <div class="col-md">
