@@ -63,21 +63,21 @@
 </div>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/zxing/zxing.min.js"></script>
 <script type="text/javascript">
-    var video = document.querySelector("#video");
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia({
-            video: true
-        }, handleVideo, videoError);
-    }
+    // var video = document.querySelector("#video");
+    // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    // if (navigator.getUserMedia) {
+    //     navigator.getUserMedia({
+    //         video: true
+    //     }, handleVideo, videoError);
+    // }
 
-    function handleVideo(stream) {
-        video.src = window.URL.createObjectURL(stream);
-    }
+    // function handleVideo(stream) {
+    //     video.src = window.URL.createObjectURL(stream);
+    // }
 
-    function videoError(e) {
-        document.write("can't use the webcam");
-    }
+    // function videoError(e) {
+    //     document.write("can't use the webcam");
+    // }
     window.addEventListener('load', function() {
         $('#myModal').modal('hide')
         let selectedDeviceId;
