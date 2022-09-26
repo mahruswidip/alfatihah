@@ -65,12 +65,20 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Paket</p>
                         </a>
                     </li> -->
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'galeri/index') {
+                    <li class="nav-item <?php if ($this->uri->uri_string() == 'scan/index') {
                                             echo 'active';
                                         } ?>">
                         <a class="nav-link" href="<?php echo site_url(''); ?>scan/index">
                             <i class="material-icons">computer</i>
                             <p>Scan Kehadiran Manasik</p>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php if ($this->uri->uri_string() == 'scan/public') {
+                                            echo 'active';
+                                        } ?>">
+                        <a class="nav-link" href="<?php echo site_url(''); ?>scan/public">
+                            <i class="material-icons">computer</i>
+                            <p>Lihat Detail Jamaah</p>
                         </a>
                     </li>
                     <li class="nav-item">

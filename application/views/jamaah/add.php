@@ -89,11 +89,25 @@
 								<div class="col-md-2">
 									<div class="form-group">
 										<label class="bmd-label-floating">Lama Hari <span style="font-size: x-small;">9, 10, 13, 16</span></label>
-										<input type="text" name="paket" value="<?php echo $this->input->post('paket'); ?>" class="form-control" id="paket" />
+										<input type="text" name="lama_hari" value="<?php echo $this->input->post('lama_hari'); ?>" class="form-control" id="lama_hari" />
 									</div>
 								</div>
 							</div>
 							<br>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="bmd-label-floating">Hotel Madinah</label>
+										<input type="text" name="hotel_madinah" value="<?php echo $this->input->post('hotel_madinah'); ?>" class="form-control" id="hotel_madinah" />
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="bmd-label-floating">Hotel Mekkah</label>
+										<input type="text" name="hotel_mekkah" value="<?php echo $this->input->post('hotel_mekkah'); ?>" class="form-control" id="hotel_mekkah" />
+									</div>
+								</div>
+							</div>
 							<?php
 							if ($this->session->flashdata('error') != '') {
 								echo '<div class="alert alert-danger" role="alert">';

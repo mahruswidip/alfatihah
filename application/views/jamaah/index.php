@@ -48,6 +48,8 @@
                             <th class="col-2">Alamat</th>
                             <th>Grup Keberangkatan</th>
                             <th>Paket</th>
+                            <th>Hotel Madinah</th>
+                            <th>Hotel Mekkah</th>
                             <th>Input Oleh</th>
                             <?php if ($this->session->userdata('user_level') == '1') {
                                 echo '<th>QR Code</th>';
@@ -69,6 +71,8 @@
                                     <td class="col-2"><?php echo $j['alamat']; ?></td>
                                     <td><?php echo $j['grup_keberangkatan']; ?></td>
                                     <td><?php echo $j['paket']; ?></td>
+                                    <td><?php echo $j['hotel_madinah']; ?></td>
+                                    <td><?php echo $j['hotel_mekkah']; ?></td>
                                     <?php if ($this->session->userdata('user_level') == '2') {
                                         echo '<td>'. $this->session->userdata('user_name').'</td>';
                                     } else {

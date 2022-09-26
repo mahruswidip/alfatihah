@@ -87,6 +87,26 @@
 									<input type="text" name="paket" value="<?php echo ($this->input->post('paket') ? $this->input->post('paket') : $jamaah['paket']); ?>" class="form-control" id="paket" />
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Lama Hari</label>
+									<input type="text" name="lama_hari" value="<?php echo ($this->input->post('lama_hari') ? $this->input->post('lama_hari') : $jamaah['lama_hari']); ?>" class="form-control" id="lama_hari" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Hotel Madinah</label>
+									<input type="text" name="hotel_madinah" value="<?php echo ($this->input->post('hotel_madinah') ? $this->input->post('hotel_madinah') : $jamaah['hotel_madinah']); ?>" class="form-control" id="hotel_madinah" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="bmd-label-floating">Hotel Mekkah</label>
+									<input type="text" name="hotel_mekkah" value="<?php echo ($this->input->post('hotel_mekkah') ? $this->input->post('hotel_mekkah') : $jamaah['hotel_mekkah']); ?>" class="form-control" id="hotel_mekkah" />
+								</div>
+							</div>
 						</div>
 						<button type="submit" class="btn btn-info pull-right">Simpan</button>
 						<div class="clearfix"></div>

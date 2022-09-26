@@ -28,6 +28,20 @@ class Scan extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
+    function public()
+    {
+        $params['limit'] = RECORDS_PER_PAGE;
+        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
+
+        $config = $this->config->item('pagination');
+        $config['base_url'] = site_url('scan/public?');
+        $this->pagination->initialize($config);
+        $data['_view'] = 'scan/public';
+        $result_code = $this->input->post('uuid');
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah_by_uuid($result_code);
+        $this->load->view('layouts/main', $data);
+    }
+
     public function messageAlert($type, $title)
     {
         $messageAlert = "const Toast = Swal.mixin({
