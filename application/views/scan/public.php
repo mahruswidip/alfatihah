@@ -120,9 +120,10 @@
     scanner.addListener('scan', function(content) {
         alert(content);
     });
+
     Instascan.Camera.getCameras().then(cameras => {
-        if (cameras.length > 0) {
-            scanner.start(cameras[0]);
+        if (cameras.length > 1) {
+            scanner.start(cameras[1]);
         } else {
             console.error("Please enable Camera!");
         }
