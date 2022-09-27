@@ -67,31 +67,31 @@
         const codeReader = new ZXing.BrowserQRCodeReader()
         console.log('ZXing code reader initialized')
         codeReader.listVideoInputDevices()
-            .then((videoInputDevices) => {
-                const sourceSelect = document.getElementById('sourceSelect')
-                selectedDeviceId = videoInputDevices[0].deviceId
-                if (videoInputDevices.length >= 1) {
-                    videoInputDevices.forEach((element) => {
-                        const sourceOption = document.createElement('option')
-                        sourceOption.text = element.label
-                        sourceOption.value = element.deviceId
-                        sourceSelect.appendChild(sourceOption)
-                    })
-                    sourceSelect.onchange = () => {
-                        selectedDeviceId = sourceSelect.value;
-                    };
-                    const sourceSelectPanel = document.getElementById('sourceSelectPanel')
-                    sourceSelectPanel.style.display = 'block'
+        .then((videoInputDevices) => {
+            const sourceSelect = document.getElementById('sourceSelect')
+            selectedDeviceId = videoInputDevices[0].deviceId
+            if (videoInputDevices.length >= 1) {
+                videoInputDevices.forEach((element) => {
+                    const sourceOption = document.createElement('option')
+                    sourceOption.text = element.label
+                    sourceOption.value = element.deviceId
+                    sourceSelect.appendChild(sourceOption)
+                })
+                sourceSelect.onchange = () => {
+                    selectedDeviceId = sourceSelect.value;
+                };
+                const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+                sourceSelectPanel.style.display = 'block'
+            }
+            codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
+                console.log(result)
+                document.getElementById('result').textContent = result.text
+                var firstValue = document.getElementById('result').textContent = result.text;
+                if (result != null) {
+                    audio.play();
                 }
-                codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
-                    console.log(result)
-                    document.getElementById('result').textContent = result.text
-                    var firstValue = document.getElementById('result').textContent = result.text;
-                    if (result != null) {
-                        audio.play();
-                    }
-                    $('#button').submit();
-                }).catch((err) => {
+                $('#button').submit();
+            }).catch((err) => {
                     console.error(err)
                     document.getElementById('result').textContent = err
                 })
@@ -100,181 +100,79 @@
             .catch((err) => {
                 console.error(err)
             })
-
-        $('#myModal').modal('show');
-
-
-        setTimeout(function() {
-            $('#myModal').modal('hide');
+            
+            $('#myModal').modal('show');
+            
+            
+            setTimeout(function() {
+                $('#myModal').modal('hide');
         }, 1500);
     })
 </script> -->
+<style>
+    html {
+        height: 100%;
+    }
 
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@mahruswidip 
-zxing-js
-/
-library
-Public
-Code
-Issues
-121
-Pull requests
-10
-Actions
-Projects
-6
-Security
-Insights
-library/docs/examples/multi-camera/index.html
-@koljatm-edeka
-koljatm-edeka fix broken link in demo page
-…
-Latest commit 6f4343c on 23 Oct 2021
- History
- 5 contributors
-@odahcam@sillyfrog@slokhorst@koljatm-edeka@iqre8
-121 lines (98 sloc)  4.35 KB
+    body {
+        font-family: sans-serif;
+        padding: 0 10px;
+        height: 100%;
+        background: black;
+        margin: 0;
+    }
 
-<!doctype html>
-<html lang="en">
+    h1 {
+        color: white;
+        margin: 0;
+        padding: 15px;
+    }
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="ZXing for JS">
+    #container {
+        text-align: center;
+        margin: 0;
+    }
 
-  <title>ZXing TypeScript | Decoding from camera stream</title>
+    #qr-canvas {
+        margin: auto;
+        width: calc(100% - 20px);
+        max-width: 400px;
+    }
 
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
-  <link rel="stylesheet" rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
-</head>
+    #btn-scan-qr {
+        cursor: pointer;
+    }
 
-<body>
+    #btn-scan-qr img {
+        height: 10em;
+        padding: 15px;
+        margin: 15px;
+        background: white;
+    }
 
-  <main class="wrapper" style="padding-top:2em">
+    #qr-result {
+        font-size: 1.2em;
+        margin: 20px auto;
+        padding: 20px;
+        max-width: 700px;
+        background-color: white;
+    }
+</style>
+<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+<div id="container">
+    <h1>QR Code Scanner</h1>
 
-    <section class="container" id="demo-content">
-      <h1 class="title">Scan 1D/2D Code from Video Camera</h1>
+    <a id="btn-scan-qr">
+        <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
+        <a />
 
-      <p>
-        <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
-      </p>
+        <canvas hidden="" id="qr-canvas"></canvas>
 
-      <p>This example shows how to scan any supported 1D/2D code with ZXing javascript library from the device video
-        camera. If more
-        than one video input devices are available (for example front and back camera) the example shows how to read
-        them and use a select to change the input device.</p>
+        <div id="qr-result" hidden="">
+            <b>Data:</b> <span id="outputData"></span>
+        </div>
+</div>
 
-      <div>
-        <a class="button" id="startButton">Start</a>
-        <a class="button" id="resetButton">Reset</a>
-      </div>
 
-      <div>
-        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
-      </div>
 
-      <div id="sourceSelectPanel" style="display:none">
-        <label for="sourceSelect">Change video source:</label>
-        <select id="sourceSelect" style="max-width:400px">
-        </select>
-      </div>
-
-      <label>Result:</label>
-      <pre><code id="result"></code></pre>
-
-      <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/multi-camera/">source code</a>
-        for this example.</p>
-    </section>
-
-    <footer class="footer">
-      <section class="container">
-        <p>ZXing TypeScript Demo. Licensed under the <a target="_blank"
-            href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
-      </section>
-    </footer>
-
-  </main>
-
-  <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
-  <script type="text/javascript">
-    window.addEventListener('load', function () {
-      let selectedDeviceId;
-      const codeReader = new ZXing.BrowserMultiFormatReader()
-      console.log('ZXing code reader initialized')
-      codeReader.listVideoInputDevices()
-        .then((videoInputDevices) => {
-          const sourceSelect = document.getElementById('sourceSelect')
-          selectedDeviceId = videoInputDevices[0].deviceId
-          if (videoInputDevices.length >= 1) {
-            videoInputDevices.forEach((element) => {
-              const sourceOption = document.createElement('option')
-              sourceOption.text = element.label
-              sourceOption.value = element.deviceId
-              sourceSelect.appendChild(sourceOption)
-            })
-
-            sourceSelect.onchange = () => {
-              selectedDeviceId = sourceSelect.value;
-            };
-
-            const sourceSelectPanel = document.getElementById('sourceSelectPanel')
-            sourceSelectPanel.style.display = 'block'
-          }
-
-          document.getElementById('startButton').addEventListener('click', () => {
-            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-              if (result) {
-                console.log(result)
-                document.getElementById('result').textContent = result.text
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-                document.getElementById('result').textContent = err
-              }
-            })
-            console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
-          })
-
-          document.getElementById('resetButton').addEventListener('click', () => {
-            codeReader.reset()
-            document.getElementById('result').textContent = '';
-            console.log('Reset.')
-          })
-
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-    })
-  </script>
-
-</body>
-
-</html>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-library/index.html at master · zxing-js/library
+<script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/qrCodeScanner/qrCodeScanner.js"></script>
