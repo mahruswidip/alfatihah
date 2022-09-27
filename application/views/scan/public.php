@@ -109,70 +109,64 @@
         }, 1500);
     })
 </script> -->
-<style>
-    html {
-        height: 100%;
-    }
-
-    body {
-        font-family: sans-serif;
-        padding: 0 10px;
-        height: 100%;
-        background: black;
-        margin: 0;
-    }
-
-    h1 {
-        color: white;
-        margin: 0;
-        padding: 15px;
-    }
-
-    #container {
-        text-align: center;
-        margin: 0;
-    }
-
-    #qr-canvas {
-        margin: auto;
-        width: calc(100% - 20px);
-        max-width: 400px;
-    }
-
-    #btn-scan-qr {
-        cursor: pointer;
-    }
-
-    #btn-scan-qr img {
-        height: 10em;
-        padding: 15px;
-        margin: 15px;
-        background: white;
-    }
-
-    #qr-result {
-        font-size: 1.2em;
-        margin: 20px auto;
-        padding: 20px;
-        max-width: 700px;
-        background-color: white;
-    }
-</style>
-<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
-<div id="container">
-    <h1>QR Code Scanner</h1>
-
-    <a id="btn-scan-qr">
-        <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg">
-        <a />
-
-        <canvas hidden="" id="qr-canvas"></canvas>
-
-        <div id="qr-result" hidden="">
-            <b>Data:</b> <span id="outputData"></span>
-        </div>
-</div>
 
 
+<!DOCTYPE html>
 
-<script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/qrCodeScanner/qrCodeScanner.js"></script>
+<html>
+
+<head>
+
+	<title>JQuery HTML5 QR Code Scanner using Instascan JS Example - ItSolutionStuff.com</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+</head>
+
+<body>
+
+  
+
+    <h1>JQuery HTML5 QR Code Scanner using Instascan JS Example - ItSolutionStuff.com</h1>
+
+    
+
+    <video id="preview"></video>
+
+    <script type="text/javascript">
+
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+
+      scanner.addListener('scan', function (content) {
+
+        alert(content);
+
+      });
+
+      Instascan.Camera.getCameras().then(function (cameras) {
+
+        if (cameras.length > 0) {
+
+          scanner.start(cameras[0]);
+
+        } else {
+
+          console.error('No cameras found.');
+
+        }
+
+      }).catch(function (e) {
+
+        console.error(e);
+
+      });
+
+    </script>
+
+   
+
+</body>
+
+</html>
