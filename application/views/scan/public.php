@@ -129,14 +129,13 @@
     <main class="wrapper" style="padding-top:2em">
 
         <section class="container" id="demo-content">
-            <h1 class="title">Scan 1D/2D Code from Video Camera</h1>
+            <h1 class="title">Scan QR Code from Video Camera</h1>
 
             <p>
                 <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
             </p>
 
-            <p>This example shows how to scan any supported 1D/2D code with ZXing javascript library from the device video
-                camera. If more
+            <p>This example shows how to scan a QR code with ZXing javascript library from the device video camera. If more
                 than one video input devices are available (for example front and back camera) the example shows how to read
                 them and use a select to change the input device.</p>
 
@@ -155,11 +154,19 @@
                 </select>
             </div>
 
+            <div style="display: table">
+                <label for="decoding-style"> Decoding Style:</label>
+                <select id="decoding-style" size="1">
+                    <option value="once">Decode once</option>
+                    <option value="continuously">Decode continuously</option>
+                </select>
+            </div>
+
             <label>Result:</label>
             <pre><code id="result"></code></pre>
 
-            <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/multi-camera/">source code</a>
-                for this example.</p>
+            <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/qr-camera/">source code</a> for
+                this example.</p>
         </section>
 
         <footer class="footer">
@@ -170,13 +177,49 @@
 
     </main>
 
-    <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
     <script type="text/javascript">
+        function decodeOnce(codeReader, selectedDeviceId) {
+            codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
+                console.log(result)
+                document.getElementById('result').textContent = result.text
+            }).catch((err) => {
+                console.error(err)
+                document.getElementById('result').textContent = err
+            })
+        }
+
+        function decodeContinuously(codeReader, selectedDeviceId) {
+            codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
+                if (result) {
+                    // properly decoded qr code
+                    console.log('Found QR code!', result)
+                    document.getElementById('result').textContent = result.text
+                }
+
+                if (err) {
+
+                    if (err instanceof ZXing.NotFoundException) {
+                        console.log('No QR code found.')
+                    }
+
+                    if (err instanceof ZXing.ChecksumException) {
+                        console.log('A code was found, but it\'s read value was not valid.')
+                    }
+
+                    if (err instanceof ZXing.FormatException) {
+                        console.log('A code was found, but it was in a invalid format.')
+                    }
+                }
+            })
+        }
+
         window.addEventListener('load', function() {
             let selectedDeviceId;
-            const codeReader = new ZXing.BrowserMultiFormatReader()
+            const codeReader = new ZXing.BrowserQRCodeReader()
             console.log('ZXing code reader initialized')
-            codeReader.listVideoInputDevices()
+
+            codeReader.getVideoInputDevices()
                 .then((videoInputDevices) => {
                     const sourceSelect = document.getElementById('sourceSelect')
                     selectedDeviceId = videoInputDevices[0].deviceId
@@ -197,17 +240,16 @@
                     }
 
                     document.getElementById('startButton').addEventListener('click', () => {
-                        codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-                            if (result) {
-                                console.log(result)
-                                document.getElementById('result').textContent = result.text
-                            }
-                            if (err && !(err instanceof ZXing.NotFoundException)) {
-                                console.error(err)
-                                document.getElementById('result').textContent = err
-                            }
-                        })
-                        console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+
+                        const decodingStyle = document.getElementById('decoding-style').value;
+
+                        if (decodingStyle == "once") {
+                            decodeOnce(codeReader, selectedDeviceId);
+                        } else {
+                            decodeContinuously(codeReader, selectedDeviceId);
+                        }
+
+                        console.log(`Started decode from camera with id ${selectedDeviceId}`)
                     })
 
                     document.getElementById('resetButton').addEventListener('click', () => {
