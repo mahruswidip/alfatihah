@@ -1,4 +1,4 @@
-<!-- <div class="row">
+<div class="row">
     <?php
     $attributes = array('id' => 'button');
     echo form_open('scan/public', $attributes); ?>
@@ -9,7 +9,7 @@
     <textarea style="display: block;" name="uuid" id="result" readonly></textarea>
     <span> <input style="display: none;" type="submit" id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
     <div class="col">
-        <video id="video" width="100%" height="420" style="border: 0.2rem solid grey; border-radius: 2rem;-webkit-transform: scaleX(-1);
+        <video playsinline id="video" width="100%" height="420" style="border: 0.2rem solid grey; border-radius: 2rem;-webkit-transform: scaleX(-1);
   transform: scaleX(1);"></video>
     </div>
     <?php echo form_close(); ?>
@@ -108,39 +108,9 @@
                 $('#myModal').modal('hide');
             }, 1500);
         })
-    </script> -->
+    </script>
 
 
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<video id="preview" playsinline></video>
-<script>
-    let scanner = new Instascan.Scanner({
-        video: document.getElementById('preview')
-    });
-    scanner.addListener('scan', function(content) {
-        alert(content);
-    });
-
-    //Detect user's cameras
-    Instascan.Camera.getCameras().then(function(cameras) {
-        //If a camera is detected
-        if (cameras.length > 0) {
-            //If the user has a rear/back camera
-            if (cameras[1]) {
-                //use that by default
-                scanner.start(cameras[1]);
-            } else {
-                //else use front camera
-                scanner.start(cameras[0]);
-            }
-        } else {
-            //if no cameras are detected give error
-            console.error('No cameras found.');
-        }
-    }).catch(function(e) {
-        console.error(e);
-    });
-</script>
-<script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/qrCodeScanner/instascan.min.js"></script>
 <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
