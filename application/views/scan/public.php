@@ -112,7 +112,8 @@
 
 
 <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-<video id="preview"></video>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<video id="preview" playsinline></video>
 <script>
     let scanner = new Instascan.Scanner({
         video: document.getElementById('preview')
@@ -142,3 +143,4 @@
     });
 </script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/qrCodeScanner/instascan.min.js"></script>
+<script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
