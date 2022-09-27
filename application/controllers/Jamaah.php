@@ -82,6 +82,8 @@ class Jamaah extends CI_Controller
                     'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
                     'paket' => $this->input->post('paket'),
                     'lama_hari' => $this->input->post('lama_hari'),
+                    'hotel_madinah' => $this->input->post('hotel_madinah'),
+                    'hotel_mekkah' => $this->input->post('hotel_mekkah'),
                     'alamat' => $this->input->post('alamat'),
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
                     'created_by' => $user_id,
