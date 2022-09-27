@@ -121,12 +121,24 @@
         alert(content);
     });
 
-    Instascan.Camera.getCameras().then(cameras => {
+    //Detect user's cameras
+    Instascan.Camera.getCameras().then(function(cameras) {
+        //If a camera is detected
         if (cameras.length > 0) {
-            scanner.start(cameras[0]);
+            //If the user has a rear/back camera
+            if (cameras[1]) {
+                //use that by default
+                scanner.start(cameras[1]);
+            } else {
+                //else use front camera
+                scanner.start(cameras[0]);
+            }
         } else {
-            console.error("Please enable Camera!");
+            //if no cameras are detected give error
+            console.error('No cameras found.');
         }
+    }).catch(function(e) {
+        console.error(e);
     });
 </script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/qrCodeScanner/instascan.min.js"></script>
