@@ -1,7 +1,6 @@
-<!--Modal Form Login with Avatar Demo-->
+<!--Modal Form Login with Avatar Demo
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered cascading-modal modal-avatar modal-sm" role="document">
-        <!--Content-->
         <div class="modal-content" <?php if ($this->session->flashdata('jk') == 'Perempuan') {
                                         echo 'style="background-color: #d4edda; color: #155724;"';
                                     } elseif ($this->session->flashdata('jk') == 'Laki-Laki') {
@@ -34,11 +33,9 @@
             </div>
 
         </div>
-        <!--/.Content-->
     </div>
 </div>
-<!--Modal Form Login with Avatar Demo-->
-
+Modal Form Login with Avatar Demo
 <div class="row">
     <?php
     $attributes = array('id' => 'button');
@@ -47,9 +44,6 @@
         <label for="sourceSelect">Change video source:</label>
         <select id="sourceSelect" style="max-width:800px"></select>
     </div>
-    <!-- <div>
-        <video id="video" width="700" height="600" style="border: 1px solid gray"></video>
-    </div> -->
     <textarea style="display: none;" name="uuid" id="result" readonly></textarea>
     <span> <input style="display: none;" type="submit" id="button" class="btn btn-success btn-md" value="Cek Kehadiran"></span>
     <div class="col">
@@ -64,9 +58,6 @@
                     <div class="col-md-9">
                         <h3 class="card-title ">Scan Kehadiran</h3>
                     </div>
-                    <!-- <div class="col-auto">
-                        <a style="display: none;" href="<?php echo site_url(''); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
-                    </div> -->
                 </div>
             </div>
             <div class="card-body">
@@ -87,7 +78,6 @@
                                         } else {
                                             echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-danger">Tidak Hadir / Belum Hadir</span>';
                                         } ?></td>
-                                    <!-- <td><a href="<?php echo site_url('jamaah/edit_kehadiran/' . $p['id_jamaah']); ?>" class="btn btn-danger"><span class="fa fa-pencil"></span></a></td> -->
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -100,7 +90,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
 <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/zxing/zxing.min.js"></script>
 <script type="text/javascript">
@@ -152,4 +142,103 @@
             $('#myModal').modal('hide');
         }, 1500);
     })
+</script>
+-->
+
+<main class="wrapper" style="padding-top:2em">
+
+<section class="container" id="demo-content">
+  <h1 class="title">Scan 1D/2D Code from Video Camera</h1>
+
+  <p>
+    <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
+  </p>
+
+  <p>This example shows how to scan any supported 1D/2D code with ZXing javascript library from the device video
+    camera. If more
+    than one video input devices are available (for example front and back camera) the example shows how to read
+    them and use a select to change the input device.</p>
+
+  <div>
+    <a class="button" id="startButton">Start</a>
+    <a class="button" id="resetButton">Reset</a>
+  </div>
+
+  <div>
+    <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+  </div>
+
+  <div id="sourceSelectPanel" style="display:none">
+    <label for="sourceSelect">Change video source:</label>
+    <select id="sourceSelect" style="max-width:400px">
+    </select>
+  </div>
+
+  <label>Result:</label>
+  <pre><code id="result"></code></pre>
+
+  <p>See the <a href="https://github.com/zxing-js/library/tree/master/docs/examples/multi-camera/">source code</a>
+    for this example.</p>
+</section>
+
+<footer class="footer">
+  <section class="container">
+    <p>ZXing TypeScript Demo. Licensed under the <a target="_blank"
+        href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
+  </section>
+</footer>
+
+</main>
+
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+<script type="text/javascript">
+window.addEventListener('load', function () {
+  let selectedDeviceId;
+  const codeReader = new ZXing.BrowserMultiFormatReader()
+  console.log('ZXing code reader initialized')
+  codeReader.listVideoInputDevices()
+    .then((videoInputDevices) => {
+      const sourceSelect = document.getElementById('sourceSelect')
+      selectedDeviceId = videoInputDevices[0].deviceId
+      if (videoInputDevices.length >= 1) {
+        videoInputDevices.forEach((element) => {
+          const sourceOption = document.createElement('option')
+          sourceOption.text = element.label
+          sourceOption.value = element.deviceId
+          sourceSelect.appendChild(sourceOption)
+        })
+
+        sourceSelect.onchange = () => {
+          selectedDeviceId = sourceSelect.value;
+        };
+
+        const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+        sourceSelectPanel.style.display = 'block'
+      }
+
+      document.getElementById('startButton').addEventListener('click', () => {
+        codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+          if (result) {
+            console.log(result)
+            document.getElementById('result').textContent = result.text
+          }
+          if (err && !(err instanceof ZXing.NotFoundException)) {
+            console.error(err)
+            document.getElementById('result').textContent = err
+          }
+        })
+        console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+      })
+
+      document.getElementById('resetButton').addEventListener('click', () => {
+        codeReader.reset()
+        document.getElementById('result').textContent = '';
+        console.log('Reset.')
+      })
+
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+})
 </script>
