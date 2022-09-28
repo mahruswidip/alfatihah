@@ -9,6 +9,9 @@ class Jamaah extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         $this->load->model('Jamaah_model');
         $this->load->model('Scan_model');
     }
@@ -100,29 +103,6 @@ class Jamaah extends CI_Controller
             $this->session->set_flashdata('error', 'Ukuran Tidak boleh lebih dari 5 MB');
             redirect('jamaah/add');
         }
-
-        // $user_id = $this->session->userdata('user_id');
-        // if (isset($_POST) && count($_POST) > 0) {
-        //     $params = array(
-        //         'nama_program' => $this->input->post('nama_program'),
-        //         'jamaah' => $this->input->post('jamaah'),
-        //         'hotel_mekkah' => $this->input->post('hotel_mekkah'),
-        //         'hotel_madinah' => $this->input->post('hotel_madinah'),
-        //         'bintang_mekkah' => $this->input->post('bintang_mekkah'),
-        //         'bintang_madinah' => $this->input->post('bintang_madinah'),
-        //         'uang_muka' => $this->input->post('uang_muka'),
-        //         'harga_jamaah' => $this->input->post('harga_jamaah'),
-        //         'sudah_termasuk' => $this->input->post('sudah_termasuk'),
-        //         'belum_termasuk' => $this->input->post('belum_termasuk'),
-        //         'jamaah_img' => $this->input->post('jamaah_img'),
-        //         'created_by' => $user_id,
-        //     );
-        //     $jamaah_id = $this->Jamaah_model->add_jamaah($params);
-        //     redirect('jamaah/index');
-        // } else {
-        //     $data['_view'] = 'jamaah/add';
-        //     $this->load->view('layouts/main', $data);
-        // }
     }
     /*
      * Editing a luasan

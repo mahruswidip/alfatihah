@@ -77,7 +77,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label class="bmd-label-floating">Grup Keberangkatan</label>
-										<input type="text" name="grup_keberangkatan" value="<?php echo $this->input->post('grup_keberangkatan'); ?>" class="form-control" id="grup_keberangkatan" />
+										<input type="date" name="grup_keberangkatan" value="<?php echo $this->input->post('grup_keberangkatan'); ?>" class="form-control" id="grup_keberangkatan" />
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -88,8 +88,8 @@
 								</div>
 								<div class="col-md-2">
 									<div class="form-group">
-										<label class="bmd-label-floating">Lama Hari <span style="font-size: x-small;">9, 10, 13, 16</span></label>
-										<input type="text" name="lama_hari" value="<?php echo $this->input->post('lama_hari'); ?>" class="form-control" id="lama_hari" />
+										<label class="bmd-label-floating">Lama Hari</label>
+										<input type="number" name="lama_hari" value="<?php echo $this->input->post('lama_hari'); ?>" class="form-control" id="lama_hari" />
 									</div>
 								</div>
 							</div>
