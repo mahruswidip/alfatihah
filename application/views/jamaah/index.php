@@ -98,6 +98,7 @@
                                             echo '';
                                         }
                                         ?>
+                                        <!-- <a href="<?php echo site_url('jamaah/detail/' . $j['uuid']); ?>" class="btn btn-success"><span class="fa fa-user"></span></a> -->
                                     </td>                                    
                                 </tr>
                             <?php } ?>

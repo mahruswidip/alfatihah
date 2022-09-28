@@ -159,6 +159,15 @@ class Jamaah extends CI_Controller
         }
     }
 
+    function detail($uuid){
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah_by_uuid($uuid);
+        // echo '<pre>';
+        // print_r($data['jamaah']);
+        // exit();
+        $data['_view'] = 'jamaah/detail';
+        $this->load->view('layouts/main', $data);
+    }
+
     function updateqr($id_jamaah)
     {
 
@@ -187,10 +196,11 @@ class Jamaah extends CI_Controller
                 $this->ciqrcode->initialize($config);
 
                 $nama = $this->input->post('uuid');
+                $site = base_url('jamaah/detail/');
 
                 $qr_code = $nama . '.png'; //buat name dari qr code sesuai dengan nim
 
-                $params1['data'] = $nama; //data yang akan di jadikan QR CODE
+                $params1['data'] = $site.$nama; //data yang akan di jadikan QR CODE
                 $params1['level'] = 'H'; //H=High
                 $params1['size'] = 10;
                 $params1['savename'] = FCPATH . $config['imagedir'] . $qr_code; //simpan image QR CODE ke folder assets/images/
