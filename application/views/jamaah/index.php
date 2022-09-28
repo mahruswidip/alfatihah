@@ -1,4 +1,3 @@
-
 <!--Modal Form Login with Avatar Demo-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered cascading-modal modal-avatar modal-sm" role="document">
@@ -33,7 +32,7 @@
                         } else {
                             echo '';
                         } ?>
-                        
+
                     </div>
                 </div>
             </div>
@@ -76,14 +75,17 @@
                                     <td><?php echo $j['hotel_madinah']; ?></td>
                                     <td><?php echo $j['hotel_mekkah']; ?></td>
                                     <?php if ($this->session->userdata('user_level') == '2') {
-                                        echo '<td>'. $this->session->userdata('user_name').'</td>';
+                                        echo '<td>' . $this->session->userdata('user_name') . '</td>';
                                     } else {
-                                        echo '<td>'.$j['user_name'].'</td>';
+                                        echo '<td>' . $j['user_name'] . '</td>';
                                     }
                                     ?>
-                                    <!-- <td><?php echo $j['user_name']; ?></td> -->
                                     <?php if ($this->session->userdata('user_level') == '1') {
-                                        echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr_uuid/' . $j['qr_code_benar'] . '"></td>';
+                                        if ($j['qr_code_benar'] == null) {
+                                            echo '<td><a href="' . site_url('jamaah/updateqr/' . $j['id_jamaah']) . '" class="btn btn-dark"><span class="fa fa-qrcode"></span></a></td>';
+                                        } else {
+                                            echo '<td><img style="width: 100px;" src="' . base_url() . 'assets/images/qr_uuid/' . $j['qr_code_benar'] . '"></td>';
+                                        }
                                     } else {
                                         echo '';
                                     }
@@ -92,14 +94,7 @@
                                         <a href="<?php echo site_url('jamaah/cetak_id_card/' . $j['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span></a>
                                         <a href="<?php echo site_url('jamaah/edit/' . $j['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
                                         <a href="<?php echo site_url('jamaah/remove/' . $j['id_jamaah']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a>
-                                        <?php if ($j['qr_code_benar']== null) {
-                                            echo '<a href="'.site_url('jamaah/updateqr/' . $j['id_jamaah']).'" class="btn btn-dark"><span class="fa fa-qrcode"></span></a>';
-                                        } else {
-                                            echo '';
-                                        }
-                                        ?>
-                                        <!-- <a href="<?php echo site_url('jamaah/detail/' . $j['uuid']); ?>" class="btn btn-success"><span class="fa fa-user"></span></a> -->
-                                    </td>                                    
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>
