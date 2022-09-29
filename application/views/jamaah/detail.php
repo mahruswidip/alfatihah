@@ -10,7 +10,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-auto">
-                    <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $j['jamaah_img']; ?>" alt="">
+                    <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
                 </div>
             </div>
             <div class="row">
