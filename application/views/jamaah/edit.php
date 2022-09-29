@@ -78,7 +78,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="bmd-label-floating">Grup Keberangkatan</label>
-									<input type="text" name="grup_keberangkatan" value="<?php echo ($this->input->post('grup_keberangkatan') ? $this->input->post('grup_keberangkatan') : $jamaah['grup_keberangkatan']); ?>" class="form-control" id="grup_keberangkatan" />
+									<input type="date" name="grup_keberangkatan" value="<?php echo ($this->input->post('grup_keberangkatan') ? $this->input->post('grup_keberangkatan') : $jamaah['grup_keberangkatan']); ?>" class="form-control" id="grup_keberangkatan" />
 								</div>
 							</div>
 							<div class="col-md-6">
