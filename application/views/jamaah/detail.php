@@ -10,6 +10,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-auto">
+                    <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $j['jamaah_img']; ?>" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
                     <i class="fa fa-book"></i>&nbsp; No. Paspor/Passport Number
                 </div>
                 <div class="col-auto">
