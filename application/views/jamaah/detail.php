@@ -15,6 +15,7 @@
                     </div>
                 </center>
             </div>
+            <br>
             <div class="row">
                 <div class="col-auto">
                     <i class="fa fa-book"></i>&nbsp; No. Paspor/Passport Number
