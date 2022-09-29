@@ -78,7 +78,7 @@ class Jamaah_model extends CI_Model
         $this->db->set('hotel_mekkah', $params['hotel_mekkah']);
         $this->db->set('jamaah_img', $gambar);
         $this->db->set('created_by', $params['created_by']);
-        $this->db->set('uuid', 'UUID()', FALSE);
+        $this->db->set('uuid', 'UUID_SHORT()', FALSE);
         $this->db->insert('jamaah');
     }
 
