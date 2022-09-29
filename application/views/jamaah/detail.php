@@ -9,9 +9,11 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-auto">
-                    <img class="img-fluid" style="max-width: 100px; max-height: 100px; border-radius: 2rem;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
-                </div>
+                <center>
+                    <div class="col-auto">
+                        <img class="img-fluid" style="max-width: 100px; max-height: 100px; border-radius: 1.5rem;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
+                    </div>
+                </center>
             </div>
             <div class="row">
                 <div class="col-auto">
