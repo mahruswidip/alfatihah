@@ -9,9 +9,7 @@ class Jamaah extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('logged_in') !== TRUE) {
-            redirect('login');
-        }
+        
         $this->load->model('Jamaah_model');
         $this->load->model('Scan_model');
     }
@@ -21,6 +19,9 @@ class Jamaah extends CI_Controller
      */
     function index()
     {
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         $params['limit'] = RECORDS_PER_PAGE;
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
 
@@ -49,11 +50,17 @@ class Jamaah extends CI_Controller
 
     function bukatambah()
     {
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         $data['_view'] = 'jamaah/add';
         $this->load->view('layouts/main', $data);
     }
     function add()
     {
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         $config['upload_path'] = './assets/images/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
@@ -109,6 +116,9 @@ class Jamaah extends CI_Controller
      */
     function edit($id_jamaah)
     {
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         // check if the luasan exists before trying to edit it
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
 
@@ -150,7 +160,9 @@ class Jamaah extends CI_Controller
 
     function updateqr($id_jamaah)
     {
-
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         $config['upload_path'] = './assets/images/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
@@ -199,6 +211,9 @@ class Jamaah extends CI_Controller
 
     function cetak_id_card($id_jamaah)
     {
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('login');
+        }
         // check if the luasan exists before trying to edit it
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
 
