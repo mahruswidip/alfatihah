@@ -71,7 +71,7 @@
                                     <td class="col-2"><?php echo $j['alamat']; ?></td>
                                     <td><?php echo $tanggalConverted = date_format(date_create($j['grup_keberangkatan']), 'd F Y'); ?></td>
                                     <td><?php echo $j['paket']; ?></td>
-                                    <td><?php echo $j['lama_hari']; ?></td>
+                                    <td><?php echo $j['lama_hari'].' Hari'; ?></td>
                                     <td><?php echo $j['hotel_madinah']; ?></td>
                                     <td><?php echo $j['hotel_mekkah']; ?></td>
                                     <?php if ($this->session->userdata('user_level') == '2') {
