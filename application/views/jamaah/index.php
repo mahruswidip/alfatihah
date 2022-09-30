@@ -69,7 +69,7 @@
                                     <td><?php echo $j['nama_jamaah']; ?></td>
                                     <td><?php echo $j['nomor_telepon']; ?></td>
                                     <td class="col-2"><?php echo $j['alamat']; ?></td>
-                                    <td><?php echo $j['grup_keberangkatan']; ?></td>
+                                    <td><?php echo $tanggalConverted = date_format(date_create($j['grup_keberangkatan']), 'd F Y'); ?></td>
                                     <td><?php echo $j['paket']; ?></td>
                                     <td><?php echo $j['lama_hari']; ?></td>
                                     <td><?php echo $j['hotel_madinah']; ?></td>
