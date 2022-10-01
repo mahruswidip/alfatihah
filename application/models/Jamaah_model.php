@@ -11,6 +11,55 @@ class Jamaah_model extends CI_Model
         parent::__construct();
     }
 
+
+    function get_tanggal_keberangkatan($searchTerm = "")
+    {
+        $this->db->select('*');
+        $this->db->where("tanggal_keberangkatan like '%" . $searchTerm . "%' ");
+        $this->db->order_by('id_keberangkatan', 'asc');
+        $fetched_records = $this->db->get('keberangkatan');
+        $datatanggal = $fetched_records->result_array();
+
+        $data = array();
+        foreach ($datatanggal as $tanggal) {
+            $data[] = array("id_keberangkatan" => $tanggal['id_keberangkatan'], "text" => $tanggal['tanggal_keberangkatan']);
+        }
+        return $data;
+    }
+
+    function get_paket($id_keberangkatan, $searchTerm = "")
+    {
+        $this->db->select('*');
+        $this->db->where('id_keberangkatan', $id_keberangkatan);
+        $this->db->where("paket like '%" . $searchTerm . "%' ");
+        $this->db->order_by('id_keberangkatan', 'asc');
+        $fetched_records = $this->db->get('keberangkatan');
+        $datapaket = $fetched_records->result_array();
+
+        $data = array();
+        foreach ($datapaket as $paket) {
+            $data[] = array("id_keberangkatan" => $paket['id_keberangkatan'], "text" => $paket['paket']);
+        }
+        return $data;
+    }
+
+    function get_all_keberangkatan($params = array())
+    {
+        $this->db->order_by('keberangkatan.id_keberangkatan', 'asc');
+        // $this->db->join('tbl_users', 'tbl_users.id_keberangkatan=keberangkatan.id_keberangkatan', 'left');
+        if (isset($params) && !empty($params)) {
+            $this->db->limit($params['limit'], $params['offset']);
+        }
+        return $this->db->get('keberangkatan')->result_array();
+    }
+
+    function add_keberangkatan_to_jamaah($params)
+    {
+        $this->db->set('fk_id_jamaah', $params['id_jamaah']);
+        $this->db->set('fk_id_keberangkatan', $params['fk_id_keberangkatan']);
+        $this->db->insert('jamaah');
+    }
+
     public function filter($search, $limit, $start, $order_field, $order_ascdesc)
     {
         $this->db->like('nik', $search); // Untuk menambahkan query where LIKE

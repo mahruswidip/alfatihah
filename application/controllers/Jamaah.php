@@ -80,6 +80,42 @@ class Jamaah extends CI_Controller
         $data['_view'] = 'jamaah/add';
         $this->load->view('layouts/main', $data);
     }
+
+    
+       // Tanggal
+    public function getdatatanggal()
+    {
+        $searchTerm = $this->input->post('searchTerm');
+        $response   = $this->Jamaah_model->get_tanggal_keberangkatan($searchTerm);
+        echo json_encode($response);
+    }
+ 
+    // Paket    
+    public function getdatapaket($id_keberangkatan)
+    {
+        $searchTerm = $this->input->post('searchTerm');
+        $response   = $this->Jamaah_model->get_paket($id_keberangkatan, $searchTerm);
+        echo json_encode($response);
+    }
+
+    function add_keberangkatan($id_jamaah)
+    {
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+        if (isset($_POST) && count($_POST) > 0) {
+            $params = array(
+                'id_jamaah' => $this->input->post('id_jamaah'),
+                'fk_id_keberankatan' => $this->input->post('fk_id_keberankatan'),
+            );
+
+            $keberangkatan_id = $this->Jamaah_model->add_keberangkatan($params);
+            redirect('jamaah/index');
+        } else {
+            $data['_view'] = 'jamaah/add_keberangkatan';
+            $this->load->view('layouts/main', $data);
+        }
+    }
+    
+
     function add()
     {
         if ($this->session->userdata('logged_in') !== TRUE) {

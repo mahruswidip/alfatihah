@@ -154,8 +154,7 @@
                 [5, 10, 50],
                 [5, 10, 50]
             ], // Combobox Limit
-            "columns": [
-                {
+            "columns": [{
                     "data": "nomor_paspor"
                 },
                 {
@@ -165,7 +164,8 @@
                 },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
-                        return '<a href="https://alfatihahtravel.com/admin/jamaah/detail/'+row.id_jamaah+'">'+row.nama_jamaah+'</a>' ;
+                        return '<a href="http://localhost/absensi/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
+                        // return '<a href="https://alfatihahtravel.com/admin/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
                     }
                 },
                 {
