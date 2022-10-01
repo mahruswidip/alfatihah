@@ -11,6 +11,35 @@ class Jamaah_model extends CI_Model
         parent::__construct();
     }
 
+    public function filter($search, $limit, $start, $order_field, $order_ascdesc)
+    {
+        $this->db->like('nik', $search); // Untuk menambahkan query where LIKE
+        $this->db->or_like('nama_jamaah', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('nik', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('grup_keberangkatan', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('alamat', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->order_by($order_field, $order_ascdesc); // Untuk menambahkan query ORDER BY
+        $this->db->limit($limit, $start); // Untuk menambahkan query LIMIT
+
+        return $this->db->get('jamaah')->result_array(); // Eksekusi query sql sesuai kondisi diatas
+    }
+
+    public function count_all()
+    {
+        return $this->db->count_all('jamaah'); // Untuk menghitung semua data jamaah
+    }
+
+    public function count_filter($search)
+    {
+        $this->db->like('nik', $search); // Untuk menambahkan query where LIKE
+        $this->db->or_like('nama_jamaah', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('nik', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('grup_keberangkatan', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('alamat', $search); // Untuk menambahkan query where OR LIKE
+
+        return $this->db->get('jamaah')->num_rows(); // Untuk menghitung jumlah data sesuai dengan filter pada textbox pencarian
+    }
+
     /*
      * Get luasan by id_luasan
      */

@@ -38,6 +38,30 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    <table class="table table-bordered" id="tablejamaah">
+                        <thead>
+                            <tr>
+                                <th>Nomor Paspor</th>
+                                <th>Foto</th>
+                                <th>Nama Jamaah</th>
+                                <th>Nomor HP</th>
+                                <th class="col-2">Alamat</th>
+                                <th>Grup Keberangkatan</th>
+                                <th>Paket</th>
+                                <th>Lama Hari</th>
+                                <th>Hotel Madinah</th>
+                                <th>Hotel Mekkah</th>
+                                <th>Input Oleh</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <br>
+                <hr>
+                <br>
+                <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
                             <th>Nomor Paspor</th>
@@ -71,7 +95,7 @@
                                     <td class="col-2"><?php echo $j['alamat']; ?></td>
                                     <td><?php echo $tanggalConverted = date_format(date_create($j['grup_keberangkatan']), 'd F Y'); ?></td>
                                     <td><?php echo $j['paket']; ?></td>
-                                    <td><?php echo $j['lama_hari'].' Hari'; ?></td>
+                                    <td><?php echo $j['lama_hari'] . ' Hari'; ?></td>
                                     <td><?php echo $j['hotel_madinah']; ?></td>
                                     <td><?php echo $j['hotel_mekkah']; ?></td>
                                     <?php if ($this->session->userdata('user_level') == '2') {
@@ -107,11 +131,59 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    window.addEventListener('load', function() {
-        $('#myModal').modal('hide')
-        setTimeout(function() {
-            $('#myModal').modal('hide');
-        }, 2500);
-    })
+<script src="<?php echo site_url('assets/'); ?>js/core/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/datatables.min.js"></script>
+<script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/lib/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tablejamaah').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ordering": true, // Set true agar bisa di sorting
+            "order": [
+                [0, 'asc']
+            ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+            "ajax": {
+                "url": "<?php echo site_url('jamaah/view') ?>", // URL file untuk proses select datanya
+                "type": "POST"
+            },
+            "deferRender": true,
+            "aLengthMenu": [
+                [5, 10, 50],
+                [5, 10, 50]
+            ], // Combobox Limit
+            "columns": [
+                {"data": "nomor_paspor"},
+                {
+                    "render": function(data, type, row) { // Tampilkan jenis kelamin
+                        var html = "<img class='img-fluid' style='max-width: 100px; max-height: 100px;' src='<?php echo base_url() . 'assets/images/'?>'>"
+                        return html;
+                    }
+                },
+                {"data": "jamaah_img"},
+                {"data": "nama_jamaah"},
+                {"data": "nomor_telepon"},
+                {"data": "alamat"},
+                // {
+                //     "render": function(data, type, row) { // Tampilkan jenis kelamin
+                //         var html = ""
+
+                //         if (row.jenis_kelamin == 1) { // Jika jenis kelaminnya 1
+                //             html = 'Laki-laki' // Set laki-laki
+                //         } else { // Jika bukan 1
+                //             html = 'Perempuan' // Set perempuan
+                //         }
+
+                //         return html; // Tampilkan jenis kelaminnya
+                //     }
+                // },
+                {
+                    "render": function(data, type, row) { // Tampilkan kolom aksi
+                        var html = "<a href='<?php echo site_url('jamaah/cetak_id_card/' . $j['id_jamaah']); ?>' class='btn btn-warning'><span class='fa fa-print'></span></a><a href='<?php echo site_url('jamaah/edit/' . $j['id_jamaah']); ?>' class='btn btn-info'><span class='fa fa-pencil'></span></a><a href='<?php echo site_url('jamaah/remove/' . $j['id_jamaah']); ?>'' class='btn btn-danger'><span class='fa fa-trash'></span></a>"
+                        return html
+                    }
+                },
+            ],
+        });
+    });
 </script>

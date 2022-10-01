@@ -9,7 +9,7 @@ class Jamaah extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        
+
         $this->load->model('Jamaah_model');
         $this->load->model('Scan_model');
     }
@@ -44,6 +44,30 @@ class Jamaah extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
+    function view()
+    {
+
+        $search = $_POST['search']['value']; // Ambil data yang di ketik user pada textbox pencarian
+        $limit = $_POST['length']; // Ambil data limit per page
+        $start = $_POST['start']; // Ambil data start
+        $order_index = $_POST['order'][0]['column']; // Untuk mengambil index yg menjadi acuan untuk sorting
+        $order_field = $_POST['columns'][$order_index]['data']; // Untuk mengambil nama field yg menjadi acuan untuk sorting
+        $order_ascdesc = $_POST['order'][0]['dir']; // Untuk menentukan order by "ASC" atau "DESC"
+
+        $sql_total = $this->Jamaah_model->count_all(); // Panggil fungsi count_all pada Jamaah_model
+        $sql_data = $this->Jamaah_model->filter($search, $limit, $start, $order_field, $order_ascdesc); // Panggil fungsi filter pada Jamaah_model
+        $sql_filter = $this->Jamaah_model->count_filter($search); // Panggil fungsi count_filter pada Jamaah_model
+
+        $callback = array(
+            'draw' => $_POST['draw'], // Ini dari datatablenya
+            'recordsTotal' => $sql_total,
+            'recordsFiltered' => $sql_filter,
+            'data' => $sql_data
+        );
+
+        header('Content-Type: application/json');
+        echo json_encode($callback); // Convert array $callback ke json
+    }
     /*
      * Adding a new luasan
      */
@@ -149,7 +173,8 @@ class Jamaah extends CI_Controller
         }
     }
 
-    function detail($uuid){
+    function detail($uuid)
+    {
         $data['jamaah'] = $this->Jamaah_model->get_jamaah_by_uuid($uuid);
         // echo '<pre>';
         // print_r($data['jamaah']);
@@ -174,7 +199,7 @@ class Jamaah extends CI_Controller
         if (isset($data['jamaah']['id_jamaah'])) {
             if (isset($_POST) && count($_POST) > 0) {
                 $params = array(
-                    'qr_code_benar' => $this->input->post('uuid').'.png',
+                    'qr_code_benar' => $this->input->post('uuid') . '.png',
                 );
 
                 $config['cacheable']    = true; //boolean, the default is true
@@ -192,7 +217,7 @@ class Jamaah extends CI_Controller
 
                 $qr_code = $nama . '.png'; //buat name dari qr code sesuai dengan nim
 
-                $params1['data'] = $site.$nama; //data yang akan di jadikan QR CODE
+                $params1['data'] = $site . $nama; //data yang akan di jadikan QR CODE
                 $params1['level'] = 'H'; //H=High
                 $params1['size'] = 10;
                 $params1['savename'] = FCPATH . $config['imagedir'] . $qr_code; //simpan image QR CODE ke folder assets/images/
@@ -345,7 +370,7 @@ class Jamaah extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('D3', "NOMOR HP"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
         $excel->setActiveSheetIndex(0)->setCellValue('E3', "GRUP KEBERANGKATAN"); // Set kolom E3 dengan tulisan "ALAMAT"
         $excel->setActiveSheetIndex(0)->setCellValue('F3', "KEHADIRAN MANASIK"); // Set kolom E3 dengan tulisan "ALAMAT"
-        
+
 
         // Apply style header yang telah kita buat tadi ke masing-masing kolom header
         $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -354,7 +379,7 @@ class Jamaah extends CI_Controller
         $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
-        
+
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
         $jamaah = $this->Jamaah_model->get_all_jamaah_pure();
@@ -368,7 +393,7 @@ class Jamaah extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data['nomor_telepon']);
             $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data['grup_keberangkatan']);
             $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data['kehadiran']);
-            
+
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_row);
@@ -388,7 +413,7 @@ class Jamaah extends CI_Controller
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20); // Set width kolom D
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(30); // Set width kolom E
         $excel->getActiveSheet()->getColumnDimension('F')->setWidth(25); // Set width kolom E
-        
+
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
         $excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
