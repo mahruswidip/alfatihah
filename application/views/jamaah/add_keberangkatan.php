@@ -12,8 +12,8 @@
                             <input type="text" name="id_jamaah" value="<?php echo ($this->input->post('id_jamaah') ? $this->input->post('id_jamaah') : $jamaah['id_jamaah']); ?>" class="form-control" id="id_jamaah" />
                             <form>
                                 <div class="form-group">
-                                    <label for="tanggal_keberangkatan">Tanggal Keberangkatan</label>
-                                    <select id="tanggal_keberangkatan" name="tanggal_keberangkatan" class="form-control select2">
+                                    <label for="tanggal-keberangkatan">Tanggal Keberangkatan</label>
+                                    <select id="tanggal-keberangkatan" name="tanggal-keberangkatan" class="form-control select2">
                                         <option value="" selected>Pilih tanggal_keberangkatan</option>
                                     </select>
                                 </div>
@@ -108,7 +108,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#tanggal_keberangkatan").select2({
+        $("#tanggal-keberangkatan").select2({
             ajax: {
                 url: '<?= base_url() ?>jamaah/getdatatanggal',
                 type: "post",
@@ -130,8 +130,8 @@
     });
 
     // Kabupaten
-    $("#tanggal_keberangkatan").change(function() {
-        var id_prov = $("#tanggal_keberangkatan").val();
+    $("#tanggal-keberangkatan").change(function() {
+        var id_prov = $("#tanggal-keberangkatan").val();
         $("#paket").select2({
             ajax: {
                 url: '<?= base_url() ?>jamaah/getdatapaket/' + id_prov,
