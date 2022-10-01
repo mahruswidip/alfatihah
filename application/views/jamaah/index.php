@@ -1,4 +1,5 @@
 <!--Modal Form Login with Avatar Demo-->
+<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/'); ?>datatables/lib/css/dataTables.bootstrap.min.css ?>" />
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered cascading-modal modal-avatar modal-sm" role="document">
         <!--Content-->
@@ -38,7 +39,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <!-- <table class="table table-bordered" id="tablejamaah">
+                    <table class="table table-bordered" id="tablejamaah">
                         <thead>
                             <tr>
                                 <th>Nomor Paspor</th>
@@ -60,8 +61,8 @@
                 </div>
                 <br>
                 <hr>
-                <br> -->
-                <div class="table-responsive">
+                <br>
+                <!-- <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
                             <th>Nomor Paspor</th>
@@ -126,13 +127,14 @@
                     <div class="pull-right">
                         <?php echo $this->pagination->create_links(); ?>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </div>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-html5-1.5.1/datatables.min.css" />
 <script src="<?php echo site_url('assets/'); ?>js/core/jquery.min.js"></script>
-<!-- <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/datatables.min.js"></script>
+<script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/datatables.min.js"></script>
 <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/lib/js/dataTables.bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -153,30 +155,62 @@
                 [5, 10, 50]
             ], // Combobox Limit
             "columns": [
-                {"data": "nomor_paspor"},
+                {
+                    "data": "nomor_paspor"
+                },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
-                        var html = "<img class='img-fluid' style='max-width: 100px; max-height: 100px;' src='<?php echo base_url() . 'assets/images/'?>'>"
-                        return html;
+                        return '<img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' ?>' + row.jamaah_img + '">';
                     }
                 },
-                {"data": "jamaah_img"},
-                {"data": "nama_jamaah"},
-                {"data": "nomor_telepon"},
-                {"data": "alamat"},
-                // {
-                //     "render": function(data, type, row) { // Tampilkan jenis kelamin
-                //         var html = ""
+                {
+                    "render": function(data, type, row) { // Tampilkan jenis kelamin
+                        return '<a href="https://alfatihahtravel.com/admin/jamaah/detail/'+row.id_jamaah+'">'+row.nama_jamaah+'</a>' ;
+                    }
+                },
+                {
+                    "data": "nomor_telepon"
+                },
+                {
+                    "data": "alamat"
+                },
+                {
+                    "data": "grup_keberangkatan"
+                },
+                {
+                    "data": "paket"
+                },
+                {
+                    "data": "lama_hari"
+                },
+                {
+                    "data": "hotel_madinah"
+                },
+                {
+                    "data": "hotel_mekkah"
+                },
+                {
+                    "render": function(data, type, row) { // Tampilkan jenis kelamin
+                        var html = ""
 
-                //         if (row.jenis_kelamin == 1) { // Jika jenis kelaminnya 1
-                //             html = 'Laki-laki' // Set laki-laki
-                //         } else { // Jika bukan 1
-                //             html = 'Perempuan' // Set perempuan
-                //         }
-
-                //         return html; // Tampilkan jenis kelaminnya
-                //     }
-                // },
+                        if (row.created_by == 1) {
+                            html = 'Admin Super'
+                        } else if (row.created_by == 2) {
+                            html = 'Kantor Cabang Malang'
+                        } else if (row.created_by == 3) {
+                            html = 'Kantor Cabang Probolinggo'
+                        } else if (row.created_by == 4) {
+                            html = 'Kantor Cabang Situbondo'
+                        } else if (row.created_by == 5) {
+                            html = 'Kantor Cabang Jember'
+                        } else if (row.created_by == 6) {
+                            html = 'Kantor Cabang Jakarta'
+                        } else {
+                            html = 'Kantor Cabang Pasuruan'
+                        }
+                        return html; // Tampilkan jenis kelaminnya
+                    }
+                },
                 {
                     "render": function(data, type, row) { // Tampilkan kolom aksi
                         var html = "<a href='<?php echo site_url('jamaah/cetak_id_card/' . $j['id_jamaah']); ?>' class='btn btn-warning'><span class='fa fa-print'></span></a><a href='<?php echo site_url('jamaah/edit/' . $j['id_jamaah']); ?>' class='btn btn-info'><span class='fa fa-pencil'></span></a><a href='<?php echo site_url('jamaah/remove/' . $j['id_jamaah']); ?>'' class='btn btn-danger'><span class='fa fa-trash'></span></a>"
@@ -186,4 +220,4 @@
             ],
         });
     });
-</script> -->
+</script>

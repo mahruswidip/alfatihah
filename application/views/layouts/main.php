@@ -24,7 +24,6 @@ The above copyright notice and this permission notice shall be included in all c
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/'); ?>datatables/lib/css/dataTables.bootstrap.min.css ?>" />
     <!-- CSS Files -->
     <link href="<?php echo site_url('assets/'); ?>css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <link rel="stylesheet" href="<?php echo site_url('resources/css/bootstrap-datetimepicker.min.css'); ?>">
