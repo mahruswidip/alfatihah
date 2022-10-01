@@ -38,7 +38,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="tablejamaah">
+                    <!-- <table class="table table-bordered" id="tablejamaah">
                         <thead>
                             <tr>
                                 <th>Nomor Paspor</th>
@@ -60,7 +60,7 @@
                 </div>
                 <br>
                 <hr>
-                <br>
+                <br> -->
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
@@ -90,7 +90,7 @@
                                     <td>
                                         <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $j['jamaah_img']; ?>" alt="">
                                     </td>
-                                    <td><?php echo $j['nama_jamaah']; ?></td>
+                                    <td><a href="<?php echo site_url('jamaah/detail/' . $j['id_jamaah']); ?>"><?php echo $j['nama_jamaah']; ?></a></td>
                                     <td><?php echo $j['nomor_telepon']; ?></td>
                                     <td class="col-2"><?php echo $j['alamat']; ?></td>
                                     <td><?php echo $tanggalConverted = date_format(date_create($j['grup_keberangkatan']), 'd F Y'); ?></td>
@@ -132,7 +132,7 @@
     </div>
 </div>
 <script src="<?php echo site_url('assets/'); ?>js/core/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/datatables.min.js"></script>
+<!-- <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/datatables.min.js"></script>
 <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/lib/js/dataTables.bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -186,4 +186,4 @@
             ],
         });
     });
-</script>
+</script> -->

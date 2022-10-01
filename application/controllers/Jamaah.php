@@ -173,12 +173,9 @@ class Jamaah extends CI_Controller
         }
     }
 
-    function detail($uuid)
+    function detail($id_jamaah)
     {
-        $data['jamaah'] = $this->Jamaah_model->get_jamaah_by_uuid($uuid);
-        // echo '<pre>';
-        // print_r($data['jamaah']);
-        // exit();
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
         $data['_view'] = 'jamaah/detail';
         $this->load->view('layouts/main', $data);
     }
