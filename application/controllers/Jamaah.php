@@ -44,6 +44,15 @@ class Jamaah extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
+    public function getstates()
+    {
+        $json = array();
+        $this->Jamaah_model->setCountryID($this->input->post('countryID'));
+        $json = $this->Jamaah_model->getStates();
+        header('Content-Type: application/json');
+        echo json_encode($json);
+    }
+
     function view()
     {
 
@@ -81,15 +90,15 @@ class Jamaah extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
-    
-       // Tanggal
+
+    // Tanggal
     public function getdatatanggal()
     {
         $searchTerm = $this->input->post('searchTerm');
         $response   = $this->Jamaah_model->get_tanggal_keberangkatan($searchTerm);
         echo json_encode($response);
     }
- 
+
     // Paket    
     public function getdatapaket($id_keberangkatan)
     {
@@ -101,20 +110,22 @@ class Jamaah extends CI_Controller
     function add_keberangkatan($id_jamaah)
     {
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+        $data['getCountries'] = $this->Jamaah_model->getAllCountries();
+
         if (isset($_POST) && count($_POST) > 0) {
             $params = array(
                 'id_jamaah' => $this->input->post('id_jamaah'),
-                'fk_id_keberankatan' => $this->input->post('fk_id_keberankatan'),
+                'id_paket' => $this->input->post('id_paket'),
             );
-
-            $keberangkatan_id = $this->Jamaah_model->add_keberangkatan($params);
-            redirect('jamaah/index');
+            
+            $this->Jamaah_model->add_keberangkatan($params);
+            redirect('jamaah/detail/'.$id_jamaah);
         } else {
             $data['_view'] = 'jamaah/add_keberangkatan';
             $this->load->view('layouts/main', $data);
         }
     }
-    
+
 
     function add()
     {
@@ -149,11 +160,6 @@ class Jamaah extends CI_Controller
                     'nama_jamaah' => $this->input->post('nama_jamaah'),
                     'jenis_kelamin' => $this->input->post('jenis_kelamin'),
                     'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
-                    'paket' => $this->input->post('paket'),
-                    'lama_hari' => $this->input->post('lama_hari'),
-                    'hotel_madinah' => $this->input->post('hotel_madinah'),
-                    'hotel_mekkah' => $this->input->post('hotel_mekkah'),
                     'alamat' => $this->input->post('alamat'),
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
                     'created_by' => $user_id,
@@ -188,14 +194,9 @@ class Jamaah extends CI_Controller
                     'nik' => $this->input->post('nik'),
                     'nama_jamaah' => $this->input->post('nama_jamaah'),
                     'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                    'paket' => $this->input->post('paket'),
-                    'lama_hari' => $this->input->post('lama_hari'),
-                    'hotel_madinah' => $this->input->post('hotel_madinah'),
-                    'hotel_mekkah' => $this->input->post('hotel_mekkah'),
                     'alamat' => $this->input->post('alamat'),
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
                     'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    'grup_keberangkatan' => $this->input->post('grup_keberangkatan'),
                 );
 
                 $this->Jamaah_model->update_jamaah($id_jamaah, $params);
@@ -212,6 +213,7 @@ class Jamaah extends CI_Controller
     function detail($id_jamaah)
     {
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+        $data['record'] = $this->Jamaah_model->get_record_keberangkatan($id_jamaah);
         $data['_view'] = 'jamaah/detail';
         $this->load->view('layouts/main', $data);
     }

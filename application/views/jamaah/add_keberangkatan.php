@@ -7,96 +7,32 @@
                         <h4 class="card-title">Tambah Grup Keberangkatan</h4>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo site_url() . 'jamaah/add_keberangkatan' ?>" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo site_url() . 'jamaah/add_keberangkatan/' . $jamaah['id_jamaah'] ?>" method="post" enctype="multipart/form-data">
                             <h3>Data Keberangkatan</h3>
                             <input type="text" name="id_jamaah" value="<?php echo ($this->input->post('id_jamaah') ? $this->input->post('id_jamaah') : $jamaah['id_jamaah']); ?>" class="form-control" id="id_jamaah" />
-                            <form>
-                                <div class="form-group">
-                                    <label for="tanggal-keberangkatan">Tanggal Keberangkatan</label>
-                                    <select id="tanggal-keberangkatan" name="tanggal-keberangkatan" class="form-control select2">
-                                        <option value="" selected>Pilih tanggal_keberangkatan</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="paket">Paket</label>
-                                    <select id="paket" name="paket" class="form-control select2">
-                                        <option value="" selected>Pilih paket</option>
-                                    </select>
-                                </div>
-                            </form>
-
-                            <!-- <div class="row">
-                                <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Tanggal Keberangkatan</label>
-                                        <input type="date" name="tanggal_keberangkatan" value="<?php echo $this->input->post('tanggal_keberangkatan'); ?>" class="form-control" id="tanggal_keberangkatan" />
+                                        <select title="Select Country" name="regcountry" class="form-control" id="country-name">
+                                            <option value="">Pilih Tanggal Tersedia</option>
+                                            <?php
+                                            foreach ($getCountries as $key => $element) {
+                                                echo '<option value="' . $element['id_keberangkatan'] . '">' . $element['tanggal_keberangkatan'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
                                     <div class="form-group">
-                                        <select name="paket" class="form-control">
+                                        <select title="Select State" name="id_paket" class="form-control" id="state-name">
                                             <option value="">Pilih Paket</option>
-                                            <?php
-                                            $paket_values = array(
-                                                'Ekonomi' => 'Ekonomi',
-                                                'Hemat' => 'Hemat',
-                                                'Standard' => 'Standard',
-                                                'Semi VIP' => 'Semi VIP',
-                                                'VIP' => 'VIP',
-                                                'VVIP' => 'VVIP',
-                                                'Private' => 'Private',
-                                            );
-
-                                            foreach ($paket_values as $value => $display_text) {
-                                                $selected = ($value == $this->input->post('paket')) ? ' selected="selected"' : "";
-                                                echo '<option value="' . $value . '" ' . $selected . '>' . $display_text . '</option>';
-                                            }
-                                            ?>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Lama Hari</label>
-                                        <input type="number" name="lama_hari" value="<?php echo $this->input->post('lama_hari'); ?>" class="form-control" id="lama_hari" />
-                                    </div>
-                                </div>
                             </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Hotel Mekkah</label>
-                                        <input type="text" name="hotel_mekkah" value="<?php echo $this->input->post('hotel_mekkah'); ?>" class="form-control" id="hotel_mekkah" />
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Hotel Madinah</label>
-                                        <input type="text" name="hotel_madinah" value="<?php echo $this->input->post('hotel_madinah'); ?>" class="form-control" id="hotel_madinah" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <select name="is_aktif" class="form-control">
-                                            <option value="">Aktifkan / Non Aktifkan</option>
-                                            <?php
-                                            $is_aktif_values = array(
-                                                '0' => 'Non Aktif',
-                                                '1' => 'Aktif',
-                                            );
-
-                                            foreach ($is_aktif_values as $value => $display_text) {
-                                                $selected = ($value == $this->input->post('is_aktif')) ? ' selected="selected"' : "";
-                                                echo '<option value="' . $value . '" ' . $selected . '>' . $display_text . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> -->
                             <button type="submit" class="btn btn-success pull-right">Tambah</button>
                             <div class="clearfix"></div>
                         </form>
@@ -108,48 +44,42 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#tanggal-keberangkatan").select2({
-            ajax: {
-                url: '<?= base_url() ?>jamaah/getdatatanggal',
-                type: "post",
-                dataType: 'json',
-                delay: 200,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
+        // get state 
+        jQuery(document).on('change', 'select#country-name', function(e) {
+            e.preventDefault();
+            var countryID = jQuery(this).val();
+            getStatesList(countryID);
         });
-    });
 
-    // Kabupaten
-    $("#tanggal-keberangkatan").change(function() {
-        var id_prov = $("#tanggal-keberangkatan").val();
-        $("#paket").select2({
-            ajax: {
-                url: '<?= base_url() ?>jamaah/getdatapaket/' + id_prov,
-                type: "post",
+        // function get All States
+        function getStatesList(countryID) {
+            $.ajax({
+                // url: "https://alfatihahtravel.com/admin/jamaah/getstates",
+                url: "http://localhost/absensi/jamaah/getstates",
+                type: 'post',
+                data: {
+                    countryID: countryID,
+                },
                 dataType: 'json',
-                delay: 200,
-                data: function(params) {
-                    return {
-                        searchTerm: params.term
-                    };
+                beforeSend: function() {
+                    jQuery('select#state-name').find("option:eq(0)").html("Please wait..");
                 },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
+                complete: function() {
+                    // code
                 },
-                cache: true
-            }
-        });
+                success: function(json) {
+                    var options = '';
+                    options += '<option value="">Pilih Paket</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        options += '<option value="' + json[i].id_paket + '">' + json[i].paket + '</option>';
+                    }
+                    jQuery("select#state-name").html(options);
+                    
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
     });
 </script>

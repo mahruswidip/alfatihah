@@ -69,7 +69,7 @@
                     <h3 class="card-title ">Grup Keberangkatan</h3>
                 </div>
                 <div class="col-auto">
-                    <a href="<?php echo site_url('jamaah/add_keberangkatan/'.$jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
+                    <a href="<?php echo site_url('jamaah/add_keberangkatan/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
                 </div>
             </div>
             <br>
@@ -77,7 +77,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">No.</th>
                             <th scope="col">Tanggal Keberangkatan</th>
                             <th scope="col">Paket</th>
                             <th scope="col">Lama Hari</th>
@@ -86,29 +85,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
+                        <?php foreach ($record as $j) { ?>
+                            <tr>
+                                <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_keberangkatan']), 'd F Y'); ?></td>
+                                <td><?php echo $j['paket']; ?></td>
+                                <td><?php echo $j['lama_hari']; ?></td>
+                                <td><?php echo $j['hotel_mekkah']; ?></td>
+                                <td><?php echo $j['hotel_madinah']; ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

@@ -12,52 +12,42 @@ class Jamaah_model extends CI_Model
     }
 
 
-    function get_tanggal_keberangkatan($searchTerm = "")
-    {
-        $this->db->select('*');
-        $this->db->where("tanggal_keberangkatan like '%" . $searchTerm . "%' ");
-        $this->db->order_by('id_keberangkatan', 'asc');
-        $fetched_records = $this->db->get('keberangkatan');
-        $datatanggal = $fetched_records->result_array();
+    private $_countryID;
 
-        $data = array();
-        foreach ($datatanggal as $tanggal) {
-            $data[] = array("id_keberangkatan" => $tanggal['id_keberangkatan'], "text" => $tanggal['tanggal_keberangkatan']);
-        }
-        return $data;
+    // set country id
+    public function setCountryID($countryID)
+    {
+        return $this->_countryID = $countryID;
+    }
+    // set state id
+    public function setStateID($stateID)
+    {
+        return $this->_stateID = $stateID;
     }
 
-    function get_paket($id_keberangkatan, $searchTerm = "")
+    public function getAllCountries()
     {
-        $this->db->select('*');
-        $this->db->where('id_keberangkatan', $id_keberangkatan);
-        $this->db->where("paket like '%" . $searchTerm . "%' ");
-        $this->db->order_by('id_keberangkatan', 'asc');
-        $fetched_records = $this->db->get('keberangkatan');
-        $datapaket = $fetched_records->result_array();
-
-        $data = array();
-        foreach ($datapaket as $paket) {
-            $data[] = array("id_keberangkatan" => $paket['id_keberangkatan'], "text" => $paket['paket']);
-        }
-        return $data;
+        $this->db->select(array('c.id_keberangkatan as id_keberangkatan', 'c.tanggal_keberangkatan', 'c.tanggal_keberangkatan'));
+        $this->db->from('keberangkatan as c');
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
-    function get_all_keberangkatan($params = array())
+    // get state method
+    public function getStates()
     {
-        $this->db->order_by('keberangkatan.id_keberangkatan', 'asc');
-        // $this->db->join('tbl_users', 'tbl_users.id_keberangkatan=keberangkatan.id_keberangkatan', 'left');
-        if (isset($params) && !empty($params)) {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
-        return $this->db->get('keberangkatan')->result_array();
+        $this->db->select(array('s.id_paket as id_paket', 's.fk_id_keberangkatan', 's.paket as paket'));
+        $this->db->from('paket as s');
+        $this->db->where('s.fk_id_keberangkatan', $this->_countryID);
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
-    function add_keberangkatan_to_jamaah($params)
+    function add_keberangkatan($params)
     {
-        $this->db->set('fk_id_jamaah', $params['id_jamaah']);
-        $this->db->set('fk_id_keberangkatan', $params['fk_id_keberangkatan']);
-        $this->db->insert('jamaah');
+        $this->db->set('id_jamaah', $params['id_jamaah']);
+        $this->db->set('id_paket', $params['id_paket']);
+        $this->db->insert('record_keberangkatan');
     }
 
     public function filter($search, $limit, $start, $order_field, $order_ascdesc)
@@ -147,13 +137,8 @@ class Jamaah_model extends CI_Model
         $this->db->set('nama_jamaah', $params['nama_jamaah']);
         $this->db->set('nomor_telepon', $params['nomor_telepon']);
         $this->db->set('jenis_kelamin', $params['jenis_kelamin']);
-        $this->db->set('grup_keberangkatan', $params['grup_keberangkatan']);
         $this->db->set('alamat', $params['alamat']);
         $this->db->set('nomor_paspor', $params['nomor_paspor']);
-        $this->db->set('paket', $params['paket']);
-        $this->db->set('lama_hari', $params['lama_hari']);
-        $this->db->set('hotel_madinah', $params['hotel_madinah']);
-        $this->db->set('hotel_mekkah', $params['hotel_mekkah']);
         $this->db->set('jamaah_img', $gambar);
         $this->db->set('created_by', $params['created_by']);
         $this->db->set('uuid', 'UUID_SHORT()', FALSE);
@@ -181,5 +166,15 @@ class Jamaah_model extends CI_Model
     function delete_jamaah($id_jamaah)
     {
         return $this->db->delete('jamaah', array('id_jamaah' => $id_jamaah));
+    }
+
+    function get_record_keberangkatan($id_jamaah)
+    {
+        $this->db->order_by('record_keberangkatan.id_jamaah', 'asc');
+        $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
+        $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
+        return $this->db->get('record_keberangkatan')->result_array();
+        // var_dump($get);
+        // exit();
     }
 }

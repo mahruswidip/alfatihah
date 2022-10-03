@@ -70,52 +70,6 @@
 									</div>
 								</div>
 							</div>
-							<br>
-							<hr>
-							<h3>Data Paket</h3>
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="bmd-label-floating">Grup Keberangkatan</label>
-										<input type="date" name="grup_keberangkatan" value="<?php echo $this->input->post('grup_keberangkatan'); ?>" class="form-control" id="grup_keberangkatan" />
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="bmd-label-floating">Paket <span style="font-size: x-small;">Ekonomi, VIP, VVIP</span></label>
-										<input type="text" name="paket" value="<?php echo $this->input->post('paket'); ?>" class="form-control" id="paket" />
-									</div>
-								</div>
-								<div class="col-md-2">
-									<div class="form-group">
-										<label class="bmd-label-floating">Lama Hari</label>
-										<input type="number" name="lama_hari" value="<?php echo $this->input->post('lama_hari'); ?>" class="form-control" id="lama_hari" />
-									</div>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="bmd-label-floating">Hotel Madinah</label>
-										<input type="text" name="hotel_madinah" value="<?php echo $this->input->post('hotel_madinah'); ?>" class="form-control" id="hotel_madinah" />
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<label class="bmd-label-floating">Hotel Mekkah</label>
-										<input type="text" name="hotel_mekkah" value="<?php echo $this->input->post('hotel_mekkah'); ?>" class="form-control" id="hotel_mekkah" />
-									</div>
-								</div>
-							</div>
-							<?php
-							if ($this->session->flashdata('error') != '') {
-								echo '<div class="alert alert-danger" role="alert">';
-								echo $this->session->flashdata('error');
-								echo '</div>';
-							}
-							?>
-
 							<button type="submit" class="btn btn-success pull-right">Tambah</button>
 							<div class="clearfix"></div>
 						</form>

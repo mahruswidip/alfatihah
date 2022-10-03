@@ -47,11 +47,6 @@
                                 <th>Nama Jamaah</th>
                                 <th>Nomor HP</th>
                                 <th class="col-2">Alamat</th>
-                                <th>Grup Keberangkatan</th>
-                                <th>Paket</th>
-                                <th>Lama Hari</th>
-                                <th>Hotel Madinah</th>
-                                <th>Hotel Mekkah</th>
                                 <th>Input Oleh</th>
                                 <th>Aksi</th>
                             </tr>
@@ -173,21 +168,6 @@
                 },
                 {
                     "data": "alamat"
-                },
-                {
-                    "data": "grup_keberangkatan"
-                },
-                {
-                    "data": "paket"
-                },
-                {
-                    "data": "lama_hari"
-                },
-                {
-                    "data": "hotel_madinah"
-                },
-                {
-                    "data": "hotel_mekkah"
                 },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
