@@ -66,7 +66,7 @@
             <hr>
             <div class="row justify-content-between">
                 <div class="col-md-9">
-                    <h3 class="card-title ">Grup Keberangkatan</h3>
+                    <h3 class="card-title ">Riwayat Keberangkatan</h3>
                 </div>
                 <div class="col-auto">
                     <a href="<?php echo site_url('jamaah/add_keberangkatan/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
