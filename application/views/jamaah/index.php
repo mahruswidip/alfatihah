@@ -39,7 +39,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="tablejamaah">
+                    <table class="table" id="tablejamaah">
                         <thead>
                             <tr>
                                 <th>Nomor Paspor</th>
