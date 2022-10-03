@@ -54,8 +54,8 @@
         // function get All States
         function getStatesList(countryID) {
             $.ajax({
-                // url: "https://alfatihahtravel.com/admin/jamaah/getstates",
-                url: "http://localhost/absensi/jamaah/getstates",
+                url: "https://alfatihahtravel.com/admin/jamaah/getstates",
+                // url: "http://localhost/absensi/jamaah/getstates",
                 type: 'post',
                 data: {
                     countryID: countryID,
