@@ -23,10 +23,6 @@
                         <thead class=" text-primary ">
                             <th></th>
                             <th>Tanggal Keberangkatan</th>
-                            <th>Paket</th>
-                            <th>Lama Hari</th>
-                            <th>Hotel Mekkah</th>
-                            <th>Hotel Madinah</th>
                             <th>Actions</th>
                         </thead>
                         <tbody>
@@ -42,10 +38,6 @@
                                             echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-danger">.</span>';
                                         } ?></td>
                                     <td><?php echo $tanggalConverted = date_format(date_create($p   ['tanggal_keberangkatan']), 'd F Y'); ?></td>
-                                    <td><?php echo $p['paket']; ?></td>
-                                    <td><?php echo $p['lama_hari']; ?></td>
-                                    <td><?php echo $p['hotel_mekkah']; ?></td>
-                                    <td><?php echo $p['hotel_madinah']; ?></td>
                                     <td>
                                         <a href="<?php echo site_url('keberangkatan/edit/' . $p['id_keberangkatan']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
                                         <a href="<?php echo site_url('keberangkatan/remove/' . $p['id_keberangkatan']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a>
