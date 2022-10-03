@@ -212,11 +212,11 @@
                     }
                 },
                 {
-                    "render": function(data, type, row) { // Tampilkan kolom aksi
-                        var html = "<a href='<?php echo site_url('jamaah/cetak_id_card/' . $j['id_jamaah']); ?>' class='btn btn-warning'><span class='fa fa-print'></span></a><a href='<?php echo site_url('jamaah/edit/' . $j['id_jamaah']); ?>' class='btn btn-info'><span class='fa fa-pencil'></span></a><a href='<?php echo site_url('jamaah/remove/' . $j['id_jamaah']); ?>'' class='btn btn-danger'><span class='fa fa-trash'></span></a>"
-                        return html
+                    "render": function(data, type, row) { // Tampilkan jenis kelamin
+                        return '<a href="http://localhost/absensi/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                        // return '<a href="https://alfatihahtravel.com/admin/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
                     }
-                },
+                }
             ],
         });
     });
