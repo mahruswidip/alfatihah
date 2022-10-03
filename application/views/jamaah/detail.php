@@ -39,26 +39,6 @@
                             <td><i class="fa fa-map-marker"></i>&nbsp; Alamat</td>
                             <td><?php echo $jamaah['alamat']; ?></td>
                         </tr>
-                        <tr>
-                            <td><i class="fa fa-calendar"></i>&nbsp; Grup Keberangkatan</td>
-                            <td><?php echo $tanggalConverted = date_format(date_create($jamaah['grup_keberangkatan']), 'd F Y'); ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-address-card"></i>&nbsp; Paket</td>
-                            <td><?php echo $jamaah['paket']; ?></td>
-                        </tr>
-                        <tr>
-                            <td> <i class="fa fa-address-card"></i>&nbsp; Lama Hari</td>
-                            <td><?php echo $jamaah['lama_hari'] . ' Hari'; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-bed" aria-hidden="true"></i>&nbsp; Hotel Madinah</td>
-                            <td><?php echo $jamaah['hotel_madinah']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-bed" aria-hidden="true"></i>&nbsp; Hotel Mekkah</td>
-                            <td><?php echo $jamaah['hotel_mekkah']; ?></td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
