@@ -56,9 +56,6 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <br>
-                <hr>
-                <br>
                 <!-- <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
