@@ -57,6 +57,8 @@ class Jamaah_model extends CI_Model
         $this->db->or_like('nik', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('grup_keberangkatan', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('alamat', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('updated_at', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('qr_code_benar', $search); // Untuk menambahkan query where OR LIKE
         $this->db->order_by($order_field, $order_ascdesc); // Untuk menambahkan query ORDER BY
         $this->db->limit($limit, $start); // Untuk menambahkan query LIMIT
 
@@ -75,6 +77,8 @@ class Jamaah_model extends CI_Model
         $this->db->or_like('nik', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('grup_keberangkatan', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('alamat', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('updated_at', $search); // Untuk menambahkan query where OR LIKE
+        $this->db->or_like('qr_code_benar', $search); // Untuk menambahkan query where OR LIKE
 
         return $this->db->get('jamaah')->num_rows(); // Untuk menghitung jumlah data sesuai dengan filter pada textbox pencarian
     }

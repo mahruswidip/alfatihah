@@ -252,7 +252,7 @@ class Jamaah extends CI_Controller
 
                 $qr_code = $nama . '.png'; //buat name dari qr code sesuai dengan nim
 
-                $params1['data'] = $site . $nama; //data yang akan di jadikan QR CODE
+                $params1['data'] = $nama; //data yang akan di jadikan QR CODE
                 $params1['level'] = 'H'; //H=High
                 $params1['size'] = 10;
                 $params1['savename'] = FCPATH . $config['imagedir'] . $qr_code; //simpan image QR CODE ke folder assets/images/
