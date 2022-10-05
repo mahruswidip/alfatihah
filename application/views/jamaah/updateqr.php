@@ -12,7 +12,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<!-- <label class="bmd-label-floating text-danger">UUID</label> -->
-									<input type="text" name="uuid" style="display: block;" value="<?php echo ($this->input->post('uuid') ? $this->input->post('uuid') : $jamaah['uuid']); ?>" class="form-control" id="uuid" />
+									<input type="text" name="uuid" style="display: none;" value="<?php echo ($this->input->post('uuid') ? $this->input->post('uuid') : $jamaah['uuid']); ?>" class="form-control" id="uuid" />
 									<!-- <input type="text" name="base_url" style="display: block;" value="<?php echo (base_url('jamaah/detail/').$jamaah['id_jamaah'] ? base_url('jamaah/detail/').$jamaah['id_jamaah'] : base_url('jamaah/detail/').$jamaah['id_jamaah']); ?>" class="form-control" id="base_url" /> -->
 								</div>
 							</div>
