@@ -42,12 +42,14 @@
                     <table class="table" id="tablejamaah">
                         <thead>
                             <tr>
+                                <th>Updated At</th>
                                 <th>Nomor Paspor</th>
                                 <th>Foto</th>
                                 <th>Nama Jamaah</th>
                                 <th>Nomor HP</th>
                                 <th class="col-2">Alamat</th>
                                 <th>Input Oleh</th>
+                                <th>QR Code</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -138,7 +140,7 @@
             "serverSide": true,
             "ordering": true, // Set true agar bisa di sorting
             "order": [
-                [0, 'asc']
+                [0, 'desc']
             ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
             "ajax": {
                 "url": "<?php echo site_url('jamaah/view') ?>", // URL file untuk proses select datanya
@@ -150,6 +152,9 @@
                 [5, 10, 50]
             ], // Combobox Limit
             "columns": [{
+                    "data": "updated_at"
+                },
+                {
                     "data": "nomor_paspor"
                 },
                 {
@@ -193,8 +198,21 @@
                 },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
-                        return '<a href="http://localhost/absensi/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
-                        // return '<a href="https://alfatihahtravel.com/admin/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                        var qr = ""
+
+                        if (row.qr_code_benar == "") {
+                            // qr = '<a href="http://localhost/absensi/jamaah/updateqr/' + row.id_jamaah + '"' + 'class="btn btn-dark"><span class="fa fa-qrcode"></span></a>'
+                            qr = '<a href="https://alfatihahtravel.com/admin/jamaah/updateqr/' + row.id_jamaah + '"' + 'class="btn btn-dark"><span class="fa fa-qrcode"></span></a>'
+                        } else {
+                            qr = '<img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/qr_uuid/' ?>' + row.qr_code_benar + '">'
+                        }
+                        return qr;
+                    }
+                },
+                {
+                    "render": function(data, type, row) { // Tampilkan jenis kelamin
+                        // return '<a href="http://localhost/absensi/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                        return '<a href="https://alfatihahtravel.com/admin/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
                     }
                 }
             ],
