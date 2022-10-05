@@ -42,13 +42,13 @@
                     <table class="table" id="tablejamaah">
                         <thead>
                             <tr>
-                                <th>Updated At</th>
                                 <th>Nomor Paspor</th>
                                 <th>Foto</th>
                                 <th>Nama Jamaah</th>
                                 <th>Nomor HP</th>
                                 <th class="col-2">Alamat</th>
                                 <th>Input Oleh</th>
+                                <th>Updated At</th>
                                 <th>QR Code</th>
                                 <th>Aksi</th>
                             </tr>
@@ -151,9 +151,7 @@
                 [5, 10, 50],
                 [5, 10, 50]
             ], // Combobox Limit
-            "columns": [{
-                    "data": "updated_at"
-                },
+            "columns": [
                 {
                     "data": "nomor_paspor"
                 },
@@ -195,6 +193,9 @@
                         }
                         return html; // Tampilkan jenis kelaminnya
                     }
+                },
+                {
+                    "data": "updated_at"
                 },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
