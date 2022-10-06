@@ -52,9 +52,9 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6">
-								<label class="bmd-label-floating text-danger disabled">Foto Jamaah</label>
+								<label class="bmd-label-floating text-danger">Foto Jamaah</label>
 								<br>
-								<input type="file" name="jamaah_img" disabled>
+								<input type="file" name="jamaah_img">
 								<br>
 								<br>
 								<div class="form-group">

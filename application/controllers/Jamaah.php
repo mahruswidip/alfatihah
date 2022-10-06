@@ -186,6 +186,10 @@ class Jamaah extends CI_Controller
             redirect('login');
         }
         // check if the luasan exists before trying to edit it
+        $config['upload_path'] = './assets/images/'; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+        $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
+        $user_id = $this->session->userdata('user_id');
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
 
         if (isset($data['jamaah']['id_jamaah'])) {
