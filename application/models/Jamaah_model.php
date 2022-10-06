@@ -154,13 +154,23 @@ class Jamaah_model extends CI_Model
      */
     function update_jamaah($id_jamaah, $params)
     {
-        echo '<pre>';
-        print_r($id_jamaah);
-        echo '<br>';
-        print_r($params);
-        exit();
+        // echo '<pre>';
+        // print_r($id_jamaah);
+        // echo '<br>';
+        // print_r($params);
+        // exit();
         $this->db->where('id_jamaah', $id_jamaah);
         return $this->db->update('jamaah', $params);
+    }
+    function update_jamaah_img($id_jamaah, $params2)
+    {
+        // echo '<pre>';
+        // print_r($id_jamaah);
+        // echo '<br>';
+        // print_r($params2);
+        // exit();
+        $this->db->where('id_jamaah', $id_jamaah);
+        return $this->db->update('jamaah', $params2);
     }
 
     function update_scan($result_code, $params)
