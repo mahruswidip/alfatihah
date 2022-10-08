@@ -279,7 +279,7 @@ class Jamaah extends CI_Controller
             redirect('login');
         }
         // check if the luasan exists before trying to edit it
-        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);        
 
         if (isset($data['jamaah']['id_jamaah'])) {
             if (isset($_POST) && count($_POST) > 0) {
