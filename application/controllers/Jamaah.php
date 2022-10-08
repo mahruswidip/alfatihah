@@ -117,9 +117,9 @@ class Jamaah extends CI_Controller
                 'id_jamaah' => $this->input->post('id_jamaah'),
                 'id_paket' => $this->input->post('id_paket'),
             );
-
+            
             $this->Jamaah_model->add_keberangkatan($params);
-            redirect('jamaah/detail/' . $id_jamaah);
+            redirect('jamaah/detail/'.$id_jamaah);
         } else {
             $data['_view'] = 'jamaah/add_keberangkatan';
             $this->load->view('layouts/main', $data);
@@ -177,89 +177,6 @@ class Jamaah extends CI_Controller
             redirect('jamaah/add');
         }
     }
-
-    // function bukaedit($id_jamaah)
-    // {
-    //     if ($this->session->userdata('logged_in') !== TRUE) {
-    //         redirect('login');
-    //     }
-    //     $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
-    //     $data['_view'] = 'jamaah/edit';
-    //     $this->load->view('layouts/main', $data);
-    // }
-
-    // function edit()
-    // {
-    //     $config = array(
-    //         'upload_path' => './assets/images/',
-    //         'allowed_types' => 'jpg|png|jpeg',
-    //         'max_size' => 10000
-    //     );
-
-    //     $id_jamaah = $this->input->post('id_jamaah');
-    //     $nik = $this->input->post('nik');
-    //     $nama_jamaah = $this->input->post('nama_jamaah');
-    //     $jenis_kelamin = $this->input->post('jenis_kelamin');
-    //     $nomor_telepon = $this->input->post('nomor_telepon');
-    //     $alamat = $this->input->post('alamat');
-    //     $nomor_paspor = $this->input->post('nomor_paspor');
-    //     $data_kode = array('id_jamaah' => $id_jamaah);
-    //     $foto = $this->db->get_where('jamaah', $data_kode);
-
-    //     if ($foto->num_rows() > 0) {
-    //         $pros = $foto->row();
-    //         $name = $pros->jamaah_img;
-
-    //         if (file_exists($lok = FCPATH . '/assets/images/' . $name)) {
-    //             unlink($lok);
-    //         }
-    //     }
-
-    //     $this->load->library('upload', $config);
-
-    //     if ($this->upload->do_upload('jamaah_img')) {
-
-    //         $finfo = $this->upload->data();
-    //         $nama_foto = $finfo['file_name'];
-
-    //         $params = array(
-    //             'nik' => $nik,
-    //             'nama_jamaah' => $nama_jamaah,
-    //             'jenis_kelamin' => $jenis_kelamin,
-    //             'nomor_telepon' => $nomor_telepon,
-    //             'alamat' => $alamat,
-    //             'nomor_paspor' => $nomor_paspor,
-    //             'jamaah_img' => $nama_foto
-    //         );
-
-    //         $config2 = array(
-    //             'source_image' => 'assets/images/' . $nama_foto,
-    //             'image_library' => 'gd2',
-    //             'new_image' => 'assets/images/',
-    //             'maintain_ratio' => false,
-    //             'width' => '20%',
-    //             'quality' => '60%',
-
-    //         );
-
-    //         $this->load->library('image_lib', $config2);
-    //         $this->image_lib->resize();
-    //     } else {
-    //         $params = array(
-    //             'nik' => $nik,
-    //             'nama_jamaah' => $nama_jamaah,
-    //             'jenis_kelamin' => $jenis_kelamin,
-    //             'nomor_telepon' => $nomor_telepon,
-    //             'alamat' => $alamat,
-    //             'nomor_paspor' => $nomor_paspor,
-    //         );
-    //     }
-
-    //     $this->Jamaah_model->update_ikut($data_kode, $params);
-    //     redirect('jamaah/index');
-    // }
-
-
     /*
      * Editing a luasan
      */
@@ -274,65 +191,23 @@ class Jamaah extends CI_Controller
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
         $user_id = $this->session->userdata('user_id');
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
-        $gambar =  $data['jamaah']['jamaah_img'];
-        $this->upload->initialize($config);
 
         if (isset($data['jamaah']['id_jamaah'])) {
-
-            if ($this->upload->do_upload('jamaah_img')) {
-                $gbr = $this->upload->data();
-                //Compress Image
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = './assets/images/' . $gbr['file_name'];
-                $config['create_thumb'] = FALSE;
-                $config['maintain_ratio'] = FALSE;
-                $config['quality'] = '60%';
-                $config['width'] = '20%';
-                $config['max_size'] = '10000';
-                $config['new_image'] = './assets/images/' . $gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-                $gambar = $gbr['file_name'];
-                $old_image = $data['jamaah']['jamaah_img'];
-
-                
+            if (isset($_POST) && count($_POST) > 0) {
                 $params = array(
                     'nik' => $this->input->post('nik'),
                     'nama_jamaah' => $this->input->post('nama_jamaah'),
                     'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                    'nomor_telepon' => $this->input->post('nomor_telepon'),
                     'alamat' => $this->input->post('alamat'),
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
-                    'created_by' => $user_id,
-                );
-                
-                $params2 = array(
-                    'jamaah_img' => $gambar,
+                    'nomor_telepon' => $this->input->post('nomor_telepon'),
                 );
 
-                if (file_exists($lok = FCPATH . '/assets/images/' . $old_image)) {
-                    unlink($lok);
-                }
-                
                 $this->Jamaah_model->update_jamaah($id_jamaah, $params);
-                $this->Jamaah_model->update_jamaah_img($id_jamaah, $params2);
-                redirect('jamaah/detail/' . $id_jamaah);
+                redirect('jamaah/index');
             } else {
-                if (isset($_POST) && count($_POST) > 0) {
-                    $params = array(
-                        'nik' => $this->input->post('nik'),
-                        'nama_jamaah' => $this->input->post('nama_jamaah'),
-                        'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                        'alamat' => $this->input->post('alamat'),
-                        'nomor_paspor' => $this->input->post('nomor_paspor'),
-                        'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    );
-                    $this->Jamaah_model->update_jamaah($id_jamaah, $params);
-                    redirect('jamaah/detail/'.$id_jamaah);
-                } else {
-                    $data['_view'] = 'jamaah/edit';
-                    $this->load->view('layouts/main', $data);
-                }
+                $data['_view'] = 'jamaah/edit';
+                $this->load->view('layouts/main', $data);
             }
         } else {
             show_error('The jamaah you are trying to edit does not exist.');

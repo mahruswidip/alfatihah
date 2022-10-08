@@ -84,6 +84,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <br>
                     <h5>
                         <?php echo $this->session->userdata('user_name') ?>
+                        <?php $user_level = $this->session->userdata('user_level') ?>
                     </h5>
                 </a></div>
             <div class="sidebar-wrapper">
@@ -96,17 +97,25 @@ The above copyright notice and this permission notice shall be included in all c
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
-                        </li>
+                        </li>        
                         <li class="nav-item <?php if ($this->uri->uri_string() == 'keberangkatan/index') {
-                                                echo 'active';
+                                                echo 'active';  
                                             } ?>">
                             <a class="nav-link" href="<?php echo site_url(''); ?>keberangkatan/index">
-                                <i class="material-icons">trolley</i>
+                                <i class="material-icons">event-available</i>
                                 <p>Keberangkatan</p>
                             </a>
                         </li>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'paket/index') {
+                                                echo 'active';  
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>paket/index">
+                                <i class="material-icons">view_kanban</i>
+                                <p>Paket</p>
+                            </a>
+                        </li>
                         <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
-                                                echo 'active';
+                                                echo 'active';  
                                             } ?>">
                             <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
                                 <i class="material-icons">persons</i>

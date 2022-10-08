@@ -115,16 +115,17 @@
 								</div>
 								<div class="col-auto">
 									<div class="form-group">
-										<select name="tampilan" class="form-control">
+										<select name="matauangall" class="form-control">
 											<option value="">USD / Rp</option>
 											<?php
-											$tampilan_values = array(
-												'USD' => 'USD',
+											$matauangall_values = array(
+												'USD' => 'USD',												
 												'Rp' => 'Rp',
+
 											);
 
-											foreach ($tampilan_values as $value => $display_text) {
-												$selected = ($value == $this->input->post('tampilan')) ? ' selected="selected"' : "";
+											foreach ($matauangall_values as $value => $display_text) {
+												$selected = ($value == $this->input->post('matauangall')) ? ' selected="selected"' : "";
 
 												echo '<option value="' . $value . '" ' . $selected . '>' . $display_text . '</option>';
 											}
