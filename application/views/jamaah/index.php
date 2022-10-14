@@ -169,8 +169,8 @@
                 },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
-                        return '<a href="http://localhost/absensi/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
-                        // return '<a href="https://alfatihahtravel.com/admin/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
+                        // return '<a href="http://localhost/absensi/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
+                        return '<a href="https://alfatihahtravel.com/admin/jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
                     }
                 },
                 {
@@ -209,8 +209,8 @@
                         var qr = ""
 
                         if (row.qr_code_benar == "") {
-                            // qr = '<a href="https://alfatihahtravel.com/admin/jamaah/updateqr/' + row.id_jamaah + '"' + 'class="btn btn-dark"><span class="fa fa-qrcode"></span></a>'
-                            qr = '<a href="http://localhost/absensi/jamaah/updateqr/' + row.id_jamaah + '"' + 'class="btn btn-dark"><span class="fa fa-qrcode"></span></a>'
+                            qr = '<a href="https://alfatihahtravel.com/admin/jamaah/updateqr/' + row.id_jamaah + '"' + 'class="btn btn-dark"><span class="fa fa-qrcode"></span></a>'
+                            // qr = '<a href="http://localhost/absensi/jamaah/updateqr/' + row.id_jamaah + '"' + 'class="btn btn-dark"><span class="fa fa-qrcode"></span></a>'
                         } else {
                             qr = '<img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/qr_uuid/' ?>' + row.qr_code_benar + '">'
                         }
@@ -220,11 +220,11 @@
                 {
                     "render": function(data, type, row) {
                         if (user_level != "1") {
-                            // return '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
-                            return '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                            return '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                            // return '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
                         } else {
-                            // return '<a href="https://alfatihahtravel.com/admin/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
-                            return '<a href="http://localhost/absensi/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                            return '<a href="https://alfatihahtravel.com/admin/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                            // return '<a href="http://localhost/absensi/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="http://localhost/absensi/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
                         }
                          // Tampilkan jenis kelamin
                         // return '<a href="https://alfatihahtravel.com/admin/jamaah/cetak_id_card/' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/edit/' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="https://alfatihahtravel.com/admin/jamaah/remove/' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
