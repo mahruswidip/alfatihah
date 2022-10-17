@@ -102,7 +102,7 @@ The above copyright notice and this permission notice shall be included in all c
                                                 echo 'active';  
                                             } ?>">
                             <a class="nav-link" href="<?php echo site_url(''); ?>keberangkatan/index">
-                                <i class="material-icons">event-available</i>
+                                <i class="material-icons">event_available</i>
                                 <p>Keberangkatan</p>
                             </a>
                         </li>
