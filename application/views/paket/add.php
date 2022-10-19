@@ -34,7 +34,7 @@
 										<select name="keberangkatan" class="form-control">
 											<option value="">Pilih Tanggal Tersedia</option>
 											<?php
-											foreach ($keberangkatan as $key => $element) {
+											foreach ($keberangkatan as $element) {
 												echo '<option value="' . $element['id_keberangkatan'] . '">' . $element['tanggal_keberangkatan'] . '</option>';
 											}
 											?>

@@ -60,8 +60,8 @@
                             <th scope="col">Tanggal Keberangkatan</th>
                             <th scope="col">Paket</th>
                             <th scope="col">Lama Hari</th>
-                            <th scope="col">Hotel Mekkah</th>
-                            <th scope="col">Hotel Madinah</th>
+                            <th scope="col">Tanggal Manasik</th>
+                            <th scope="col">Kehadiran Manasik</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,8 +70,8 @@
                                 <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_keberangkatan']), 'd F Y'); ?></td>
                                 <td><?php echo $j['paket']; ?></td>
                                 <td><?php echo $j['lama_hari']; ?></td>
-                                <td><?php echo $j['hotel_mekkah']; ?></td>
-                                <td><?php echo $j['hotel_madinah']; ?></td>
+                                <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_manasik']), 'd F Y'); ?></td>
+                                <td><?php echo $j['kehadiran']; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

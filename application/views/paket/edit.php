@@ -29,6 +29,24 @@
 									</select>
 								</div>
 							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<select name="keberangkatan" class="form-control">
+										<option value="">Pilih Tanggal Tersedia</option>
+										<?php
+										foreach ($keberangkatan as $element) {
+											echo '<option value="' . $element['id_keberangkatan'] . '">' . $element['tanggal_keberangkatan'] . '</option>';
+										}
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label class="bmd-label-floating">Lama Hari</label>
+									<input type="text" required placeholder="9/13/16" name="lama_hari" value="<?php echo $this->input->post('lama_hari'); ?>" class="form-control" id="lama_hari" />
+								</div>
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-6">
