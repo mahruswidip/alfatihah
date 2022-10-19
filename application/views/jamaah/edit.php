@@ -7,7 +7,7 @@
 						<h4 class="card-title">Edit Jamaah</h4>
 					</div>
 					<div class="card-body">
-						<?php echo form_open_multipart('jamaah/edit/'. $jamaah['id_jamaah']); ?>
+						<?php echo form_open_multipart('jamaah/update_jamaah_img/'. $jamaah['id_jamaah']); ?>
 							<h3>Data Jamaah</h3>
 							<div class="row">
 								<div class="col-md-6">
