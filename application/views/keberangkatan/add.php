@@ -37,6 +37,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Tanggal Manasik</label>
+                                        <input type="date" name="tanggal_manasik" value="<?php echo $this->input->post('tanggal_manasik'); ?>" class="form-control" id="tanggal_manasik" />
+                                    </div>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-success pull-right">Tambah</button>
                             <div class="clearfix"></div>
                         </form>
