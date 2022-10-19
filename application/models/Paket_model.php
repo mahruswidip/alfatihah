@@ -43,14 +43,7 @@ class Paket_model extends CI_Model
         if (isset($params) && !empty($params)) {
             $this->db->limit($params['limit'], $params['offset']);
         }
-        $user_id = $this->session->userdata('user_id');
-        if ($user_id == '1') {
-            return $this->db->get('paket')->result_array();
-        } elseif ($user_id == '2') {
-            return $this->db->get('paket')->result_array();
-        } else {
-            return $this->db->get_where('paket', array('paket.created_by' => $user_id))->result_array();
-        }
+        return $this->db->get('paket')->result_array();
     }
 
     /*
