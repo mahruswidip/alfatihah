@@ -185,6 +185,7 @@ class Jamaah_model extends CI_Model
 
     function get_record_keberangkatan($id_jamaah)
     {
+        $this->db->where('id_jamaah', $id_jamaah);
         $this->db->order_by('record_keberangkatan.id_jamaah', 'asc');
         $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
         $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');

@@ -31,17 +31,17 @@ class Paket extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
-    /*
-     * Adding a new luasan
-     */
-
     function bukatambah()
     {
         $data['_view'] = 'paket/add';
+        $data['keberangkatan'] = $this->Paket_model->get_tanggal_keberangkatan();
+        // var_dump( $data['keberangkatan']);
+        // exit();
         $this->load->view('layouts/main', $data);
     }
     function add()
     {
+        
         $config['upload_path'] = './assets/images/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya

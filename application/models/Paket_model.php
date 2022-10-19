@@ -28,6 +28,11 @@ class Paket_model extends CI_Model
         return $this->db->count_all_results();
     }
 
+    function get_tanggal_keberangkatan()
+    {
+        $this->db->order_by('keberangkatan.id_keberangkatan', 'desc');
+        return $this->db->get('keberangkatan')->result_array();
+    }
     /*
      * Get all paket
      */

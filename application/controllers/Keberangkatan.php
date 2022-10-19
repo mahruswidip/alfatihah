@@ -54,6 +54,7 @@ class Keberangkatan extends CI_Controller
             $params = array(
                 'tanggal_keberangkatan' => $this->input->post('tanggal_keberangkatan'),
                 'is_aktif' => $this->input->post('is_aktif'),
+                'tanggal_manasik' => $this->input->post('tanggal_manasik'),
             );
 
             $keberangkatan_id = $this->Keberangkatan_model->add_keberangkatan($params);
@@ -79,7 +80,7 @@ class Keberangkatan extends CI_Controller
                 $params = array(
                     'tanggal_keberangkatan' => $this->input->post('tanggal_keberangkatan'),
                     'is_aktif' => $this->input->post('is_aktif'),
-
+                    'tanggal_manasik' => $this->input->post('tanggal_manasik'),
                 );
 
                 $this->Keberangkatan_model->update_keberangkatan($id_keberangkatan, $params);
