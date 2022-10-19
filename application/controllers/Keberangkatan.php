@@ -53,10 +53,6 @@ class Keberangkatan extends CI_Controller
         if (isset($_POST) && count($_POST) > 0) {
             $params = array(
                 'tanggal_keberangkatan' => $this->input->post('tanggal_keberangkatan'),
-                'paket' => $this->input->post('paket'),
-                'lama_hari' => $this->input->post('lama_hari'),
-                'hotel_mekkah' => $this->input->post('hotel_mekkah'),
-                'hotel_madinah' => $this->input->post('hotel_madinah'),
                 'is_aktif' => $this->input->post('is_aktif'),
             );
 
@@ -82,10 +78,6 @@ class Keberangkatan extends CI_Controller
             if (isset($_POST) && count($_POST) > 0) {
                 $params = array(
                     'tanggal_keberangkatan' => $this->input->post('tanggal_keberangkatan'),
-                    'paket' => $this->input->post('paket'),
-                    'lama_hari' => $this->input->post('lama_hari'),
-                    'hotel_mekkah' => $this->input->post('hotel_mekkah'),
-                    'hotel_madinah' => $this->input->post('hotel_madinah'),
                     'is_aktif' => $this->input->post('is_aktif'),
 
                 );
