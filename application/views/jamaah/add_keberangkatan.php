@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <form action="<?php echo site_url() . 'jamaah/add_keberangkatan/' . $jamaah['id_jamaah'] ?>" method="post" enctype="multipart/form-data">
                             <h3>Data Keberangkatan</h3>
-                            <!-- <input type="text" name="id_jamaah" value="<?php echo ($this->input->post('id_jamaah') ? $this->input->post('id_jamaah') : $jamaah['id_jamaah']); ?>" class="form-control" id="id_jamaah" /> -->
+                            <input type="text" name="id_jamaah" value="<?php echo ($this->input->post('id_jamaah') ? $this->input->post('id_jamaah') : $jamaah['id_jamaah']); ?>" class="form-control d-none" id="id_jamaah" />
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
