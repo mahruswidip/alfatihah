@@ -190,6 +190,16 @@ class Jamaah_model extends CI_Model
         $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
         $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
         $this->db->join('kehadiran', 'record_keberangkatan.id_jamaah=kehadiran.fk_id_jamaah', 'left');
+        $this->db->order_by('paket.id_paket', 'asc');
+        return $this->db->get('record_keberangkatan')->result_array();
+    }
+
+    function get_hotel_from_record_keberangkatan($id_jamaah)
+    {
+        $this->db->where('id_jamaah', $id_jamaah);
+        $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
+        $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
+        $this->db->order_by('record_keberangkatan.created_at', 'desc');
         return $this->db->get('record_keberangkatan')->result_array();
     }
 }

@@ -7,6 +7,7 @@
             </div>
             <div style="margin-top: 20px;">
                 <button type="button" id="btn_convert2" class="btn btn-success"><span class="fa fa-download"></span> Halaman Belakang</button>
+                <a href="<?php echo site_url('jamaah/cetak_label_koper/' . $jamaah['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span></a>
             </div>
             <div id="html-content-holder" style="width: 639px; height: 1016px;">
                 <img src="<?php echo base_url() . 'assets/images/id_card_template/depan.png'; ?>">
