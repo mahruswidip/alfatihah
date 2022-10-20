@@ -2,10 +2,10 @@
 <form action="<?php echo site_url() . 'jamaah/edit' . $jamaah['id_jamaah'] ?>" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col">
-            <!-- <?php
+            <?php
             echo '<pre>';
             print_r($hotel);
-            ?> -->
+            ?>
             <div style="margin-top: 20px;">
                 <button type="button" id="btn_convert" class="btn btn-success"><span class="fa fa-download"></span> Halaman Depan Label Koper</button>
             </div>
