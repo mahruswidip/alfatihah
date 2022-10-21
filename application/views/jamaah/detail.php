@@ -5,6 +5,10 @@
                 <div class="col-md-9">
                     <h3 class="card-title ">Detail Jamaah</h3>
                 </div>
+                <div class="col-auto">
+                    <a href="<?php echo site_url('jamaah/cetak_id_card/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-print"></span> ID CARD</a>
+                    <a href="<?php echo site_url('jamaah/cetak_label_koper/' . $jamaah['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span> LABEL</a>
+                </div>
             </div>
         </div>
         <div class="card-body">
