@@ -194,34 +194,6 @@ class Jamaah extends CI_Controller
 
         if (isset($data['jamaah']['id_jamaah'])) {
             if (isset($_POST) && count($_POST) > 0) {
-
-                $gbr = $this->upload->data();
-                //Compress Image
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = './assets/images/' . $gbr['file_name'];
-                $config['create_thumb'] = FALSE;
-                $config['maintain_ratio'] = FALSE;
-                $config['quality'] = '60%';
-                $config['width'] = '20%';
-                $config['max_size'] = '10000';
-                $config['new_image'] = './assets/images/' . $gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-                $gambar = $gbr['file_name'];
-
-                $params = array(
-                    'nik' => $this->input->post('nik'),
-                    'nama_jamaah' => $this->input->post('nama_jamaah'),
-                    'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                    'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    'alamat' => $this->input->post('alamat'),
-                    'nomor_paspor' => $this->input->post('nomor_paspor'),
-                    'created_by' => $user_id,
-                );
-
-                $this->Jamaah_model->update_jamaah_img($params, $gambar);
-                redirect('jamaah/edit');
-
                 $params = array(
                     'nik' => $this->input->post('nik'),
                     'nama_jamaah' => $this->input->post('nama_jamaah'),
@@ -230,6 +202,28 @@ class Jamaah extends CI_Controller
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
                     'nomor_telepon' => $this->input->post('nomor_telepon'),
                 );
+                $this->upload->initialize($config); // proses upload baru
+                if (!empty($_FILES['jamaah_img']['name'])) {
+                    if ($this->upload->do_upload('jamaah_img')) {
+                        $gbr = $this->upload->data();
+                        //Compress Image
+                        $config['image_library'] = 'gd2';
+                        $config['source_image'] = './assets/images/' . $gbr['file_name'];
+                        $config['create_thumb'] = FALSE;
+                        $config['maintain_ratio'] = FALSE;
+                        $config['quality'] = '60%';
+                        $config['width'] = '20%';
+                        $config['max_size'] = '10000';
+                        $config['new_image'] = './assets/images/' . $gbr['file_name'];
+                        $this->load->library('image_lib', $config);
+                        $this->image_lib->resize();
+                        $gambar = $gbr['file_name'];
+                    }
+                }
+                if (isset($gambar)){
+                    $params['jamaah_img'] = $gambar;
+                    unlink(FCPATH.'assets/images/'.$data['jamaah']['jamaah_img']); // menghapus file upload seblumnya
+                }
 
                 $this->Jamaah_model->update_jamaah($id_jamaah, $params);
                 redirect('jamaah/index');
@@ -242,66 +236,10 @@ class Jamaah extends CI_Controller
         }
     }
 
-    function update_jamaah_img($id_jamaah)
-    {
-        if ($this->session->userdata('logged_in') !== TRUE) {
-            redirect('login');
-        }
-        $config['upload_path'] = './assets/images/'; //path folder
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-        $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
-        $user_id = $this->session->userdata('user_id');
-        $this->load->library('ciqrcode');
-
-        $this->upload->initialize($config);
-        if (!empty($_FILES['jamaah_img']['name'])) {
-            if ($this->upload->do_upload('jamaah_img')) {
-                $gbr = $this->upload->data();
-                //Compress Image
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = './assets/images/' . $gbr['file_name'];
-                $config['create_thumb'] = FALSE;
-                $config['maintain_ratio'] = FALSE;
-                $config['quality'] = '60%';
-                $config['width'] = '20%';
-                $config['max_size'] = '10000';
-                $config['new_image'] = './assets/images/' . $gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-                $gambar = $gbr['file_name'];
-
-                $params = array(
-                    'nik' => $this->input->post('nik'),
-                    'nama_jamaah' => $this->input->post('nama_jamaah'),
-                    'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                    'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    'alamat' => $this->input->post('alamat'),
-                    'nomor_paspor' => $this->input->post('nomor_paspor'),
-                );
-
-                $this->Jamaah_model->update_jamaah_img($params, $gambar);
-                redirect('jamaah/index');
-            } else {
-                echo "else";
-                exit();
-                redirect('jamaah/index');
-            }
-        } else {
-            $this->session->set_flashdata('error', 'Ukuran Tidak boleh lebih dari 5 MB');
-            redirect('jamaah/edit');
-        }
-    }
-    /*
-     * Editing a luasan
-     */
-
     function detail($id_jamaah)
     {
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
         $data['record'] = $this->Jamaah_model->get_record_keberangkatan($id_jamaah);
-        // echo '<pre>';
-        // print_r($data['record']);
-        // exit();
         $data['_view'] = 'jamaah/detail';
         $this->load->view('layouts/main', $data);
     }
@@ -441,6 +379,7 @@ class Jamaah extends CI_Controller
         // check if the jamaah exists before trying to delete it
         if (isset($jamaah['id_jamaah'])) {
             $this->Jamaah_model->delete_jamaah($id_jamaah);
+            unlink(FCPATH.'assets/images/'.$jamaah['jamaah_img']);
             redirect('jamaah/index');
         } else
             show_error('The jamaah you are trying to delete does not exist.');
