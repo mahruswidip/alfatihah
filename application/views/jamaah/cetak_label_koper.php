@@ -35,44 +35,44 @@
                 <table style="position:relative; width: 364px;height: 25px;margin-top: -903px;font-size: 2.5rem;text-align: left;font-weight: bold;line-height: 2.4rem;margin-left: 207px;">
                     <tr>
                         <td>
-                            <p style="font-size: 1.2rem;text-align: left;font-weight: bold;line-height: 0rem;"><?php echo $hotel[0]['hotel_madinah'] ?> <?php if ($hotel[0]['bintang_madinah'] == '5') {
+                            <p style="font-size: 1.2rem;text-align: left;font-weight: bold;line-height: 0rem;"><?php echo $hotel[0]['hotel_mekkah'] ?> <?php if ($hotel[0]['bintang_mekkah'] == '5') {
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
-                                                                                                                                                        } elseif ($hotel[0]['bintang_madinah'] == '4') {
+                                                                                                                                                        } elseif ($hotel[0]['bintang_mekkah'] == '4') {
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
-                                                                                                                                                        } elseif ($hotel[0]['bintang_madinah'] == '3') {
+                                                                                                                                                        } elseif ($hotel[0]['bintang_mekkah'] == '3') {
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
-                                                                                                                                                        } elseif ($hotel[0]['bintang_madinah'] == '2') {
+                                                                                                                                                        } elseif ($hotel[0]['bintang_mekkah'] == '2') {
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                         } else {
                                                                                                                                                             echo '&#9733;';
                                                                                                                                                         };
                                                                                                                                                         ?></p>
-                            <p style="font-size: 1.2rem;text-align: left;font-weight: bold;line-height: 0rem; margin-top: 33px;"><?php echo $hotel[0]['hotel_mekkah'] ?> <?php if ($hotel[0]['bintang_mekkah'] == '5') {
+                            <p style="font-size: 1.2rem;text-align: left;font-weight: bold;line-height: 0rem; margin-top: 33px;"><?php echo $hotel[0]['hotel_madinah'] ?> <?php if ($hotel[0]['bintang_madinah'] == '5') {
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
-                                                                                                                                                                            } elseif ($hotel[0]['bintang_mekkah'] == '4') {
+                                                                                                                                                                            } elseif ($hotel[0]['bintang_madinah'] == '4') {
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
-                                                                                                                                                                            } elseif ($hotel[0]['bintang_mekkah'] == '3') {
+                                                                                                                                                                            } elseif ($hotel[0]['bintang_madinah'] == '3') {
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
-                                                                                                                                                                            } elseif ($hotel[0]['bintang_mekkah'] == '2') {
+                                                                                                                                                                            } elseif ($hotel[0]['bintang_madinah'] == '2') {
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                                 echo '&#9733;';
                                                                                                                                                                             } else {
