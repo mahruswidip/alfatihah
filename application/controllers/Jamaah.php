@@ -220,9 +220,9 @@ class Jamaah extends CI_Controller
                         $gambar = $gbr['file_name'];
                     }
                 }
-                if (isset($gambar)){
+                if (isset($gambar)) {
                     $params['jamaah_img'] = $gambar;
-                    unlink(FCPATH.'assets/images/'.$data['jamaah']['jamaah_img']); // menghapus file upload seblumnya
+                    unlink(FCPATH . 'assets/images/' . $data['jamaah']['jamaah_img']); // menghapus file upload seblumnya
                 }
 
                 $this->Jamaah_model->update_jamaah($id_jamaah, $params);
@@ -257,42 +257,32 @@ class Jamaah extends CI_Controller
         // check if the luasan exists before trying to edit it
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
 
-        if (isset($data['jamaah']['id_jamaah'])) {
-            if (isset($_POST) && count($_POST) > 0) {
-                $params = array(
-                    'qr_code_benar' => $this->input->post('uuid') . '.png',
-                );
+        $config['cacheable']    = true; //boolean, the default is true
+        $config['cachedir']     = './assets/'; //string, the default is application/cache/
+        $config['errorlog']     = './assets/'; //string, the default is application/logs/
+        $config['imagedir']     = './assets/images/qr_uuid/'; //direktori penyimpanan qr code
+        $config['quality']      = true; //boolean, the default is true
+        $config['size']         = '1024'; //interger, the default is 1024
+        $config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
+        $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+        $this->ciqrcode->initialize($config);
 
-                $config['cacheable']    = true; //boolean, the default is true
-                $config['cachedir']     = './assets/'; //string, the default is application/cache/
-                $config['errorlog']     = './assets/'; //string, the default is application/logs/
-                $config['imagedir']     = './assets/images/qr_uuid/'; //direktori penyimpanan qr code
-                $config['quality']      = true; //boolean, the default is true
-                $config['size']         = '1024'; //interger, the default is 1024
-                $config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
-                $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
-                $this->ciqrcode->initialize($config);
+        $nama = $data['jamaah']['uuid'];
 
-                $nama = $this->input->post('uuid');
-                $site = base_url('jamaah/detail/');
+        $qr_code = $nama . '.png'; //buat name dari qr code sesuai dengan nim
 
-                $qr_code = $nama . '.png'; //buat name dari qr code sesuai dengan nim
+        $params1['data'] = $nama; //data yang akan di jadikan QR CODE
+        $params1['level'] = 'H'; //H=High
+        $params1['size'] = 10;
+        $params1['savename'] = FCPATH . $config['imagedir'] . $qr_code; //simpan image QR CODE ke folder assets/images/
+        $this->ciqrcode->generate($params1); // fungsi untuk generate QR CODE
 
-                $params1['data'] = $nama; //data yang akan di jadikan QR CODE
-                $params1['level'] = 'H'; //H=High
-                $params1['size'] = 10;
-                $params1['savename'] = FCPATH . $config['imagedir'] . $qr_code; //simpan image QR CODE ke folder assets/images/
-                $this->ciqrcode->generate($params1); // fungsi untuk generate QR CODE
+        $params = array(
+            'qr_code_benar' => $qr_code
+        );
 
-                $this->Jamaah_model->update_jamaah($id_jamaah, $params);
-                redirect('jamaah/index');
-            } else {
-                $data['_view'] = 'jamaah/updateqr';
-                $this->load->view('layouts/main', $data);
-            }
-        } else {
-            show_error('The jamaah you are trying to edit does not exist.');
-        }
+        $this->Jamaah_model->update_jamaah($id_jamaah, $params);
+        redirect('jamaah/index');
     }
 
     function cetak_id_card($id_jamaah)
@@ -379,10 +369,12 @@ class Jamaah extends CI_Controller
         // check if the jamaah exists before trying to delete it
         if (isset($jamaah['id_jamaah'])) {
             $this->Jamaah_model->delete_jamaah($id_jamaah);
-            unlink(FCPATH.'assets/images/'.$jamaah['jamaah_img']);
+            unlink(FCPATH . 'assets/images/' . $jamaah['jamaah_img']);
+            unlink(FCPATH . 'assets/images/qr_uuid/' . $jamaah['qr_code_benar']);
             redirect('jamaah/index');
-        } else
+        } else {
             show_error('The jamaah you are trying to delete does not exist.');
+        }
     }
 
     public function export()
