@@ -36,9 +36,9 @@ class Jamaah_model extends CI_Model
     // get state method
     public function getStates()
     {
-        $this->db->select(array('s.id_paket as id_paket', 's.fk_id_keberangkatan', 's.paket as paket'));
-        $this->db->from('paket as s');
-        $this->db->where('s.fk_id_keberangkatan', $this->_countryID);
+        $this->db->select(array('id_paket', 'fk_id_keberangkatan', 'nama_program'));
+        $this->db->from('paket');
+        $this->db->where('fk_id_keberangkatan', $this->_countryID);
         $query = $this->db->get();
         return $query->result_array();
     }

@@ -71,7 +71,7 @@
                     var options = '';
                     options += '<option value="">Pilih Paket</option>';
                     for (var i = 0; i < json.length; i++) {
-                        options += '<option value="' + json[i].id_paket + '">' + json[i].paket + '</option>';
+                        options += '<option value="' + json[i].id_paket + '">' + json[i].nama_program + '</option>';
                     }
                     jQuery("select#state-name").html(options);
                     
