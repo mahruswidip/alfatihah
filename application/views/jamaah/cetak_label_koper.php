@@ -14,7 +14,7 @@
             </div>
             <div id="html-content-holder" style="width: 639px; height: 1016px;">
                 <img src="<?php echo base_url() . 'assets/images/id_card_template/labelkoper/depan.png'; ?>">
-                <img style="border-radius: 20px; width: 280px; height: 385px; margin-top: -977px; margin-left: 180px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>">
+                <img class="img-fluid" style="border-radius: 20px; width: 280px; object-fit: cover; height: 390px; margin-top: -977px; margin-left: 180px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>">
                 <table style="position:relative; color:black; width: 524px; height: 200px; margin-top: -330px; font-size: 2.5rem; text-align: center; font-weight: bold; line-height: 2.4rem;" align="center">
                     <tr>
                         <td>
