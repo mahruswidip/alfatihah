@@ -76,7 +76,7 @@ class Scan_model extends CI_Model
         return $this->db->update('jamaah', $params);
     }
 
-    function get_kehadiran_with_jamaah($params = array())
+    function get_kehadiran_with_jamaah()
     {
         $this->db->join('jamaah', 'kehadiran.id_jamaah=jamaah.id_jamaah', 'left');
         return $this->db->get('kehadiran')->result_array();
