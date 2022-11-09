@@ -379,7 +379,7 @@ class Jamaah extends CI_Controller
 
     public function export()
     {
-        $jamaah = $this->Jamaah_model->get_all_jamaah_pure();
+        $jamaah = $this->Jamaah_model->get_all_jamaah();
         echo '<pre>';
         print_r($jamaah);
         exit();
