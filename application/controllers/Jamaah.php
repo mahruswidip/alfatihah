@@ -379,10 +379,10 @@ class Jamaah extends CI_Controller
 
     public function export()
     {
-        $jamaah = $this->Jamaah_model->get_all_jamaah_with_record();
-        echo '<pre>';
-        print_r($jamaah);
-        exit();
+        // $jamaah = $this->Jamaah_model->get_all_jamaah_with_record();
+        // echo '<pre>';
+        // print_r($jamaah);
+        // exit();
         // Load plugin PHPExcel nya
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
 
@@ -437,7 +437,8 @@ class Jamaah extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('C3', "NAMA"); // Set kolom C3 dengan tulisan "NAMA"
         $excel->setActiveSheetIndex(0)->setCellValue('D3', "NOMOR HP"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
         $excel->setActiveSheetIndex(0)->setCellValue('E3', "GRUP KEBERANGKATAN"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('F3', "KEHADIRAN MANASIK"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('F3', "TANGGAL MANASIK"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('G3', "KEHADIRAN MANASIK"); // Set kolom E3 dengan tulisan "ALAMAT"
 
 
         // Apply style header yang telah kita buat tadi ke masing-masing kolom header
@@ -447,10 +448,11 @@ class Jamaah extends CI_Controller
         $excel->getActiveSheet()->getStyle('D3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('E3')->applyFromArray($style_col);
         $excel->getActiveSheet()->getStyle('F3')->applyFromArray($style_col);
+        $excel->getActiveSheet()->getStyle('G3')->applyFromArray($style_col);
 
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $jamaah = $this->Jamaah_model->get_all_jamaah();
+        $jamaah = $this->Jamaah_model->get_all_jamaah_with_record();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
@@ -459,8 +461,9 @@ class Jamaah extends CI_Controller
             $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $data['nik']);
             $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $data['nama_jamaah']);
             $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $data['nomor_telepon']);
-            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data['grup_keberangkatan']);
-            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data['kehadiran']);
+            $excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow, $data['tanggal_keberangkatan']);
+            $excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow, $data['tanggal_manasik']);
+            $excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, $data['kehadiran']);
 
             // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
             $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
@@ -469,6 +472,7 @@ class Jamaah extends CI_Controller
             $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('E' . $numrow)->applyFromArray($style_row);
             $excel->getActiveSheet()->getStyle('F' . $numrow)->applyFromArray($style_row);
+            $excel->getActiveSheet()->getStyle('G' . $numrow)->applyFromArray($style_row);
 
             $no++; // Tambah 1 setiap kali looping
             $numrow++; // Tambah 1 setiap kali looping
@@ -481,6 +485,7 @@ class Jamaah extends CI_Controller
         $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20); // Set width kolom D
         $excel->getActiveSheet()->getColumnDimension('E')->setWidth(30); // Set width kolom E
         $excel->getActiveSheet()->getColumnDimension('F')->setWidth(25); // Set width kolom E
+        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(25); // Set width kolom E
 
 
         // Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
