@@ -128,8 +128,8 @@ class Jamaah_model extends CI_Model
     {
         $this->db->order_by('jamaah.updated_at', 'desc');
         $this->db->join('tbl_users', 'tbl_users.user_id=jamaah.created_by', 'left');
-        // $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
         $this->db->join('record_keberangkatan', 'record_keberangkatan.id_jamaah=jamaah.id_jamaah', 'left');
+        $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
         return $this->db->get('jamaah')->result_array();
     }
 
