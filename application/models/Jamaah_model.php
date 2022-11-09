@@ -124,6 +124,15 @@ class Jamaah_model extends CI_Model
         return $this->db->get('jamaah')->result_array();
     }
 
+    function get_all_jamaah_with_record()
+    {
+        $this->db->order_by('jamaah.updated_at', 'desc');
+        $this->db->join('tbl_users', 'tbl_users.user_id=jamaah.created_by', 'left');
+        $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
+        $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
+        return $this->db->get('jamaah')->result_array();
+    }
+
     function get_all_jamaah_pure($params = array())
     {
         $this->db->order_by('jamaah.grup_keberangkatan', 'asc');
