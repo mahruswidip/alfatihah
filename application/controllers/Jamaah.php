@@ -446,7 +446,7 @@ class Jamaah extends CI_Controller
 
 
         // Panggil function view yang ada di SiswaModel untuk menampilkan semua data siswanya
-        $jamaah = $this->Jamaah_model->get_all_jamaah_pure();
+        $jamaah = $this->Jamaah_model->get_all_jamaah();
 
         $no = 1; // Untuk penomoran tabel, di awal set dengan 1
         $numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
