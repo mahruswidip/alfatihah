@@ -379,6 +379,10 @@ class Jamaah extends CI_Controller
 
     public function export()
     {
+        $jamaah = $this->Jamaah_model->get_all_jamaah();
+        echo '<pre>';
+        print_r($jamaah);
+        exit();
         // Load plugin PHPExcel nya
         include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
 
