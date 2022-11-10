@@ -157,6 +157,17 @@ class Paket extends CI_Controller
             show_error('The paket you are trying to edit does not exist.');
     }
 
+    function detail($id_paket)
+    {
+        $data['paket'] = $this->Paket_model->get_tanggal_keberangkatan($id_paket);
+        $data['record'] = $this->Paket_model->get_record_with_this_paket($id_paket);
+        // echo '<pre>';
+        // print_r($data['record']);
+        // exit();
+        $data['_view'] = 'paket/detail';
+        $this->load->view('layouts/main', $data);
+    }
+
     /*
      * Deleting paket
      */

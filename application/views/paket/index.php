@@ -44,7 +44,7 @@
                                     }else {
                                         echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-success">Tour</span>';
                                     } ?></td>
-                                    <td><?php echo $p['nama_program']; ?></td>
+                                    <td><a href="<?php echo site_url('paket/detail/' . $p['id_paket']); ?>"><?php echo $p['nama_program']; ?></a></td>                                    
                                     <td><?php echo $p['paket']; ?></td>
                                     <td><?php echo $p['hotel_mekkah']; ?><br>
                                         <?php if ($p['bintang_mekkah'] == '5') {

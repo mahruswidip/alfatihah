@@ -19,6 +19,13 @@ class Paket_model extends CI_Model
         return $this->db->get_where('paket', array('id_paket' => $id_paket))->row_array();
     }
 
+    // function get_all_data_paket($id_paket)
+    // {
+    //     $this->db->get_where('paket', array('id_paket' => $id_paket))->row_array();
+    //     $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
+    //     return $this->db->get('paket')->result_array();
+    // }
+
     /*
      * Get all paket count
      */
@@ -28,10 +35,18 @@ class Paket_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    function get_tanggal_keberangkatan()
+    function get_tanggal_keberangkatan($id_paket)
     {
-        $this->db->order_by('keberangkatan.id_keberangkatan', 'desc');
-        return $this->db->get('keberangkatan')->result_array();
+        $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
+        $this->db->where('id_paket', $id_paket);
+        return $this->db->get('paket')->result_array();
+    }
+    
+    function get_record_with_this_paket($id_paket)
+    {
+        $this->db->join('jamaah', 'jamaah.id_jamaah=record_keberangkatan.id_jamaah', 'left');
+        $this->db->where('record_keberangkatan.id_paket', $id_paket);
+        return $this->db->get('record_keberangkatan')->result_array();
     }
     /*
      * Get all paket
