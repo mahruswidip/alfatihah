@@ -40,6 +40,7 @@ class Paket_model extends CI_Model
     {
         $this->db->order_by('paket.id_paket', 'desc');
         $this->db->join('tbl_users', 'tbl_users.user_id=paket.created_by', 'left');
+        $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
         if (isset($params) && !empty($params)) {
             $this->db->limit($params['limit'], $params['offset']);
         }

@@ -15,6 +15,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead class=" text-primary">
+                            <th>Tanggal Keberangkatan</th>
                             <th>Program</th>
                             <th></th>
                             <th>Nama Program</th>
@@ -32,6 +33,7 @@
                         <tbody>
                             <?php foreach ($paket as $p) { ?>
                                 <tr>
+                                    <td><?php echo $tanggalConverted = date_format(date_create($p['tanggal_keberangkatan']), 'd F Y'); ?></td></td>
                                     <td>
                                         <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $p['paket_img']; ?>" alt="">
                                     </td>
