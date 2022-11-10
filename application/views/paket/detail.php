@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <td><i class="fa fa-book"></i>&nbsp; Hotel</td>
-                            <td><?php echo $paket[0]['hotel_mekkah']; ?><br>
+                            <td><?php echo $paket[0]['hotel_mekkah']; ?>
                                 <?php if ($paket[0]['bintang_mekkah'] == '5') {
                                     echo '&#11088;';
                                     echo '&#11088;';
@@ -57,7 +57,7 @@
                                 };
                                 ?>
                                 <br>
-                                <?php echo $paket[0]['hotel_madinah']; ?><br>
+                                <?php echo $paket[0]['hotel_madinah']; ?>
                                 <?php if ($paket[0]['bintang_madinah'] == '5') {
                                     echo '&#11088;';
                                     echo '&#11088;';
