@@ -31,7 +31,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<select name="keberangkatan" class="form-control">
+										<select name="fk_id_keberangkatan" class="form-control">
 											<option value="">Pilih Tanggal Tersedia</option>
 											<?php
 											foreach ($keberangkatan as $element) {

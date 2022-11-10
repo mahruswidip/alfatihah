@@ -67,6 +67,7 @@ class Paket extends CI_Controller
                 $params = array(
                     'nama_program' => $this->input->post('nama_program'),
                     'kategori' => $this->input->post('kategori'),
+                    'fk_id_keberangkatan' => $this->input->post('fk_id_keberangkatan'),
                     'paket' => $this->input->post('paket'),
                     'hotel_mekkah' => $this->input->post('hotel_mekkah'),
                     'hotel_madinah' => $this->input->post('hotel_madinah'),
