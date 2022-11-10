@@ -91,6 +91,9 @@
                 <div class="col-md-9">
                     <h3 class="card-title ">Daftar Jamaah</h3>
                 </div>
+                <div class="col">
+                    <p>Jumlah Jamaah : <?php echo count($record); ?></p>
+                </div>
             </div>
             <br>
             <div class="table-responsive">
