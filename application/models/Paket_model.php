@@ -33,9 +33,15 @@ class Paket_model extends CI_Model
     {
         $this->db->from('paket');
         return $this->db->count_all_results();
+
+    }   
+
+    function get_tanggal_keberangkatan(){
+        $this->db->order_by('keberangkatan.id_keberangkatan', 'desc');
+        return $this->db->get('keberangkatan')->result_array();
     }
 
-    function get_tanggal_keberangkatan($id_paket)
+    function get_tanggal_keberangkatan_for_detail($id_paket)
     {
         $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
         $this->db->where('id_paket', $id_paket);
