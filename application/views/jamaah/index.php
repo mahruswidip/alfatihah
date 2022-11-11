@@ -103,7 +103,7 @@
                 },
                 {
                     "render": function(data, type, row) { // Tampilkan jenis kelamin
-                        return '<a href="' + <?php echo site_url() ?> + 'jamaah/detail/' + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
+                        return '<a href="' + <?php echo base_url() . 'jamaah/detail/' ?> + row.id_jamaah + '">' + row.nama_jamaah + '</a>';
                     }
                 },
                 {
