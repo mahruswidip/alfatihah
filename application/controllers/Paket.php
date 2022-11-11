@@ -41,12 +41,12 @@ class Paket extends CI_Controller
     }
     function add()
     {
-        
+
         $config['upload_path'] = './assets/images/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
         $user_id = $this->session->userdata('user_id');
-        
+
         $this->upload->initialize($config);
         if (!empty($_FILES['paket_img']['name'])) {
             if ($this->upload->do_upload('paket_img')) {
@@ -91,7 +91,7 @@ class Paket extends CI_Controller
                 redirect('paket/index');
             }
         } else {
-            $this->session->set_flashdata('error','Ukuran Tidak boleh lebih dari 5 MB');
+            $this->session->set_flashdata('error', 'Ukuran Tidak boleh lebih dari 5 MB');
             redirect('paket/add');
         }
 
@@ -161,6 +161,13 @@ class Paket extends CI_Controller
     {
         $data['paket'] = $this->Paket_model->get_tanggal_keberangkatan_for_detail($id_paket);
         $data['record'] = $this->Paket_model->get_record_with_this_paket($id_paket);
+
+        if ($this->session->userdata('link') == null) {
+            $this->session->set_userdata('link', $this->input->post('link_grup_whatsapp'));
+        } else {
+            $this->session->set_userdata('link', '');
+            $this->session->set_userdata('link', $this->input->post('link_grup_whatsapp'));
+        }
         // echo '<pre>';
         // print_r($data['record']);
         // exit();

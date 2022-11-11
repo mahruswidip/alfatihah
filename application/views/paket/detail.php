@@ -120,7 +120,7 @@
                                 <td>
                                     <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
                                 </td>
-                                <td><a href="<?php echo 'http://localhost/absensi/jamaah/detail/'.$jamaah['id_jamaah']; ?>"><?php echo $jamaah['nama_jamaah']; ?></a></td>
+                                <td><a href="<?php echo site_url().'jamaah/detail/'.$jamaah['id_jamaah']; ?>"><?php echo $jamaah['nama_jamaah']; ?></a></td>
                                 <td><?php echo $jamaah['nomor_paspor']; ?></td>
                                 <td><?php echo $jamaah['nomor_telepon']; ?></td>
                                 <td><a href="<?php echo 'https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20'.$this->session->userdata('link') ?>" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a></td>
