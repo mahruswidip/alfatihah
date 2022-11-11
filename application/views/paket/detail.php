@@ -94,6 +94,12 @@
                 <div class="col">
                     <p>Jumlah Jamaah : <?php echo count($record); ?></p>
                 </div>
+                <div class="col">
+                    <form action="<?php echo site_url() . 'paket/detail/'.$paket[0]['id_paket'] ?>" method="post" enctype="multipart/form-data">
+                        <input type="text" name="link_grup_whatsapp" value="<?php echo $this->input->post('link_grup_whatsapp'); ?>" class="form-control" placeholder="Link Grup Whatsapp" id="link_grup_whatsapp" />
+                        <button type="submit" class="btn btn-success pull-right">Tambah</button>
+                    </form>
+                </div>
             </div>
             <br>
             <div class="table-responsive">
@@ -104,17 +110,20 @@
                             <th scope="col">Nama Jamaah</th>
                             <th scope="col">Nomor Paspor</th>
                             <th scope="col">Nomor HP</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($record as $jamaah) { ?>
+                            <?php $nowa = $str = ltrim($jamaah['nomor_telepon'], '0'); ?>
                             <tr>
                                 <td>
                                     <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
                                 </td>
-                                <td><?php echo $jamaah['nama_jamaah']; ?></td>
+                                <td><a href="<?php echo 'http://localhost/absensi/jamaah/detail/'.$jamaah['id_jamaah']; ?>"><?php echo $jamaah['nama_jamaah']; ?></a></td>
                                 <td><?php echo $jamaah['nomor_paspor']; ?></td>
                                 <td><?php echo $jamaah['nomor_telepon']; ?></td>
+                                <td><a href="<?php echo 'https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20'.$this->session->userdata('link') ?>" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
