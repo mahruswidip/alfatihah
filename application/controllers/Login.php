@@ -86,4 +86,20 @@ class Login extends CI_Controller
       $this->load->view('login/register_view', $data);
     }
   }
+
+  // MOBILE API
+
+  public function login()
+  {
+    $email    = $this->input->post('user_name', TRUE);
+    $password = md5($this->input->post('user_password', TRUE));
+
+    $data_admin = array();
+    $data_login = $this->db->query("SELECT * FROM tbl_user where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+  
+    foreach ($data_login->$result() as $dl) {
+      $data_admin[] = $dl;
+    }
+    echo json_encode($data_admin);
+  }
 }

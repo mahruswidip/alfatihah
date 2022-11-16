@@ -66,6 +66,7 @@ class Paket extends CI_Controller
 
                 $params = array(
                     'nama_program' => $this->input->post('nama_program'),
+                    'lama_hari' => $this->input->post('lama_hari'),
                     'kategori' => $this->input->post('kategori'),
                     'fk_id_keberangkatan' => $this->input->post('fk_id_keberangkatan'),
                     'paket' => $this->input->post('paket'),
@@ -131,6 +132,7 @@ class Paket extends CI_Controller
             if (isset($_POST) && count($_POST) > 0) {
                 $params = array(
                     'nama_program' => $this->input->post('nama_program'),
+                    'lama_hari' => $this->input->post('lama_hari'),
                     'kategori' => $this->input->post('kategori'),
                     'paket' => $this->input->post('paket'),
                     'hotel_mekkah' => $this->input->post('hotel_mekkah'),
