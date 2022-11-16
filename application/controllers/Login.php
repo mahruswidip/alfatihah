@@ -91,11 +91,11 @@ class Login extends CI_Controller
 
   public function login_mobile()
   {
-    $email    = $this->input->post('user_name');
+    $email    = $this->input->post('user_email');
     $password = md5($this->input->post('user_password'));
 
     $dataAdmin = array();
-    $dataLogin = $this->db->query("SELECT * FROM tbl_user where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+    $dataLogin = $this->db->query("SELECT * FROM tbl_users where user_email = '" . $email . "' AND user_password = '" . $password . "'");
   
     foreach ($dataLogin->result() as $dl) {
       $dataAdmin[] = $dl;
