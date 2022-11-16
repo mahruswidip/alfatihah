@@ -89,17 +89,17 @@ class Login extends CI_Controller
 
   // MOBILE API
 
-  public function login()
+  public function login_mobile()
   {
-    $email    = $this->input->post('user_name', TRUE);
-    $password = md5($this->input->post('user_password', TRUE));
+    $email    = $this->input->post('user_name');
+    $password = md5($this->input->post('user_password'));
 
-    $data_admin = array();
-    $data_login = $this->db->query("SELECT * FROM tbl_user where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+    $dataAdmin = array();
+    $dataLogin = $this->db->query("SELECT * FROM tbl_user where user_email = '" . $email . "' AND user_password = '" . $password . "'");
   
-    foreach ($data_login->$result() as $dl) {
-      $data_admin[] = $dl;
+    foreach ($dataLogin->result() as $dl) {
+      $dataAdmin[] = $dl;
     }
-    echo json_encode($data_admin);
+    echo json_encode($dataAdmin);
   }
 }
