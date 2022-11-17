@@ -100,11 +100,7 @@ class Login extends CI_Controller
     foreach ($dataLogin->result() as $dl) {
       $dataAdmin[] = $dl;
     }
-    if ($dataAdmin == []) {
-      echo 'Data Anda Tidak Ditemukan';
-    } else {
       echo json_encode($dataAdmin);
-    }
     
   }
 }
