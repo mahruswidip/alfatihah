@@ -101,7 +101,7 @@ class Login extends CI_Controller
       $dataAdmin[] = $dl;
     }
     if ($dataAdmin == []) {
-      echo '';
+      echo 'Data Anda Tidak Ditemukan';
     } else {
       echo json_encode($dataAdmin);
     }
