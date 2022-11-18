@@ -98,9 +98,9 @@ class Login extends CI_Controller
     $dataLogin = $this->db->query("SELECT * FROM tbl_users where user_email = '" . $email . "' AND user_password = '" . $password . "'");
   
     foreach ($dataLogin->result() as $dl) {
-      $dataAdmin = $dl;
+      $dataAdmin[] = $dl;
     }
-    if ($dataAdmin == '') {
+    if ($dataAdmin == []) {
       http_response_code(500);
       $dataAdmin = "Data Anda Tidak Ditemukan";
       echo json_encode($dataAdmin);
