@@ -33,10 +33,10 @@ class Paket_model extends CI_Model
     {
         $this->db->from('paket');
         return $this->db->count_all_results();
+    }
 
-    }   
-
-    function get_tanggal_keberangkatan(){
+    function get_tanggal_keberangkatan()
+    {
         $this->db->order_by('keberangkatan.id_keberangkatan', 'desc');
         return $this->db->get('keberangkatan')->result_array();
     }
@@ -47,7 +47,7 @@ class Paket_model extends CI_Model
         $this->db->where('id_paket', $id_paket);
         return $this->db->get('paket')->result_array();
     }
-    
+
     function get_record_with_this_paket($id_paket)
     {
         $this->db->join('jamaah', 'jamaah.id_jamaah=record_keberangkatan.id_jamaah', 'left');
@@ -74,6 +74,8 @@ class Paket_model extends CI_Model
     function add_paket($params, $gambar)
     {
         $this->db->set('nama_program', $params['nama_program']);
+        $this->db->set('fk_id_keberangkatan', $params['fk_id_keberangkatan']);
+        $this->db->set('lama_hari', $params['lama_hari']);
         $this->db->set('kategori', $params['kategori']);
         $this->db->set('paket', $params['paket']);
         $this->db->set('hotel_mekkah', $params['hotel_mekkah']);

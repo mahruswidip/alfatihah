@@ -63,15 +63,15 @@ class Jamaah_model extends CI_Model
         $this->db->or_like('qr_code_benar', $search); // Untuk menambahkan query where OR LIKE
         $this->db->order_by($order_field, $order_ascdesc); // Untuk menambahkan query ORDER BY
         $this->db->limit($limit, $start); // Untuk menambahkan query LIMIT
-        
+
         return $this->db->get('jamaah')->result_array(); // Eksekusi query sql sesuai kondisi diatas
     }
-    
+
     public function count_all()
     {
         return $this->db->count_all('jamaah'); // Untuk menghitung semua data jamaah
     }
-    
+
     public function count_filter($search)
     {
         $user_id = $this->session->userdata('user_id');
@@ -199,8 +199,7 @@ class Jamaah_model extends CI_Model
         $this->db->order_by('record_keberangkatan.id_jamaah', 'asc');
         $this->db->join('paket', 'paket.id_paket=record_keberangkatan.id_paket', 'left');
         $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
-        $this->db->join('kehadiran', 'record_keberangkatan.id_jamaah=kehadiran.fk_id_jamaah', 'left');
-        $this->db->order_by('paket.id_paket', 'asc');
+        // $this->db->join('kehadiran', 'record_keberangkatan.id_jamaah=kehadiran.fk_id_jamaah', 'left');
         return $this->db->get('record_keberangkatan')->result_array();
     }
 

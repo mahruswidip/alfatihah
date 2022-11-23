@@ -240,6 +240,9 @@ class Jamaah extends CI_Controller
     {
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
         $data['record'] = $this->Jamaah_model->get_record_keberangkatan($id_jamaah);
+        // echo '<pre>';
+        // var_dump($data['record']);
+        // exit();
         $data['_view'] = 'jamaah/detail';
         $this->load->view('layouts/main', $data);
     }
