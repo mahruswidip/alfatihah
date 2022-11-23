@@ -33,18 +33,19 @@
                         <tbody>
                             <?php foreach ($paket as $p) { ?>
                                 <tr>
-                                    <td><?php echo $tanggalConverted = date_format(date_create($p['tanggal_keberangkatan']), 'd F Y'); ?></td></td>
+                                    <td><?php echo $tanggalConverted = date_format(date_create($p['tanggal_keberangkatan']), 'd F Y'); ?></td>
+                                    </td>
                                     <td>
                                         <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $p['paket_img']; ?>" alt="">
                                     </td>
                                     <td><?php if ($p['kategori'] == 'Umroh') {
-                                        echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-warning">Umroh</span>';
-                                    }elseif ($p['kategori'] == 'Haji') {
-                                        echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-danger">Haji</span>';
-                                    }else {
-                                        echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-success">Tour</span>';
-                                    } ?></td>
-                                    <td><a href="<?php echo site_url('paket/detail/' . $p['id_paket']); ?>"><?php echo $p['nama_program']; ?></a></td>                                    
+                                            echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-warning">Umroh</span>';
+                                        } elseif ($p['kategori'] == 'Haji') {
+                                            echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-danger">Haji</span>';
+                                        } else {
+                                            echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-success">Tour</span>';
+                                        } ?></td>
+                                    <td><a href="<?php echo site_url('paket/detail/' . $p['id_paket']); ?>"><?php echo $p['nama_program']; ?></a></td>
                                     <td><?php echo $p['paket']; ?></td>
                                     <td><?php echo $p['hotel_mekkah']; ?><br>
                                         <?php if ($p['bintang_mekkah'] == '5') {
