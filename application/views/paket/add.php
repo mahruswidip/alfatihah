@@ -65,6 +65,7 @@
 												'Hemat' => 'Hemat',
 												'Semi VIP' => 'Semi VIP',
 												'VIP' => 'VIP',
+												'Standard' => 'Standard',
 											);
 
 											foreach ($paket_values as $value => $display_text) {
