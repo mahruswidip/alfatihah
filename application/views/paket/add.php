@@ -61,11 +61,13 @@
 											<option value="">Pilih Paket</option>
 											<?php
 											$paket_values = array(
-												'Ekonomi' => 'Ekonomi',
 												'Hemat' => 'Hemat',
-												'Semi VIP' => 'Semi VIP',
-												'VIP' => 'VIP',
+												'Ekonomi' => 'Ekonomi',
 												'Standard' => 'Standard',
+												'VIP' => 'VIP',
+												'Semi VIP' => 'Semi VIP',
+												'VIP Business Class' => 'VIP Business Class',
+												'VVIP Business Class' => 'VVIP Business Class',
 											);
 
 											foreach ($paket_values as $value => $display_text) {
