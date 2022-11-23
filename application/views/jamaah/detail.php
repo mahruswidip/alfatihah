@@ -75,7 +75,7 @@
                                 <td><?php echo $j['paket']; ?></td>
                                 <td><?php echo $j['lama_hari']; ?></td>
                                 <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_manasik']), 'd F Y'); ?></td>
-                                <td><?php echo $j['kehadiran']; ?></td>
+                                <!-- <td><?php echo $j['kehadiran']; ?></td> -->
                             </tr>
                         <?php } ?>
                     </tbody>
