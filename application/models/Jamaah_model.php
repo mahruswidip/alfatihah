@@ -57,7 +57,6 @@ class Jamaah_model extends CI_Model
         $this->db->like('nik', $search); // Untuk menambahkan query where LIKE
         $this->db->or_like('nama_jamaah', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('nik', $search); // Untuk menambahkan query where OR LIKE
-        $this->db->or_like('grup_keberangkatan', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('alamat', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('updated_at', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('qr_code_benar', $search); // Untuk menambahkan query where OR LIKE
@@ -79,7 +78,6 @@ class Jamaah_model extends CI_Model
         $this->db->like('nik', $search); // Untuk menambahkan query where LIKE
         $this->db->or_like('nama_jamaah', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('nik', $search); // Untuk menambahkan query where OR LIKE
-        $this->db->or_like('grup_keberangkatan', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('alamat', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('updated_at', $search); // Untuk menambahkan query where OR LIKE
         $this->db->or_like('qr_code_benar', $search); // Untuk menambahkan query where OR LIKE
