@@ -127,7 +127,7 @@
                                 <td><a href="<?php echo site_url() . 'jamaah/detail/' . $jamaah['id_jamaah']; ?>"><?php echo $jamaah['nama_jamaah']; ?></a></td>
                                 <td><?php echo $jamaah['nomor_paspor']; ?></td>
                                 <td><?php echo $jamaah['nomor_telepon']; ?></td>
-                                <td><?php $jamaah['nomor_telepon'] = '' ? '<a href="https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') . '" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>' : '<a href="#" class="btn btn-disabled"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>'; ?></td>
+                                <td><?php $jamaah['nomor_telepon'] != '' ? '<a href="https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') . '" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>' : '<a href="#" class="btn btn-disabled"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>'; ?></td>
                                 <!-- <td><a href="<?php echo 'https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') ?>" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a></td> -->
                             </tr>
                         <?php } ?>
