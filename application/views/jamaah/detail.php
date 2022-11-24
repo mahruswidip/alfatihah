@@ -2,13 +2,13 @@
     <div class="card">
         <div class="card-header card-header-primary">
             <div class="row justify-content-between">
-                <div class="col-md-9">
+                <div class="col">
                     <h3 class="card-title ">Detail Jamaah</h3>
                 </div>
                 <div class="col-auto">
                     <a href="<?php echo site_url('jamaah/cetak_id_card/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-print"></span> ID Card</a>
-                    <a href="<?php echo site_url('jamaah/cetak_label_koper/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-print"></span> Label Koper</a>
-                    <a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> Edit</a>
+                    <a href="<?php echo site_url('jamaah/cetak_label_koper/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-print"></span> Label</a>
+                    <a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
                 </div>
             </div>
         </div>
