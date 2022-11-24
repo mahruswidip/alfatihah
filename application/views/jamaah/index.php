@@ -18,11 +18,11 @@
     </div>
 </div>
 
-<div class="alert alert-warning alert-dismissible fade show" style="display : <?php echo $this->session->userdata('alert') != '' ? 'block' : 'none' ; ?>" role="alert">
-  <strong>Anda tidak memiliki Izin</strong> <br> Masuk sebagai Kantor Pusat atau Admin untuk melakukan perintah :)
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div class="alert alert-warning alert-dismissible fade show" style="display : <?php echo $this->session->userdata('alert') != '' ? 'block' : 'none'; ?>" role="alert">
+    <strong>Anda tidak memiliki Izin</strong> <br> Masuk sebagai Kantor Pusat atau Admin untuk melakukan perintah :)
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 
 <div class="row">
@@ -75,7 +75,7 @@
 <script>
     $(document).ready(function() {
 
-        var user_level = "<?php echo $this->session->userdata('user_level');?>";
+        var user_level = "<?php echo $this->session->userdata('user_level'); ?>";
 
         $('#tablejamaah').DataTable({
             "processing": true,
@@ -152,10 +152,10 @@
                 {
                     "render": function(data, type, row) {
                         if (user_level != "1") {
-                            return '<a href="<?php echo base_url() . 'jamaah/edit/'?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/'?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                            return '<a href="<?php echo base_url() . 'jamaah/edit/' ?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/' ?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
                         } else {
-                            return '<a href="<?php echo base_url() . 'jamaah/cetak_id_card/'?>' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/edit/'?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/'?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
-                        }                    
+                            return '<a href="<?php echo base_url() . 'jamaah/cetak_id_card/' ?>' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/edit/' ?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/' ?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
+                        }
                     }
                 }
             ],

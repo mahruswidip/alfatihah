@@ -97,9 +97,9 @@ The above copyright notice and this permission notice shall be included in all c
                                 <i class="material-icons">dashboard</i>
                                 <p>Dashboard</p>
                             </a>
-                        </li>        
+                        </li>
                         <li class="nav-item <?php if ($this->uri->uri_string() == 'keberangkatan/index') {
-                                                echo 'active';  
+                                                echo 'active';
                                             } ?>">
                             <a class="nav-link" href="<?php echo site_url(''); ?>keberangkatan/index">
                                 <i class="material-icons">event_available</i>
@@ -107,7 +107,7 @@ The above copyright notice and this permission notice shall be included in all c
                             </a>
                         </li>
                         <li class="nav-item <?php if ($this->uri->uri_string() == 'paket/index') {
-                                                echo 'active';  
+                                                echo 'active';
                                             } ?>">
                             <a class="nav-link" href="<?php echo site_url(''); ?>paket/index">
                                 <i class="material-icons">view_kanban</i>
@@ -115,7 +115,7 @@ The above copyright notice and this permission notice shall be included in all c
                             </a>
                         </li>
                         <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
-                                                echo 'active';  
+                                                echo 'active';
                                             } ?>">
                             <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
                                 <i class="material-icons">persons</i>
@@ -177,7 +177,7 @@ The above copyright notice and this permission notice shall be included in all c
         </div>
     </div>
     <!--   Core JS Files   -->
-    
+
 </body>
 
 </html>
