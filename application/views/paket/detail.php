@@ -130,7 +130,7 @@
                                 <td><?php if ($jamaah['nomor_telepon'] != null) {
                                         echo '<a href="https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') . '" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>';
                                     } else {
-                                        echo '<a href="#" class="btn btn-disabled" disabled><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>';
+                                        echo '<button disabled><a href="" class="btn btn-disabled"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a></button>';
                                     }
                                     ?></td>
                                 <!-- <td><a href="<?php echo 'https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') ?>" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a></td> -->
