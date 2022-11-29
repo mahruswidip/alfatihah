@@ -8,6 +8,14 @@
 					</div>
 					<div class="card-body">
 						<form action="<?php echo site_url() . 'jamaah/add' ?>" method="post" enctype="multipart/form-data">
+							<?php if ($this->session->flashdata('nik')) { ?>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<strong style="font-weight: bold;">Aduh !</strong> Sepertinya NIK sudah ada.
+									<button type="button" class="close my-2" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							<?php } ?>
 							<h3>Data Jamaah</h3>
 							<div class="row">
 								<div class="col-md-6">

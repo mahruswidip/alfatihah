@@ -82,7 +82,7 @@
             "serverSide": true,
             "ordering": true, // Set true agar bisa di sorting
             "order": [
-                [7, 'desc']
+                [7, 'asc']
             ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
             "ajax": {
                 "url": "<?php echo site_url('jamaah/view') ?>", // URL file untuk proses select datanya

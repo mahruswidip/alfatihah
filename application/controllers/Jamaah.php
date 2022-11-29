@@ -12,6 +12,7 @@ class Jamaah extends CI_Controller
 
         $this->load->model('Jamaah_model');
         $this->load->model('Scan_model');
+        $this->load->library('form_validation');
     }
 
     /*
@@ -137,44 +138,53 @@ class Jamaah extends CI_Controller
         $config['encrypt_name'] = TRUE; //nama yang terupload nantinya
         $user_id = $this->session->userdata('user_id');
         $this->load->library('ciqrcode');
+        $this->load->library('form_validation');
 
         $this->upload->initialize($config);
-        if (!empty($_FILES['jamaah_img']['name'])) {
-            if ($this->upload->do_upload('jamaah_img')) {
-                $gbr = $this->upload->data();
-                //Compress Image
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = './assets/images/' . $gbr['file_name'];
-                $config['create_thumb'] = FALSE;
-                $config['maintain_ratio'] = FALSE;
-                $config['quality'] = '60%';
-                $config['width'] = '20%';
-                $config['max_size'] = '10000';
-                $config['new_image'] = './assets/images/' . $gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-                $gambar = $gbr['file_name'];
 
-                $params = array(
-                    'nik' => $this->input->post('nik'),
-                    'nama_jamaah' => $this->input->post('nama_jamaah'),
-                    'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                    'nomor_telepon' => $this->input->post('nomor_telepon'),
-                    'alamat' => $this->input->post('alamat'),
-                    'nomor_paspor' => $this->input->post('nomor_paspor'),
-                    'created_by' => $user_id,
-                );
+        $this->form_validation->set_rules('nik', 'nik', 'is_unique[jamaah.nik]');
 
-                $this->Jamaah_model->add_jamaah($params, $gambar);
-                redirect('jamaah/index');
+        if ($this->form_validation->run() != false) {
+            if (!empty($_FILES['jamaah_img']['name'])) {
+                if ($this->upload->do_upload('jamaah_img')) {
+                    $gbr = $this->upload->data();
+                    //Compress Image
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = './assets/images/' . $gbr['file_name'];
+                    $config['create_thumb'] = FALSE;
+                    $config['maintain_ratio'] = FALSE;
+                    $config['quality'] = '60%';
+                    $config['width'] = '20%';
+                    $config['max_size'] = '10000';
+                    $config['new_image'] = './assets/images/' . $gbr['file_name'];
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+                    $gambar = $gbr['file_name'];
+
+                    $params = array(
+                        'nik' => $this->input->post('nik'),
+                        'nama_jamaah' => $this->input->post('nama_jamaah'),
+                        'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                        'nomor_telepon' => $this->input->post('nomor_telepon'),
+                        'alamat' => $this->input->post('alamat'),
+                        'nomor_paspor' => $this->input->post('nomor_paspor'),
+                        'created_by' => $user_id,
+                    );
+
+                    $this->Jamaah_model->add_jamaah($params, $gambar);
+                    redirect('jamaah/index');
+                } else {
+                    echo "else";
+                    exit();
+                    redirect('jamaah/index');
+                }
             } else {
-                echo "else";
-                exit();
-                redirect('jamaah/index');
+                $this->session->set_flashdata('error', 'Ukuran Tidak boleh lebih dari 5 MB');
+                redirect('jamaah/add');
             }
         } else {
-            $this->session->set_flashdata('error', 'Ukuran Tidak boleh lebih dari 5 MB');
-            redirect('jamaah/add');
+            $this->session->set_flashdata('nik', 'Data NIK Sudah Ada');
+            redirect('jamaah/bukatambah');
         }
     }
     /*
