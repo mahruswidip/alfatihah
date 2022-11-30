@@ -37,8 +37,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Username</label>
-                                        <input type="text" name="user_email" value="<?php echo $this->input->post('user_email'); ?>" class="form-control" id="user_email" />
+                                        <label class="bmd-label-floating">Nomor KTP</label>
+                                        <input type="text" readonly name="nik" value="<?php echo ($this->input->post('nik') ? $this->input->post('nik') : $jamaah['nik']); ?>" class="form-control" id="nik" />
                                     </div>
                                 </div>
                             </div>
