@@ -11,6 +11,7 @@ class Jamaah extends CI_Controller
         parent::__construct();
 
         $this->load->model('Jamaah_model');
+        $this->load->model('Users_model');
         $this->load->model('Scan_model');
         $this->load->library('form_validation');
     }
@@ -243,6 +244,40 @@ class Jamaah extends CI_Controller
             }
         } else {
             show_error('The jamaah you are trying to edit does not exist.');
+        }
+    }
+
+    function buatuser($id_jamaah)
+    {
+        $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
+        $user_id = $this->session->userdata('user_id');
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('fk_id_jamaah', 'fk_id_jamaah', 'is_unique[tbl_users.fk_id_jamaah]');
+
+        if (isset($_POST) && count($_POST) > 0) {
+            if ($this->form_validation->run() != false) {
+                $params = array(
+                    'user_name' => $this->input->post('user_name'),
+                    'user_email' => $this->input->post('user_email'),
+                    'user_password' => md5($this->input->post('user_password')),
+                    'fk_id_jamaah' => $this->input->post('fk_id_jamaah'),
+                    'user_level' => '3',
+                    'pass' => $this->input->post('user_password'),
+                    'created_by' => $user_id,
+                    'is_jamaah' => '1',
+                );
+
+                $this->Users_model->register($params);
+                redirect('jamaah/index');
+            } else {
+                $this->session->set_flashdata('fk_id_jamaah', 'Maaf ! Jamaah sudah terdaftar sebagai User');
+                $data['_view'] = 'jamaah/buatuser';
+                $this->load->view('layouts/main', $data);
+            }
+        } else {
+            $data['_view'] = 'jamaah/buatuser';
+            $this->load->view('layouts/main', $data);
         }
     }
 
