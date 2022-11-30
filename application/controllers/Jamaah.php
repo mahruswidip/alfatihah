@@ -259,7 +259,7 @@ class Jamaah extends CI_Controller
             if ($this->form_validation->run() != false) {
                 $params = array(
                     'user_name' => $this->input->post('user_name'),
-                    'user_email' => $this->input->post('user_email'),
+                    'nik' => $this->input->post('nik'),
                     'user_password' => md5($this->input->post('user_password')),
                     'fk_id_jamaah' => $this->input->post('fk_id_jamaah'),
                     'user_level' => '3',
