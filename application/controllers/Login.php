@@ -95,7 +95,7 @@ class Login extends CI_Controller
     $password = md5($this->input->post('user_password'));
 
     $dataAdmin = array();
-    $dataLogin = $this->db->query("SELECT * FROM tbl_users where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+    $dataLogin = $this->db->query("SELECT * FROM tbl_users where user_email = '" . $email . "' AND user_password = '" . $password . "' LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah;");
 
     foreach ($dataLogin->result() as $dl) {
       $dataAdmin = $dl;
