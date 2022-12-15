@@ -46,7 +46,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Password</label>
-                                        <input type="text" readonly name="user_password" value="<?php echo ($this->input->post('user_password') ? $this->input->post('user_password') : $jamaah['user_password']); ?>" class="form-control" id="user_password" />
+                                        <input type="text" readonly name="user_password" value="<?php echo ($this->input->post('nik') ? $this->input->post('nik') : $jamaah['nik']); ?>" class="form-control" id="user_password" />
                                     </div>
                                 </div>
                             </div>
