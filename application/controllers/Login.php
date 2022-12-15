@@ -1,4 +1,8 @@
 <?php
+require APPPATH . '/libraries/REST_Controller.php';
+
+use Restserver\Libraries\REST_Controller;
+
 class Login extends CI_Controller
 {
   function __construct()
@@ -107,63 +111,5 @@ class Login extends CI_Controller
     } else {
       echo json_encode($dataAdmin);
     }
-  }
-
-  public function ubah_password()
-  {
-    $user_email    = $this->input->post('user_email');
-    $user_password = ($this->input->post('user_password'));
-
-    // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
-
-    $dataAdmin = array();
-    $dataLogin = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
-
-    return $dataLogin->row();
-
-    if ($dataAdmin == []) {
-      http_response_code(404);
-      $dataAdmin = "Data Anda Tidak Ditemukan";
-      echo json_encode($dataAdmin);
-    } else {
-      $this->response([
-        'status' => true,
-        'data' => $dataAdmin
-      ]);
-    }
-
-
-    // $query = "SELECT * FROM tbl_users";
-    // if ($user_email != 0) {
-    //   $query .= " WHERE user_email=" . $user_email . " LIMIT 1";
-    // }
-    // $data = array();
-    // $result = $this->db->query($query);
-    // mysqli_fetch_array($result);
-    // $response = array(
-    //   'status' => 1,
-    //   'message' => 'Get Jamaah Successfully.',
-    //   'data' => $data
-    // );
-    // header('Content-Type: application/json');
-    // echo json_encode($response);
-
-
-    // $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
-
-    // if ($dataLupaPassword == false) {
-    //   return 'gagal';
-    // } else {
-    //   return 'berhasil';
-    // }
-
-
-    // if ($dataLupaPassword == []) {
-    //   http_response_code(404);
-    //   $dataLupaPassword = "Data Anda Tidak Ditemukan";
-    //   echo json_encode($dataLupaPassword);
-    // } else {
-    //   echo json_encode($dataLupaPassword);
-    // }
   }
 }
