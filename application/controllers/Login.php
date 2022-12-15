@@ -122,9 +122,7 @@ class Login extends CI_Controller
     }
     $data = array();
     $result = $this->db->query($query);
-    while ($row = mysqli_fetch_object($result)) {
-      $data[] = $row;
-    }
+    mysqli_fetch_row($result);
     $response = array(
       'status' => 1,
       'message' => 'Get Jamaah Successfully.',
