@@ -117,7 +117,7 @@ class Login extends CI_Controller
     // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
 
     $result = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
-    mysqli_fetch_array($result);
+    mysqli_fetch_row($result);
     $response = array(
       'status' => 1,
       'message' => 'Get Jamaah Successfully.',
