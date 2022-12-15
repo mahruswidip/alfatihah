@@ -108,4 +108,14 @@ class Login extends CI_Controller
       echo json_encode($dataAdmin);
     }
   }
+
+  public function ubah_password()
+  {
+    $user_email    = $this->input->post('user_email');
+    $password = md5($this->input->post('user_password'));
+
+    $dataLupaPassword = $this->db->query("UPDATE tbl_users SET user_password = md5('" . $password . "') , `pass` = '" . $password . "' WHERE `user_email` = '" . $user_email . "'");
+
+    return $dataLupaPassword;
+  }
 }
