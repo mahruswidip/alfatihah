@@ -83,4 +83,9 @@ class Users_model extends CI_Model
         $this->db->insert('tbl_users', $params);
         return $this->db->insert_id();
     }
+    function update_is_users($id_jamaah, $is_user)
+    {
+        $this->db->where('id_jamaah', $id_jamaah);
+        return $this->db->update('jamaah', $is_user);
+    }
 }

@@ -268,7 +268,10 @@ class Jamaah extends CI_Controller
                     'is_jamaah' => '1',
                 );
 
+                $is_user = array('is_user' => '1');
+
                 $this->Users_model->register($params);
+                $this->Users_model->update_is_users($id_jamaah, $is_user);
                 redirect('jamaah/index');
             } else {
                 $this->session->set_flashdata('fk_id_jamaah', 'Maaf ! Jamaah sudah terdaftar sebagai User');

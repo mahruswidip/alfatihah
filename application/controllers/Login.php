@@ -108,8 +108,4 @@ class Login extends CI_Controller
       echo json_encode($dataAdmin);
     }
   }
-  public function get_user()
-  {
-    # code...
-  }
 }
