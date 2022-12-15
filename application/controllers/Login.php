@@ -116,9 +116,11 @@ class Login extends CI_Controller
 
     $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
     if ($cek != null) {
-      return 'berhasil cek';
+      $cek = 'berhasil cek';
+      return $cek;
     } else {
-      return 'gagal cek';
+      $cek = 'gagal cek';
+      return $cek;
     }
 
 
