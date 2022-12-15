@@ -117,7 +117,7 @@ class Login extends CI_Controller
     // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
 
     $dataAdmin = array();
-    $dataLogin = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+    $dataLogin = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where user_email = '" . $user_email . "' AND user_password = '" . $user_password . "'");
 
     foreach ($dataLogin->result() as $dl) {
       $dataAdmin = $dl;
