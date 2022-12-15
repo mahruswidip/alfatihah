@@ -119,8 +119,8 @@ class Login extends CI_Controller
     $dataAdmin = array();
     $dataLogin = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
 
-    foreach ($dataLogin->result() as $dl) {
-      $dataAdmin = $dl;
+    while ($dataLogin->result()) {
+      return $dataAdmin;
     }
     if ($dataAdmin == []) {
       http_response_code(404);
