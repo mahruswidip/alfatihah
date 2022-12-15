@@ -114,13 +114,21 @@ class Login extends CI_Controller
     $user_email    = $this->input->post('user_email');
     $user_password = ($this->input->post('user_password'));
 
-    $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
-
-    if ($dataLupaPassword == false) {
-      return 'gagal';
+    $cek = $this->db->query("SELECT tbl_users WHERE `user_email` = '" . $user_email . "' ");
+    if ($cek) {
+      return 'berhasil cek';
     } else {
-      return 'berhasil';
+      return 'gagal cek';
     }
+
+
+    // $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
+
+    // if ($dataLupaPassword == false) {
+    //   return 'gagal';
+    // } else {
+    //   return 'berhasil';
+    // }
 
 
     // if ($dataLupaPassword == []) {
