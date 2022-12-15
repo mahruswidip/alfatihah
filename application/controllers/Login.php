@@ -116,7 +116,7 @@ class Login extends CI_Controller
 
     $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
 
-    $dataLupaPassword->result();
+    json_decode($dataLupaPassword);
 
     //   if ($dataLupaPassword == []) {
     //     $dataLupaPassword = "Data Anda Berhasil di Ubah";
