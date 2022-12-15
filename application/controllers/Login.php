@@ -116,15 +116,11 @@ class Login extends CI_Controller
 
     // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
 
-    $data = array();
     $result = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
-    while ($row = mysqli_fetch_object($result)) {
-      $data[] = $row;
-    }
+    mysqli_fetch_object($result);
     $response = array(
       'status' => 1,
       'message' => 'Get Jamaah Successfully.',
-      'data' => $data
     );
     header('Content-Type: application/json');
     echo json_encode($response);
