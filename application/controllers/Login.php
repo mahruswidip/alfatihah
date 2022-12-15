@@ -119,7 +119,7 @@ class Login extends CI_Controller
     global $mysqli;
     $query = "SELECT * FROM tbl_mahasiswa";
     if ($user_email != 0) {
-      $query .= " WHERE user_email=" . $user_email . " LIMIT 1";
+      $query = " WHERE user_email=" . $user_email . " LIMIT 1";
     }
     $data = array();
     $result = $mysqli->query($query);
