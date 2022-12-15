@@ -59,6 +59,7 @@
                                 <th>Updated At</th>
                                 <th>QR Code</th>
                                 <th>Aksi</th>
+                                <th>Buat User</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -152,10 +153,21 @@
                 {
                     "render": function(data, type, row) {
                         if (user_level != "1") {
-                            return '<a href="<?php echo base_url() . 'jamaah/edit/' ?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/' ?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/buatuser/' ?>' + row.id_jamaah + '"' + 'class="btn btn-primary"><span class="fa fa-user"></span></a>' + '</a>';
+                            return '<a href="<?php echo base_url() . 'jamaah/edit/' ?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/' ?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>'
+
                         } else {
-                            return '<a href="<?php echo base_url() . 'jamaah/cetak_id_card/' ?>' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/edit/' ?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/' ?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/buatuser/' ?>' + row.id_jamaah + '"' + 'class="btn btn-primary"><span class="fa fa-user"></span></a>' + '</a>';
+                            return '<a href="<?php echo base_url() . 'jamaah/cetak_id_card/' ?>' + row.id_jamaah + '"' + 'class="btn btn-warning"><span class="fa fa-print"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/edit/' ?>' + row.id_jamaah + '"' + 'class="btn btn-info"><span class="fa fa-edit"></span></a>' + '</a>' + '<a href="<?php echo base_url() . 'jamaah/remove/' ?>' + row.id_jamaah + '"' + 'class="btn btn-danger"><span class="fa fa-trash"></span></a>' + '</a>';
                         }
+                    }
+                },
+                {
+                    "render": function(data, type, row) {
+                        if (row.is_user == "0") {
+                            user = '<a href="<?php echo base_url() . 'jamaah/buatuser/' ?>' + row.id_jamaah + '"' + 'class="btn btn-primary"><span class="fa fa-user"></span></a>' + '</a>';
+                        } else {
+                            user = '';
+                        }
+                        return user;
                     }
                 }
             ],
