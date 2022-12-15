@@ -112,11 +112,18 @@ class Login extends CI_Controller
   public function ubah_password()
   {
     $user_email    = $this->input->post('user_email');
-    $password = md5($this->input->post('user_password'));
-    $pass = $this->input->post('user_password');
+    $user_password = ($this->input->post('user_password'));
 
-    $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $pass . "', user_password = '" . $password . "'  WHERE `user_email` = '" . $user_email . "'");
+    $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
 
-    return $dataLupaPassword;
+    print $dataLupaPassword;
+
+    //   if ($dataLupaPassword == []) {
+    //     $dataLupaPassword = "Data Anda Berhasil di Ubah";
+    //     echo json_encode($dataLupaPassword);
+    //   } else {
+    //     $dataLupaPassword = "Data Anda Tidak Ditemukan";
+    //     echo json_encode($dataLupaPassword);
+    //   }
   }
 }
