@@ -117,9 +117,8 @@ class Login extends CI_Controller
     // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
 
     global $mysqli;
-    $query = "SELECT * FROM tbl_mahasiswa";
     if ($user_email != 0) {
-      $query = " WHERE user_email=" . $user_email . " LIMIT 1";
+      $query = "SELECT * FROM tbl_users WHERE user_email=" . $user_email . " LIMIT 1";
     }
     $data = array();
     $result = $mysqli->query($query);
