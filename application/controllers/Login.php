@@ -116,20 +116,38 @@ class Login extends CI_Controller
 
     // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
 
-    $query = "SELECT * FROM tbl_users";
-    if ($user_email != 0) {
-      $query .= " WHERE user_email=" . $user_email . " LIMIT 1";
+    $dataAdmin = array();
+    $dataLogin = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+
+    foreach ($dataLogin->result() as $dl) {
+      $dataAdmin = $dl;
     }
-    $data = array();
-    $result = $this->db->query($query);
-    mysqli_fetch_array($result);
-    $response = array(
-      'status' => 1,
-      'message' => 'Get Jamaah Successfully.',
-      'data' => $data
-    );
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    if ($dataAdmin == []) {
+      http_response_code(404);
+      $dataAdmin = "Data Anda Tidak Ditemukan";
+      echo json_encode($dataAdmin);
+    } else {
+      $this->response([
+        'status' => true,
+        'data' => $dataAdmin
+      ]);
+    }
+
+
+    // $query = "SELECT * FROM tbl_users";
+    // if ($user_email != 0) {
+    //   $query .= " WHERE user_email=" . $user_email . " LIMIT 1";
+    // }
+    // $data = array();
+    // $result = $this->db->query($query);
+    // mysqli_fetch_array($result);
+    // $response = array(
+    //   'status' => 1,
+    //   'message' => 'Get Jamaah Successfully.',
+    //   'data' => $data
+    // );
+    // header('Content-Type: application/json');
+    // echo json_encode($response);
 
 
     // $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
