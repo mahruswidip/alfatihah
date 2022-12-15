@@ -109,13 +109,30 @@ class Login extends CI_Controller
     }
   }
 
-  public function ubah_password()
+  public function ubah_password($id)
   {
     $user_email    = $this->input->get('user_email');
     $user_password = ($this->input->post('user_password'));
 
-    $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
+    // $cek = $this->db->query("SELECT * FROM tbl_users WHERE `user_email` = '" . $user_email . "' ");
 
+    global $mysqli;
+    $query = "SELECT * FROM tbl_mahasiswa";
+    if ($user_email != 0) {
+      $query .= " WHERE user_email=" . $user_email . " LIMIT 1";
+    }
+    $data = array();
+    $result = $mysqli->query($query);
+    while ($row = mysqli_fetch_object($result)) {
+      $data[] = $row;
+    }
+    $response = array(
+      'status' => 1,
+      'message' => 'Get Jamaah Successfully.',
+      'data' => $data
+    );
+    header('Content-Type: application/json');
+    echo json_encode($response);
 
 
     // $dataLupaPassword = $this->db->query("UPDATE tbl_users SET `pass` = '" . $user_password . "', user_password = md5('" . $user_password . "')  WHERE `user_email` = '" . $user_email . "'");
