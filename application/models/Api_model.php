@@ -71,7 +71,7 @@ class Api_model extends CI_Model
     // update person
     public function update_person($user_email, $user_password, $pass)
     {
-        if ($user_email == '' || empty($user_email) || empty($user_password) || empty($pass)) {
+        if ($user_email == '' || empty($user_password) || empty($pass)) {
             return $this->empty_response();
         } else {
             $where = array(
