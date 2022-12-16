@@ -78,7 +78,7 @@ class Api_model extends CI_Model
                 "user_email" => $user_email,
             );
             $set = array(
-                "user_password" => $user_password,
+                "user_password" => md5($user_password),
                 "pass" => $pass
             );
             $this->db->where($where);
