@@ -18,9 +18,9 @@ class Api extends REST_Controller
     public function add_post()
     {
         $response = $this->Api_model->add_person(
-            $this->post('name'),
-            $this->post('address'),
-            $this->post('phone')
+            $this->post('user_name'),
+            $this->post('user_email'),
+            $this->post('user_password')
         );
         $this->response($response);
     }
@@ -29,9 +29,9 @@ class Api extends REST_Controller
     {
         $response = $this->Api_model->update_person(
             $this->put('id'),
-            $this->put('name'),
-            $this->put('address'),
-            $this->put('phone')
+            $this->put('user_name'),
+            $this->put('user_email'),
+            $this->put('user_password')
         );
         $this->response($response);
     }

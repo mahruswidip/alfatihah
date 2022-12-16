@@ -10,18 +10,18 @@ class Api_model extends CI_Model
         $response['message'] = 'Field tidak boleh kosong';
         return $response;
     }
-    // function untuk insert data ke tabel tb_person
-    public function add_person($name, $address, $phone)
+    // function untuk insert data ke tabel tbl_users
+    public function add_person($user_name, $user_email, $user_password)
     {
-        if (empty($name) || empty($address) || empty($phone)) {
+        if (empty($user_name) || empty($user_email) || empty($user_password)) {
             return $this->empty_response();
         } else {
             $data = array(
-                "name" => $name,
-                "address" => $address,
-                "phone" => $phone
+                "user_name" => $user_name,
+                "user_email" => $user_email,
+                "user_password" => $user_password
             );
-            $insert = $this->db->insert("tb_person", $data);
+            $insert = $this->db->insert("tbl_users", $data);
             if ($insert) {
                 $response['status'] = 200;
                 $response['error'] = false;
@@ -38,7 +38,7 @@ class Api_model extends CI_Model
     // mengambil semua data person
     public function all_person()
     {
-        $all = $this->db->get("tb_person")->result();
+        $all = $this->db->get("tbl_users")->result();
         $response['status'] = 200;
         $response['error'] = false;
         $response['person'] = $all;
@@ -54,7 +54,7 @@ class Api_model extends CI_Model
                 "id" => $id
             );
             $this->db->where($where);
-            $delete = $this->db->delete("tb_person");
+            $delete = $this->db->delete("tbl_users");
             if ($delete) {
                 $response['status'] = 200;
                 $response['error'] = false;
@@ -69,21 +69,21 @@ class Api_model extends CI_Model
         }
     }
     // update person
-    public function update_person($id, $name, $address, $phone)
+    public function update_person($id, $user_name, $user_email, $user_password)
     {
-        if ($id == '' || empty($name) || empty($address) || empty($phone)) {
+        if ($id == '' || empty($user_name) || empty($user_email) || empty($user_password)) {
             return $this->empty_response();
         } else {
             $where = array(
                 "id" => $id
             );
             $set = array(
-                "name" => $name,
-                "address" => $address,
-                "phone" => $phone
+                "user_name" => $user_name,
+                "user_email" => $user_email,
+                "user_password" => $user_password
             );
             $this->db->where($where);
-            $update = $this->db->update("tb_person", $set);
+            $update = $this->db->update("tbl_users", $set);
             if ($update) {
                 $response['status'] = 200;
                 $response['error'] = false;
