@@ -78,7 +78,6 @@ class Api_model extends CI_Model
                 "user_email" => $user_email,
             );
             $set = array(
-                "user_email" => $user_email,
                 "user_password" => $user_password,
                 "pass" => $pass
             );
