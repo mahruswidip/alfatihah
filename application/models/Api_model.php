@@ -69,18 +69,17 @@ class Api_model extends CI_Model
         }
     }
     // update person
-    public function update_person($id, $user_name, $user_email, $user_password)
+    public function update_person($user_email, $user_password, $pass)
     {
-        if ($id == '' || empty($user_name) || empty($user_email) || empty($user_password)) {
+        if ($user_email == '' || empty($user_email) || empty($user_password) || empty($pass)) {
             return $this->empty_response();
         } else {
             $where = array(
-                "id" => $id
+                "user_email" => $user_email,
             );
             $set = array(
-                "user_name" => $user_name,
-                "user_email" => $user_email,
-                "user_password" => $user_password
+                "user_password" => $user_password,
+                "pass" => $pass
             );
             $this->db->where($where);
             $update = $this->db->update("tbl_users", $set);

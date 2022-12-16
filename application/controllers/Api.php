@@ -28,10 +28,8 @@ class Api extends REST_Controller
     public function update_put()
     {
         $response = $this->Api_model->update_person(
-            $this->put('id'),
-            $this->put('user_name'),
-            $this->put('user_email'),
-            $this->put('user_password')
+            $this->put('user_password'),
+            $this->put('pass')
         );
         $this->response($response);
     }
