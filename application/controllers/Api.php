@@ -1,66 +1,46 @@
 <?php
-
-require(APPPATH . '/config/REST_Controller.php');
-
+require APPPATH . 'config/REST_Controller.php';
 class Api extends REST_Controller
 {
-
-  /**
-   * Get All Data from this method.
-   *
-   * @return Response
-   */
-  public function __construct()
-  {
-    parent::__construct();
-    $this->load->database();
-  }
-
-  /**
-   * Get All Data from this method.
-   *
-   * @return Response
-   */
-  public function get_jamaah($user_email = 0)
-  {
-    if (!empty($user_email)) {
-      $data = $this->db->get_where("tbl_users", ['user_email' => $user_email])->row_array();
-    } else {
-      $data = $this->db->get("tbl_users")->result();
+    // construct
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Api_model');
     }
-
-    $this->response($data, REST_Controller::HTTP_OK);
-  }
-
-  /**
-   * Get All Data from this method.
-   *
-   * @return Response
-   */
-  // public function index_post()
-  // {
-  //   $input = $this->input->post();
-  //   $this->db->insert('items', $input);
-
-  //   $this->response(['Item created successfully.'], REST_Controller::HTTP_OK);
-  // }
-
-  /**
-   * Get All Data from this method.
-   *
-   * @return Response
-   */
-  public function index_put($user_email)
-  {
-    $input = $this->put();
-    $this->db->update('tbl_users', $input, array('user_email' => $user_email));
-
-    $this->response(['Item updated successfully.'], REST_Controller::HTTP_OK);
-  }
-
-  /**
-   * Get All Data from this method.
-   *
-   * @return Response
-   */
+    // method index untuk menampilkan semua data person menggunakan method get
+    public function index_get()
+    {
+        $response = $this->Api_model->all_person();
+        $this->response($response);
+    }
+    // untuk menambah person menaggunakan method post
+    public function add_post()
+    {
+        $response = $this->Api_model->add_person(
+            $this->post('name'),
+            $this->post('address'),
+            $this->post('phone')
+        );
+        $this->response($response);
+    }
+    // update data person menggunakan method put
+    public function update_put()
+    {
+        $response = $this->Api_model->update_person(
+            $this->put('id'),
+            $this->put('name'),
+            $this->put('address'),
+            $this->put('phone')
+        );
+        $this->response($response);
+    }
+    // hapus data person menggunakan method delete
+    public function delete_delete()
+    {
+        $response = $this->Api_model->delete_person(
+            $this->delete('id')
+        );
+        $this->response($response);
+    }
 }
