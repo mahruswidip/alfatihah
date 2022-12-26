@@ -133,7 +133,7 @@
                                         echo '<button class="btn btn-disabled" disabled><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</button>';
                                     }
                                     ?></td>
-                                <td><a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a><a href="<?php echo site_url('jamaah/buatuser/' . $jamaah['id_jamaah']); ?>" class="btn btn-primary"><span class="fa fa-user"></span></a></td>
+                                <td><a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a> <?php $jamaah['is_user'] = '0' ? 'sudahada' : 'belumada'; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
