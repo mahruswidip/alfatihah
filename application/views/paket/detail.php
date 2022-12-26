@@ -136,7 +136,7 @@
                                 <td><a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a> <?php if ($jamaah['is_user'] == '0') {
                                                                                                                                                                                 echo '<a href="' . site_url('jamaah/buatuser/') . $jamaah['id_jamaah'] . '" class="btn btn-primary"><span class="fa fa-user"></span></a>';
                                                                                                                                                                             } else {
-                                                                                                                                                                                echo '<a disabled class="btn btn-disabled"><span class="fa fa-user"></span></a>';
+                                                                                                                                                                                echo '';
                                                                                                                                                                             }
                                                                                                                                                                             ?></td>
                             </tr>
