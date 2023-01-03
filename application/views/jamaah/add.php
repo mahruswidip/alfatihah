@@ -15,6 +15,13 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
+							<?php } else if($this->session->flashdata('nik2')) {?>
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<strong style="font-weight: bold;">Aduh !</strong> Sepertinya data anda tanpa foto
+									<button type="button" class="close my-2" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
 							<?php } ?>
 							<h3>Data Jamaah</h3>
 							<div class="row">
@@ -61,7 +68,7 @@
 								<div class="col-md-6">
 									<label class="bmd-label-floating text-danger">Foto Jamaah (Ukuran Max 250kb)</label>
 									<br>
-									<input type="file" name="jamaah_img" required>
+									<input type="file" name="jamaah_img">
 									<br>
 									<br>
 									<div class="form-group">
@@ -75,6 +82,15 @@
 											<label class="bmd-label-floating">Alamat</label>
 											<input type="text" name="alamat" value="<?php echo $this->input->post('alamat'); ?>" class="form-control" id="alamat" />
 										</div>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="bmd-label-floating">Email (Opsional)</label>
+										<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" class="form-control" id="email" />
 									</div>
 								</div>
 							</div>

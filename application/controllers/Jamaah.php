@@ -70,7 +70,8 @@ class Jamaah extends CI_Controller
         $sql_filter = $this->Jamaah_model->count_filter($search); // Panggil fungsi count_filter pada Jamaah_model
 
         $callback = array(
-            'draw' => $_POST['draw'], // Ini dari datatablenya
+            'draw' => $_POST['draw'],
+            // Ini dari datatablenya
             'recordsTotal' => $sql_total,
             'recordsFiltered' => $sql_filter,
             'data' => $sql_data
@@ -97,7 +98,7 @@ class Jamaah extends CI_Controller
     public function getdatatanggal()
     {
         $searchTerm = $this->input->post('searchTerm');
-        $response   = $this->Jamaah_model->get_tanggal_keberangkatan($searchTerm);
+        $response = $this->Jamaah_model->get_tanggal_keberangkatan($searchTerm);
         echo json_encode($response);
     }
 
@@ -105,7 +106,7 @@ class Jamaah extends CI_Controller
     public function getdatapaket($id_keberangkatan)
     {
         $searchTerm = $this->input->post('searchTerm');
-        $response   = $this->Jamaah_model->get_paket($id_keberangkatan, $searchTerm);
+        $response = $this->Jamaah_model->get_paket($id_keberangkatan, $searchTerm);
         echo json_encode($response);
     }
 
@@ -146,6 +147,7 @@ class Jamaah extends CI_Controller
         $this->form_validation->set_rules('nik', 'nik', 'is_unique[jamaah.nik]');
 
         if ($this->form_validation->run() != false) {
+            $gambar = "profile_default.jpg"; // Set default image file path
             if (!empty($_FILES['jamaah_img']['name'])) {
                 if ($this->upload->do_upload('jamaah_img')) {
                     $gbr = $this->upload->data();
@@ -161,30 +163,29 @@ class Jamaah extends CI_Controller
                     $this->load->library('image_lib', $config);
                     $this->image_lib->resize();
                     $gambar = $gbr['file_name'];
-
-                    $params = array(
-                        'nik' => $this->input->post('nik'),
-                        'nama_jamaah' => $this->input->post('nama_jamaah'),
-                        'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-                        'nomor_telepon' => $this->input->post('nomor_telepon'),
-                        'alamat' => $this->input->post('alamat'),
-                        'nomor_paspor' => $this->input->post('nomor_paspor'),
-                        'created_by' => $user_id,
-                    );
-
-                    $this->Jamaah_model->add_jamaah($params, $gambar);
-                    redirect('jamaah/index');
                 } else {
                     echo "else";
                     exit();
                     redirect('jamaah/index');
                 }
-            } else {
-                $this->session->set_flashdata('error', 'Ukuran Tidak boleh lebih dari 5 MB');
-                redirect('jamaah/add');
             }
+            $params = array(
+                'nik' => $this->input->post('nik'),
+                'nama_jamaah' => $this->input->post('nama_jamaah'),
+                'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+                'nomor_telepon' => $this->input->post('nomor_telepon'),
+                'alamat' => $this->input->post('alamat'),
+                'nomor_paspor' => $this->input->post('nomor_paspor'),
+                'email' => $this->input->post('email'),
+                'created_by' => $user_id,
+            );
+            // var_dump($params);
+            // exit();
+
+            $this->Jamaah_model->add_jamaah($params, $gambar);
+            redirect('jamaah/index');
         } else {
-            $this->session->set_flashdata('nik', 'Data NIK Sudah Ada');
+            $this->session->set_flashdata('nik', 'nik double');
             redirect('jamaah/bukatambah');
         }
     }
@@ -212,6 +213,7 @@ class Jamaah extends CI_Controller
                     'alamat' => $this->input->post('alamat'),
                     'nomor_paspor' => $this->input->post('nomor_paspor'),
                     'nomor_telepon' => $this->input->post('nomor_telepon'),
+                    'email' => $this->input->post('email'),
                 );
                 $this->upload->initialize($config); // proses upload baru
                 if (!empty($_FILES['jamaah_img']['name'])) {
@@ -308,14 +310,14 @@ class Jamaah extends CI_Controller
         // check if the luasan exists before trying to edit it
         $data['jamaah'] = $this->Jamaah_model->get_jamaah($id_jamaah);
 
-        $config['cacheable']    = true; //boolean, the default is true
-        $config['cachedir']     = './assets/'; //string, the default is application/cache/
-        $config['errorlog']     = './assets/'; //string, the default is application/logs/
-        $config['imagedir']     = './assets/images/qr_uuid/'; //direktori penyimpanan qr code
-        $config['quality']      = true; //boolean, the default is true
-        $config['size']         = '1024'; //interger, the default is 1024
-        $config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
-        $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+        $config['cacheable'] = true; //boolean, the default is true
+        $config['cachedir'] = './assets/'; //string, the default is application/cache/
+        $config['errorlog'] = './assets/'; //string, the default is application/logs/
+        $config['imagedir'] = './assets/images/qr_uuid/'; //direktori penyimpanan qr code
+        $config['quality'] = true; //boolean, the default is true
+        $config['size'] = '1024'; //interger, the default is 1024
+        $config['black'] = array(224, 255, 255); // array, default is array(255,255,255)
+        $config['white'] = array(70, 130, 180); // array, default is array(0,0,0)
         $this->ciqrcode->initialize($config);
 
         $nama = $data['jamaah']['uuid'];
@@ -450,16 +452,21 @@ class Jamaah extends CI_Controller
 
         // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
         $style_col = array(
-            'font' => array('bold' => true), // Set font nya jadi bold
+            'font' => array('bold' => true),
+            // Set font nya jadi bold
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                // Set text jadi ditengah secara horizontal (center)
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
             ),
             'borders' => array(
-                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                // Set border top dengan garis tipis
+                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                // Set border right dengan garis tipis
+                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                // Set border bottom dengan garis tipis
+                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
             )
         );
 
@@ -469,10 +476,13 @@ class Jamaah extends CI_Controller
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
             ),
             'borders' => array(
-                'top' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                'right' => array('style'  => PHPExcel_Style_Border::BORDER_THIN),  // Set border right dengan garis tipis
-                'bottom' => array('style'  => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                // Set border top dengan garis tipis
+                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                // Set border right dengan garis tipis
+                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                // Set border bottom dengan garis tipis
+                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
             )
         );
 

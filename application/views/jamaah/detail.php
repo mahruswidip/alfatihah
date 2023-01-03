@@ -44,6 +44,10 @@
                             <td><i class="fa fa-map-marker"></i>&nbsp; Alamat</td>
                             <td><?php echo $jamaah['alamat']; ?></td>
                         </tr>
+                        <tr>
+                            <td><i class="fa fa-map-marker"></i>&nbsp; Email</td>
+                            <td><?php echo $jamaah['email']; ?></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

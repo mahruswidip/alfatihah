@@ -157,6 +157,7 @@ class Jamaah_model extends CI_Model
         $this->db->set('nomor_paspor', $params['nomor_paspor']);
         $this->db->set('jamaah_img', $gambar);
         $this->db->set('created_by', $params['created_by']);
+        $this->db->set('email', $params['email']);
         $this->db->set('uuid', 'UUID_SHORT()', FALSE);
         $this->db->insert('jamaah');
     }
