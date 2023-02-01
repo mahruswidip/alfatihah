@@ -110,6 +110,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th scope="col">ID RECORD</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Nama Jamaah</th>
                             <th scope="col">Nomor Paspor</th>
@@ -121,6 +122,7 @@
                         <?php foreach ($record as $jamaah) { ?>
                             <?php $nowa = $str = ltrim($jamaah['nomor_telepon'], '0'); ?>
                             <tr>
+                                <td><?php echo $jamaah['id_record']; ?></td>
                                 <td>
                                     <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
                                 </td>
@@ -139,6 +141,7 @@
                                                                                                                                                                                 echo '';
                                                                                                                                                                             }
                                                                                                                                                                             ?></td>
+                                <td><a href="<?php echo site_url('jamaah/remove_record_keberangkatan/' . $jamaah['id_record']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

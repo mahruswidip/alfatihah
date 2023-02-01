@@ -179,8 +179,6 @@ class Jamaah extends CI_Controller
                 'email' => $this->input->post('email'),
                 'created_by' => $user_id,
             );
-            // var_dump($params);
-            // exit();
 
             $this->Jamaah_model->add_jamaah($params, $gambar);
             redirect('jamaah/index');
@@ -428,6 +426,22 @@ class Jamaah extends CI_Controller
         } else {
             show_error('The jamaah you are trying to delete does not exist.');
         }
+    }
+
+    function remove_record_keberangkatan($id_record)
+    {
+        $record = $this->Jamaah_model->get_record_pure($id_record);
+
+        // echo '<pre>';
+        // print_r($record);
+        // exit(); 
+
+        // check if the paket exists before trying to delete it
+        if (isset($record[0]['id_record'])) {
+            $this->Jamaah_model->remove_record_keberangkatan($id_record);
+            redirect('jamaah/index');
+        } else
+            show_error('The Record you are trying to delete does not exist.');
     }
 
     public function export()

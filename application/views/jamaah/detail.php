@@ -70,7 +70,7 @@
                             <th scope="col">Paket</th>
                             <th scope="col">Lama Hari</th>
                             <th scope="col">Tanggal Manasik</th>
-                            <th scope="col">Kehadiran Manasik</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +80,7 @@
                                 <td><?php echo $j['paket']; ?></td>
                                 <td><?php echo $j['lama_hari']; ?></td>
                                 <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_manasik']), 'd F Y'); ?></td>
-                                <!-- <td><?php echo $j['kehadiran']; ?></td> -->
+                                <td><a href="<?php echo site_url('jamaah/remove_record_keberangkatan/' . $j['id_record']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

@@ -201,6 +201,16 @@ class Jamaah_model extends CI_Model
         // $this->db->join('kehadiran', 'record_keberangkatan.id_jamaah=kehadiran.fk_id_jamaah', 'left');
         return $this->db->get('record_keberangkatan')->result_array();
     }
+    function get_record_pure($id_record)
+    {
+        $this->db->where('id_record', $id_record);
+        return $this->db->get('record_keberangkatan')->result_array();
+    }
+
+    function remove_record_keberangkatan($id_record)
+    {
+        return $this->db->delete('record_keberangkatan',array('id_record'=>$id_record));
+    }
 
     function get_hotel_from_record_keberangkatan($id_jamaah)
     {
