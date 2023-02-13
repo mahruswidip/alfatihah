@@ -42,7 +42,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label class="bmd-label-floating text-danger">Nomor Telepon (Whatsapp)</label>
-										<input type="text" name="nomor_telepon" value="<?php echo $this->input->post('nomor_telepon'); ?>" class="form-control" id="nomor_telepon" />
+										<input type="text" name="nomor_telepon" value="<?php echo $this->input->post('nomor_telepon'); ?>" class="form-control" id="nomor_telepon" required />
 									</div>
 								</div>
 								<div class="col-md-6">
