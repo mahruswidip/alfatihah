@@ -10,7 +10,7 @@
                 <a href="<?php echo site_url('jamaah/cetak_label_koper/' . $jamaah['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span></a>
             </div>
             <div style="margin-top: 20px;">
-                <a href="<?php echo site_url('jamaah/updateqr/' . $jamaah['id_jamaah']); ?>" class="btn btn-dark"><span class="fa fa-qrcode"></span></a>
+                <a href="<?php echo site_url('jamaah/updateqrdaricetak/' . $jamaah['id_jamaah']); ?>" class="btn btn-dark"><span class="fa fa-qrcode"></span></a>
             </div>
             <div id="html-content-holder" style="width: 639px; height: 1016px;">
                 <img src="<?php echo base_url() . 'assets/images/id_card_template/depan.png'; ?>">
