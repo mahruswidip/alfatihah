@@ -109,4 +109,22 @@ class Login extends CI_Controller
       echo json_encode($dataAdmin);
     }
   }
+  public function login_qr()
+  {
+    $qr = $this->input->post('qr_code_benar');
+
+    $dataAdmin = array();
+    $dataLogin = $this->db->query("SELECT * FROM jamaah where qr_code_benar = '" . $qr_code_benar . "'");
+
+    foreach ($dataLogin->result() as $dl) {
+      $dataAdmin = $dl;
+    }
+    if ($dataAdmin == []) {
+      http_response_code(404);
+      $dataAdmin = "Data Anda Tidak Ditemukan";
+      echo json_encode($dataAdmin);
+    } else {
+      echo json_encode($dataAdmin);
+    }
+  }
 }
