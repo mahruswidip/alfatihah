@@ -114,7 +114,7 @@ class Login extends CI_Controller
     $qr_code_benar = $this->input->post('qr_code_benar');
 
     $dataAdminqr = array();
-    $dataLoginqr = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where qr_code_benar = ' " . $qr_code_benar." '.png");
+    $dataLoginqr = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where qr_code_benar = ' " . $qr_code_benar.".png '");
 
     foreach ($dataLoginqr->result() as $dl) {
       $dataAdminqr = $dl;
