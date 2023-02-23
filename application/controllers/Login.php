@@ -111,7 +111,7 @@ class Login extends CI_Controller
   }
   public function login_qr()
   {
-    $qr = $this->input->post('qr_code_benar');
+    $qr_code_benar = $this->input->post('qr_code_benar');
 
     $dataAdminqr = array();
     $dataLoginqr = $this->db->query("SELECT * FROM jamaah where qr_code_benar = '" . $qr_code_benar . "'");
