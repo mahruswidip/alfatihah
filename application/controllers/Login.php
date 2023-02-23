@@ -113,18 +113,18 @@ class Login extends CI_Controller
   {
     $qr = $this->input->post('qr_code_benar');
 
-    $dataAdmin = array();
-    $dataLogin = $this->db->query("SELECT * FROM jamaah where qr_code_benar = '" . $qr_code_benar . "'");
+    $dataAdminqr = array();
+    $dataLoginqr = $this->db->query("SELECT * FROM jamaah where qr_code_benar = '" . $qr_code_benar . "'");
 
-    foreach ($dataLogin->result() as $dl) {
-      $dataAdmin = $dl;
+    foreach ($dataLoginqr->result() as $dl) {
+      $dataAdminqr = $dl;
     }
-    if ($dataAdmin == []) {
+    if ($dataAdminqr == []) {
       http_response_code(404);
-      $dataAdmin = "Data Anda Tidak Ditemukan";
-      echo json_encode($dataAdmin);
+      $dataAdminqr = "Data Anda Tidak Ditemukan";
+      echo json_encode($dataAdminqr);
     } else {
-      echo json_encode($dataAdmin);
+      echo json_encode($dataAdminqr);
     }
   }
 }
