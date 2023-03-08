@@ -97,7 +97,7 @@ class Login extends CI_Controller
 
     $dataAdmin = array();
     $dataLogin = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah LEFT JOIN (  SELECT id_jamaah, MAX(created_at) AS max_created_at  FROM record_keberangkatan  GROUP BY id_jamaah) AS max_created_at_table ON jamaah.id_jamaah = max_created_at_table.id_jamaah LEFT JOIN record_keberangkatan ON max_created_at_table.id_jamaah = record_keberangkatan.id_jamaah AND max_created_at_table.max_created_at = record_keberangkatan.created_at WHERE tbl_users.user_email = '" . $email . "' AND tbl_users.user_password = '" . $password . "'");
-    $dataLogin = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where user_email = '" . $email . "' AND user_password = '" . $password . "'");
+    // $dataLogin = $this->db->query("SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah where user_email = '" . $email . "' AND user_password = '" . $password . "'");
     
     // sudah ada filter ambil terbaru
     // SELECT * FROM tbl_users LEFT JOIN jamaah ON tbl_users.fk_id_jamaah = jamaah.id_jamaah LEFT JOIN (  SELECT id_jamaah, MAX(created_at) AS max_created_at  FROM record_keberangkatan  GROUP BY id_jamaah) AS max_created_at_table ON jamaah.id_jamaah = max_created_at_table.id_jamaah LEFT JOIN record_keberangkatan ON max_created_at_table.id_jamaah = record_keberangkatan.id_jamaah AND max_created_at_table.max_created_at = record_keberangkatan.created_at WHERE tbl_users.user_email = '3575026407680002' AND tbl_users.user_password = 'e10adc3949ba59abbe56e057f20f883e';
