@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost:8889',
+	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'root',
-	'database' => 'absensi_jamaah',
+	'password' => '',
+	'database' => 'cvbayu',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
