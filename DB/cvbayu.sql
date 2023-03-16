@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 30 Sep 2022 pada 10.46
--- Versi server: 10.1.39-MariaDB
--- Versi PHP: 7.1.29
+-- Host: localhost:8889
+-- Waktu pembuatan: 16 Mar 2023 pada 04.52
+-- Versi server: 5.7.34
+-- Versi PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,8 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `absensi_jamaah`
+-- Database: `cvbayu`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `barang`
+--
+
+CREATE TABLE `barang` (
+  `id_barang` int(11) NOT NULL,
+  `fk_id_kategori` varchar(11) NOT NULL,
+  `nama_barang` varchar(255) NOT NULL,
+  `jumlah` varchar(255) NOT NULL,
+  `satuan` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `barang`
+--
+
+INSERT INTO `barang` (`id_barang`, `fk_id_kategori`, `nama_barang`, `jumlah`, `satuan`, `keterangan`) VALUES
+(1, '2', 'PENSIL', '11', 'BOX', 'HITAM'),
+(2, '2', 'PENGGARIS', '19', 'BOX', 'TRANSPARAN'),
+(5, '1', 'MINI ESCAVATOR', '22', 'UNIT', 'ORANYE');
 
 -- --------------------------------------------------------
 
@@ -50,13 +73,6 @@ CREATE TABLE `img_dropzone` (
   `ukuran` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `img_dropzone`
---
-
-INSERT INTO `img_dropzone` (`id`, `nama`, `tipe`, `ukuran`) VALUES
-(17, 'IMG-20171125-WA0051.jpg', 'image', '14655');
-
 -- --------------------------------------------------------
 
 --
@@ -65,17 +81,14 @@ INSERT INTO `img_dropzone` (`id`, `nama`, `tipe`, `ukuran`) VALUES
 
 CREATE TABLE `jamaah` (
   `id_jamaah` int(11) NOT NULL,
+  `fk_user_id` varchar(200) NOT NULL,
   `nik` varchar(100) NOT NULL,
   `nama_jamaah` varchar(255) NOT NULL,
   `nomor_telepon` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan','','') NOT NULL,
   `alamat` text NOT NULL,
   `nomor_paspor` varchar(11) NOT NULL,
-  `grup_keberangkatan` varchar(50) NOT NULL,
-  `paket` varchar(11) NOT NULL,
-  `lama_hari` int(10) NOT NULL,
-  `hotel_madinah` varchar(100) NOT NULL,
-  `hotel_mekkah` varchar(100) NOT NULL,
   `jamaah_img` varchar(40) NOT NULL,
   `qr_code` varchar(50) NOT NULL,
   `kehadiran` enum('Hadir','Tidak Hadir / Belum Hadir','','') NOT NULL DEFAULT 'Tidak Hadir / Belum Hadir',
@@ -83,16 +96,42 @@ CREATE TABLE `jamaah` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `uuid` text,
-  `qr_code_benar` varchar(80) NOT NULL
+  `qr_code_benar` varchar(80) NOT NULL,
+  `is_user` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `jamaah`
+-- Struktur dari tabel `kategori`
 --
 
-INSERT INTO `jamaah` (`id_jamaah`, `nik`, `nama_jamaah`, `nomor_telepon`, `jenis_kelamin`, `alamat`, `nomor_paspor`, `grup_keberangkatan`, `paket`, `lama_hari`, `hotel_madinah`, `hotel_mekkah`, `jamaah_img`, `qr_code`, `kehadiran`, `created_by`, `created_at`, `updated_at`, `uuid`, `qr_code_benar`) VALUES
-(4, '..', 'ALFIYAH MUHAYIN SAMIN', '..', 'Perempuan', '..', '..', '2022-10-11', 'VIP', 13, '', '', 'b3f4220539fa725f99523bbaefd32d8c.jpg', '3575026706590001.png', 'Hadir', 7, '2022-09-19 00:00:00', '2022-09-30 08:16:28', '1a17abc1-3ab1-11ed-8d7e-c81f66b925de', '1a17abc1-3ab1-11ed-8d7e-c81f66b925de.png'),
-;
+CREATE TABLE `kategori` (
+  `id_kategori` int(11) NOT NULL,
+  `nama_kategori` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `kategori`
+--
+
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
+(1, 'ALAT BERAT'),
+(2, 'ALAT TULIS'),
+(3, 'KENDARAAN');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `keberangkatan`
+--
+
+CREATE TABLE `keberangkatan` (
+  `id_keberangkatan` int(100) NOT NULL,
+  `tanggal_keberangkatan` date NOT NULL,
+  `is_aktif` int(11) NOT NULL DEFAULT '0',
+  `tanggal_manasik` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -102,13 +141,11 @@ INSERT INTO `jamaah` (`id_jamaah`, `nik`, `nama_jamaah`, `nomor_telepon`, `jenis
 
 CREATE TABLE `kehadiran` (
   `id_kehadiran` int(11) NOT NULL,
-  `id_jamaah` varchar(11) NOT NULL,
+  `fk_id_jamaah` varchar(11) NOT NULL,
   `nik` varchar(100) NOT NULL,
   `nama_jamaah` varchar(255) NOT NULL,
   `kehadiran` enum('Hadir','Tidak Hadir / Belum Hadir','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
 
 -- --------------------------------------------------------
 
@@ -118,13 +155,15 @@ CREATE TABLE `kehadiran` (
 
 CREATE TABLE `paket` (
   `id_paket` int(11) NOT NULL,
+  `fk_id_keberangkatan` varchar(100) NOT NULL,
   `kategori` enum('Umroh','Haji','Tour','') NOT NULL,
   `nama_program` varchar(100) NOT NULL,
-  `paket` enum('Ekonomi','Hemat','Semi VIP','VIP') NOT NULL DEFAULT 'Ekonomi',
+  `paket` enum('Ekonomi','Hemat','Semi VIP','VIP','Standard','VVIP Business Class','VIP Business Class') NOT NULL DEFAULT 'Ekonomi',
   `hotel_mekkah` varchar(100) NOT NULL,
   `hotel_madinah` varchar(100) NOT NULL,
   `bintang_mekkah` varchar(2) NOT NULL,
   `bintang_madinah` varchar(2) NOT NULL,
+  `lama_hari` int(10) NOT NULL,
   `matauang` enum('Rp','USD','','') NOT NULL DEFAULT 'Rp',
   `uang_muka` varchar(50) NOT NULL,
   `matauangall` enum('Rp','USD','','') NOT NULL DEFAULT 'Rp',
@@ -135,17 +174,30 @@ CREATE TABLE `paket` (
   `tampilan` enum('Uang Muka','Harga','','') NOT NULL,
   `created_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-------------------------------
+
+-- --------------------------------------------------------
 
 --
--- Struktur dari tabel `scan`
+-- Struktur dari tabel `pesanan`
 --
 
-CREATE TABLE `scan` (
-  `id_scan` int(11) NOT NULL,
-  `nik_terscan` varchar(100) NOT NULL,
-  `id_jamaah` varchar(11) NOT NULL,
-  `created_by` int(11) NOT NULL
+CREATE TABLE `pesanan` (
+  `id_pesanan` int(11) NOT NULL,
+  `uuid` text NOT NULL,
+  `nomor_pesanan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `record_keberangkatan`
+--
+
+CREATE TABLE `record_keberangkatan` (
+  `id_record` int(11) NOT NULL,
+  `id_jamaah` varchar(100) NOT NULL,
+  `id_paket` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -162,19 +214,29 @@ CREATE TABLE `tbl_users` (
   `user_level` varchar(3) DEFAULT NULL,
   `created_at` date NOT NULL,
   `created_by` varchar(11) NOT NULL,
-  `pass` varchar(90) NOT NULL
+  `pass` varchar(90) NOT NULL,
+  `is_jamaah` int(5) DEFAULT '0',
+  `fk_id_jamaah` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_level`, `created_at`, `created_by`, `pass`) VALUES
-(1, 'Admin Super Power', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '0000-00-00', '0', '123456');
+INSERT INTO `tbl_users` (`user_id`, `user_name`, `user_email`, `user_password`, `user_level`, `created_at`, `created_by`, `pass`, `is_jamaah`, `fk_id_jamaah`) VALUES
+(1, 'Admin Super Power', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1', '0000-00-00', '0', '123456', 0, ''),
+(2, 'Kantor Cabang Malang', 'cabang.malang', '430e1ddc2127505b756fe2c3807e6dfa', '2', '0000-00-00', '1', 'cabangmalang205', 0, ''),
+(9, 'DIDIK HADI PRAYITNO', '351412090373700001', 'e10adc3949ba59abbe56e057f20f883e', '3', '0000-00-00', '1', '123456', 1, '139');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `barang`
+--
+ALTER TABLE `barang`
+  ADD PRIMARY KEY (`id_barang`);
 
 --
 -- Indeks untuk tabel `berita`
@@ -195,16 +257,34 @@ ALTER TABLE `jamaah`
   ADD PRIMARY KEY (`id_jamaah`);
 
 --
+-- Indeks untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indeks untuk tabel `keberangkatan`
+--
+ALTER TABLE `keberangkatan`
+  ADD PRIMARY KEY (`id_keberangkatan`);
+
+--
 -- Indeks untuk tabel `paket`
 --
 ALTER TABLE `paket`
   ADD PRIMARY KEY (`id_paket`);
 
 --
--- Indeks untuk tabel `scan`
+-- Indeks untuk tabel `pesanan`
 --
-ALTER TABLE `scan`
-  ADD PRIMARY KEY (`id_scan`);
+ALTER TABLE `pesanan`
+  ADD PRIMARY KEY (`id_pesanan`);
+
+--
+-- Indeks untuk tabel `record_keberangkatan`
+--
+ALTER TABLE `record_keberangkatan`
+  ADD PRIMARY KEY (`id_record`);
 
 --
 -- Indeks untuk tabel `tbl_users`
@@ -217,6 +297,12 @@ ALTER TABLE `tbl_users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `barang`
+--
+ALTER TABLE `barang`
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT untuk tabel `berita`
 --
 ALTER TABLE `berita`
@@ -226,31 +312,49 @@ ALTER TABLE `berita`
 -- AUTO_INCREMENT untuk tabel `img_dropzone`
 --
 ALTER TABLE `img_dropzone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `jamaah`
 --
 ALTER TABLE `jamaah`
-  MODIFY `id_jamaah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id_jamaah` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `keberangkatan`
+--
+ALTER TABLE `keberangkatan`
+  MODIFY `id_keberangkatan` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `paket`
 --
 ALTER TABLE `paket`
-  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `scan`
+-- AUTO_INCREMENT untuk tabel `pesanan`
 --
-ALTER TABLE `scan`
-  MODIFY `id_scan` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pesanan`
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `record_keberangkatan`
+--
+ALTER TABLE `record_keberangkatan`
+  MODIFY `id_record` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
