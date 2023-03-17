@@ -14,25 +14,23 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table id="tableBarang" class="table table-hover">
                         <thead class=" text-primary ">
                             <th>No.</th>
                             <th>Kategori</th>
                             <th>Barang</th>
                             <th>Jumlah</th>
-                            <th>Satuan</th>
                             <th>Keterangan</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
-                            <?php $no = 1; foreach ($barang as $p) { ?>
+                            <?php $no = 1;foreach ($barang as $p) {?>
                             <tr>
-                                <td class="col-auto"><?= $no++ ?></td>
-                                <td class="col-auto"><?php echo $p['fk_id_kategori']; ?>
-                                <td class="col-auto"><?php echo $p['nama_barang']; ?>
-                                <td class="col-auto"><?php echo $p['jumlah']; ?>
-                                <td class="col-auto"><?php echo $p['satuan']; ?>
-                                <td class="col-auto"><?php echo $p['keterangan']; ?>
+                                <td class="col-auto"><?=$no++?></td>
+                                <td style="width: 20%"><?php echo $p['nama_kategori']; ?></td>
+                                <td style="width: 20%"><?php echo $p['nama_barang']; ?></td>
+                                <td style="width: 30%"><?php echo $p['jumlah'] . '&nbsp' . $p['satuan']; ?></td>
+                                <td style="width: 20%"><?php echo $p['keterangan']; ?></td>
                                 </td>
                                 <td class="col-2">
                                     <a href="<?php echo site_url('barang/edit/' . $p['id_barang']); ?>"
@@ -41,7 +39,7 @@
                                         class="btn btn-danger"><span class="fa fa-trash"></span></a>
                                 </td>
                             </tr>
-                            <?php } ?>
+                            <?php }?>
                         </tbody>
                     </table>
                     <div class="pull-right">
@@ -52,3 +50,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableBarang').DataTable();
+    } );
+</script>

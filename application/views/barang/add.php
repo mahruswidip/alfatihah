@@ -10,25 +10,19 @@
                         <form action="<?php echo site_url() . 'barang/add' ?>" method="post"
                             enctype="multipart/form-data">
                             <h3>Data Barang</h3>
-                            <!-- <?php var_dump($kategori_list)?> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Kategori Barang</label>
                                         <select name="id_kategori" id="kategori" class="form-control select2">
                                             <option value="">Select Kategori</option>
-                                            <?php foreach($kategori_list as $kategori): ?>
+                                            <?php foreach ($kategori_list as $kategori): ?>
                                             <option value="<?php echo $kategori['id_kategori']; ?>"
                                                 <?php echo set_select('id_kategori', $kategori['id_kategori']); ?>>
                                                 <?php echo $kategori['nama_kategori']; ?>
                                             </option>
-                                            <?php endforeach; ?>
+                                            <?php endforeach;?>
                                         </select>
-                                        <div id="add-kategori-btn" style="display: none;">
-                                            <button class="btn btn-primary btn-sm" onclick="addKategori()">
-                                                <i class="fas fa-plus"></i> Add Kategori
-                                            </button>
-                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Nama Barang</label>
@@ -110,15 +104,10 @@ $('.select2').select2({
         $('.select2-results__option--message').html('<button class="btn btn-primary btn-sm">' +
             '<i class="fas fa-plus"></i> Add "' + search_term + '"' +
             '</button>').on('click', function() {
-            $('.select2-search__field').prop('disabled', false).focus();
-            $('.select2-results__option--message').html('');
-            var newOption = new Option(search_term, search_term, true, true);
-            $('.select2').append(newOption).trigger('change');
-            $('#add-kategori-btn').show();
+            addKategori();
         });
     }
 });
-
 function addKategori() {
     var kategori = $('.select2-search__field').val();
     $.ajax({
@@ -137,4 +126,5 @@ function addKategori() {
         }
     });
 }
+
 </script>
