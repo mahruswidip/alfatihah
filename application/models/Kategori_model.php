@@ -29,7 +29,7 @@ class Kategori_model extends CI_Model
      */
     public function get_all_kategori($params = array())
     {
-        $this->db->order_by('kategori.id_kategori', 'asc');
+        $this->db->order_by('kategori.id_kategori', 'desc');
         // $this->db->join('tbl_users', 'tbl_users.id_kategori=kategori.id_kategori', 'left');
         if (isset($params) && !empty($params)) {
             $this->db->limit($params['limit'], $params['offset']);

@@ -16,6 +16,18 @@ class Barang_model extends CI_Model
     }
 
     /*
+     * Get jumlah barang buat di halaman add barang di pesanan
+     */
+    public function get_jumlah_barang($id_barang)
+    {
+        $this->db->select('jumlah');
+        $this->db->where('id_barang', $id_barang);
+        $query = $this->db->get('barang');
+        $result = $query->row_array();
+        return $result['jumlah'];
+    }
+
+    /*
      * Get all barang count
      */
     public function get_all_barang_count()
@@ -37,7 +49,6 @@ class Barang_model extends CI_Model
             $this->db->limit($params['limit'], $params['offset']);
         }
         return $this->db->get('barang')->result_array();
-
     }
 
     public function get_users_by_created_by($user_id)
@@ -81,7 +92,5 @@ class Barang_model extends CI_Model
             $this->db->limit($params['limit'], $params['offset']);
         }
         return $this->db->get('kategori')->result_array();
-
     }
-
 }

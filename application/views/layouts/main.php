@@ -99,6 +99,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Dashboard</p>
                         </a>
                     </li>
+                    <hr>
                     <li class="nav-item <?php if ($this->uri->uri_string() == 'kategori/index') {
     echo 'active';
 }?>">
@@ -113,6 +114,15 @@ The above copyright notice and this permission notice shall be included in all c
                         <a class="nav-link" href="<?php echo site_url(''); ?>barang/index">
                             <i class="material-icons">shopping_basket</i>
                             <p>Barang</p>
+                        </a>
+                    </li>
+                    <hr>
+                    <li class="nav-item <?php if ($this->uri->uri_string() == 'pesanan/index') {
+    echo 'active';
+}?>">
+                        <a class="nav-link" href="<?php echo site_url(''); ?>pesanan/index">
+                            <i class="material-icons">shopping_cart_checkout</i>
+                            <p>Pesanan (PO)</p>
                         </a>
                     </li>
                     <li class="nav-item <?php if ($this->uri->uri_string() == 'keberangkatan/index') {
