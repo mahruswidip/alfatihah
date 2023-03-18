@@ -15,6 +15,7 @@ class Pesanan_model extends CI_Model
         return $this->db->get_where('pesanan', array('id_pesanan' => $id_pesanan))->row_array();
     }
 
+
     /*
      * Get all pesanan count
      */
@@ -23,7 +24,6 @@ class Pesanan_model extends CI_Model
         $this->db->from('pesanan');
         return $this->db->count_all_results();
     }
-
     /*
      * Get all pesanan
      */
@@ -58,6 +58,34 @@ class Pesanan_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function add_pengiriman($params)
+    {
+        $this->db->trans_start();
+
+        // Insert pengiriman record
+        $this->db->insert('pengiriman', $params);
+
+        // Update jumlah_pesanan on barang_pesanan table
+        $id_pesanan = $params['fk_id_pesanan'];
+        $id_barang = $params['fk_id_barang'];
+        $jumlah = $params['jumlah'];
+        $this->db->set('jumlah_pesanan', 'GREATEST(jumlah_pesanan - ' . $jumlah . ', 0)', FALSE);
+        $this->db->where('fk_id_pesanan', $id_pesanan);
+        $this->db->where('fk_id_barang', $id_barang);
+        $this->db->update('barang_pesanan');
+
+        // Update jumlah on barang table
+        $barang = $this->db->get_where('barang', array('id_barang' => $id_barang))->row();
+        $this->db->set('jumlah', $barang->jumlah - $jumlah);
+        $this->db->where('id_barang', $id_barang);
+        $this->db->update('barang');
+
+        $this->db->trans_complete();
+
+        return $this->db->trans_status() !== FALSE;
+    }
+
+
     /*
      * function get data barang yang dipesan di pesanan
      */
@@ -66,6 +94,16 @@ class Pesanan_model extends CI_Model
     {
         $this->db->join('barang', 'barang_pesanan.fk_id_barang = barang.id_barang', 'left');
         return $this->db->get_where('barang_pesanan', array('fk_id_pesanan' => $id_pesanan))->result_array();
+    }
+
+    /*
+     * function get data barang yang akan dikirim (pengiriman) 
+     */
+
+    public function get_barang_pengiriman($id_pesanan)
+    {
+        $this->db->join('barang', 'barang.id_barang = pengiriman.fk_id_barang', 'left');
+        return $this->db->get_where('pengiriman', array('fk_id_pesanan' => $id_pesanan))->result_array();
     }
 
     /*

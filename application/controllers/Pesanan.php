@@ -81,6 +81,29 @@ class Pesanan extends CI_Controller
         }
     }
 
+    public function add_pengiriman($id_pesanan)
+    {
+        $data['barang_pesanan'] = $this->Pesanan_model->get_barang_pesanan($id_pesanan);
+        $data['pesanan'] = $this->Pesanan_model->get_pesanan($id_pesanan);
+
+        if (isset($_POST) && count($_POST) > 0) {
+            $params = array(
+                'fk_id_pesanan' => $id_pesanan,
+                'fk_id_barang' => $this->input->post('id_barang'),
+                'jumlah' => $this->input->post('jumlah'),
+            );
+
+            // print_r($params);
+            // exit();
+
+            $id_pesanan = $this->Pesanan_model->add_pengiriman($params);
+            redirect('pesanan/detail/'.$id_pesanan);
+        } else {
+            $data['_view'] = 'pesanan/add_surat_jalan';
+            $this->load->view('layouts/main', $data);
+        }
+    }
+
     /*
      * Cek Stok di halaman add barang di pesanan
      */
@@ -125,6 +148,7 @@ class Pesanan extends CI_Controller
         // check if the pesanan exists before trying to edit it
         $data['pesanan'] = $this->Pesanan_model->get_pesanan($id_pesanan);
         $data['barang_pesanan'] = $this->Pesanan_model->get_barang_pesanan($id_pesanan);
+        $data['pengiriman'] = $this->Pesanan_model->get_barang_pengiriman($id_pesanan);
 
         if (isset($data['pesanan']['id_pesanan'])) {
             if (isset($_POST) && count($_POST) > 0) {
