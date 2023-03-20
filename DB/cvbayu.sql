@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 18 Mar 2023 pada 10.54
--- Versi server: 10.1.39-MariaDB
--- Versi PHP: 7.1.29
+-- Host: localhost:8889
+-- Waktu pembuatan: 20 Mar 2023 pada 01.34
+-- Versi server: 5.7.34
+-- Versi PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -44,10 +43,10 @@ CREATE TABLE `barang` (
 INSERT INTO `barang` (`id_barang`, `fk_id_kategori`, `nama_barang`, `jumlah`, `satuan`, `keterangan`) VALUES
 (1, '2', 'PENSIL', 11, 'BOX', 'HITAM'),
 (2, '2', 'PENGGARIS', 19, 'BOX', 'TRANSPARAN'),
-(5, '33', 'ESCAVATOR MINI', 4, 'UNIT', 'ORANYE'),
+(5, '33', 'ESCAVATOR MINI', 37, 'UNIT', 'ORANYE'),
 (8, '7', 'KAPAS', 2, 'BOX', 'PUTIH'),
 (10, '31', 'IPONE 7', 2, 'UNIT', 'WAD'),
-(11, '31', 'IPONE 8', 22, 'UNIT', 'MERAH');
+(11, '31', 'IPONE 8', 21, 'UNIT', 'MERAH');
 
 -- --------------------------------------------------------
 
@@ -67,8 +66,9 @@ CREATE TABLE `barang_pesanan` (
 --
 
 INSERT INTO `barang_pesanan` (`id_barang_pesanan`, `fk_id_pesanan`, `fk_id_barang`, `jumlah_pesanan`) VALUES
-(4, '1', '11', '4'),
-(7, '1', '5', '7');
+(7, '1', '5', '7'),
+(9, '2', '11', '0'),
+(10, '2', '5', '0');
 
 -- --------------------------------------------------------
 
@@ -207,6 +207,30 @@ CREATE TABLE `paket` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `pengiriman`
+--
+
+CREATE TABLE `pengiriman` (
+  `id_pengiriman` int(11) NOT NULL,
+  `fk_id_pesanan` varchar(20) NOT NULL,
+  `fk_id_barang` varchar(20) NOT NULL,
+  `jumlah_kirim` varchar(20) NOT NULL,
+  `tanggal_kirim` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `pengiriman`
+--
+
+INSERT INTO `pengiriman` (`id_pengiriman`, `fk_id_pesanan`, `fk_id_barang`, `jumlah_kirim`, `tanggal_kirim`) VALUES
+(8, '2', '5', '8', '2023-03-21'),
+(10, '2', '11', '2', '2023-03-21'),
+(11, '2', '11', '1', '2023-03-23'),
+(12, '2', '11', '1', '2023-03-21');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pesanan`
 --
 
@@ -223,7 +247,8 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id_pesanan`, `nomor_pesanan`, `nama_pelanggan`, `alamat`, `tanggal_pesanan`) VALUES
-(1, 'PCVB001', 'PT. MAYORA 2', 'KEJAYAN', '2023-03-19');
+(1, 'PCVB001', 'PT. MAYORA 2', 'KEJAYAN', '2023-03-19'),
+(2, 'PCVB002', 'PT. AMERTA INDAH', 'KEJAYAN', '2023-03-09');
 
 -- --------------------------------------------------------
 
@@ -237,6 +262,20 @@ CREATE TABLE `record_keberangkatan` (
   `id_paket` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `riwayat_pengiriman`
+--
+
+CREATE TABLE `riwayat_pengiriman` (
+  `id_riwayat_pengiriman` int(11) NOT NULL,
+  `fk_id_pengiriman` varchar(20) NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `tanggal_kirim` date NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -319,6 +358,12 @@ ALTER TABLE `paket`
   ADD PRIMARY KEY (`id_paket`);
 
 --
+-- Indeks untuk tabel `pengiriman`
+--
+ALTER TABLE `pengiriman`
+  ADD PRIMARY KEY (`id_pengiriman`);
+
+--
 -- Indeks untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
@@ -329,6 +374,12 @@ ALTER TABLE `pesanan`
 --
 ALTER TABLE `record_keberangkatan`
   ADD PRIMARY KEY (`id_record`);
+
+--
+-- Indeks untuk tabel `riwayat_pengiriman`
+--
+ALTER TABLE `riwayat_pengiriman`
+  ADD PRIMARY KEY (`id_riwayat_pengiriman`);
 
 --
 -- Indeks untuk tabel `tbl_users`
@@ -350,7 +401,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT untuk tabel `barang_pesanan`
 --
 ALTER TABLE `barang_pesanan`
-  MODIFY `id_barang_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_barang_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `berita`
@@ -389,16 +440,28 @@ ALTER TABLE `paket`
   MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT untuk tabel `pengiriman`
+--
+ALTER TABLE `pengiriman`
+  MODIFY `id_pengiriman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT untuk tabel `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `record_keberangkatan`
 --
 ALTER TABLE `record_keberangkatan`
   MODIFY `id_record` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `riwayat_pengiriman`
+--
+ALTER TABLE `riwayat_pengiriman`
+  MODIFY `id_riwayat_pengiriman` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_users`
