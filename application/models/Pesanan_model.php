@@ -68,7 +68,7 @@ class Pesanan_model extends CI_Model
         // Update jumlah_pesanan on barang_pesanan table
         $id_pesanan = $params['fk_id_pesanan'];
         $id_barang = $params['fk_id_barang'];
-        $jumlah = $params['jumlah'];
+        $jumlah = $params['jumlah_kirim'];
         $this->db->set('jumlah_pesanan', 'GREATEST(jumlah_pesanan - ' . $jumlah . ', 0)', FALSE);
         $this->db->where('fk_id_pesanan', $id_pesanan);
         $this->db->where('fk_id_barang', $id_barang);
@@ -103,7 +103,8 @@ class Pesanan_model extends CI_Model
     public function get_barang_pengiriman($id_pesanan)
     {
         $this->db->join('barang', 'barang.id_barang = pengiriman.fk_id_barang', 'left');
-        return $this->db->get_where('pengiriman', array('fk_id_pesanan' => $id_pesanan))->result_array();
+        $this->db->join('barang_pesanan', 'barang_pesanan.fk_id_barang = pengiriman.fk_id_barang AND barang_pesanan.fk_id_pesanan = pengiriman.fk_id_pesanan', 'left');
+        return $this->db->get_where('pengiriman', array('pengiriman.fk_id_pesanan' => $id_pesanan))->result_array();
     }
 
     /*

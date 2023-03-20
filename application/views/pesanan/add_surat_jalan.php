@@ -86,10 +86,35 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">Jumlah yang Dikirim</label>
-                                                <input type="text" name="jumlah"
-                                                    value="<?php echo $this->input->post('jumlah'); ?>"
-                                                    class="form-control" id="jumlah" />
-                                                <div id="jumlah_pesanan"></div>
+                                                <input type="text" name="jumlah_kirim"
+                                                    value="<?php echo $this->input->post('jumlah_kirim'); ?>"
+                                                    class="form-control" id="jumlah_kirim" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label class="bmd-label-floating">Tanggal Kirim</label>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <input type="date" name="tanggal_kirim"
+                                                            value="<?php echo $this->input->post('tanggal_kirim'); ?>"
+                                                            class="form-control" id="tanggal_kirim" />
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

@@ -78,12 +78,6 @@
                             <div class="col-md-9">
                                 <h3 class="card-title ">Detail Pesanan</h3>
                             </div>
-                            <div class="col-auto">
-                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal"
-                                    data-href="<?php echo site_url('pesanan/cetak_surat_jalan/' . $pesanan['id_pesanan']); ?>">
-                                    <span class="fa fa-print"></span> &nbsp Surat Jalan
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -119,49 +113,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <div class="row justify-content-between">
-                            <div class="col">
-                                <h3 class="card-title "> Pengiriman </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <!-- <?php '<pre>'; print_r($pengiriman)?> -->
-                                    <div class="table-responsive">
-                                        <table id="tableKategori" class="table table-hover">
-                                            <thead class=" text-primary ">
-                                                <th>No.</th>
-                                                <th>Nama Barang</th>
-                                                <th>Jumlah yang Dikirim</th>
-                                                <th>Status</th>
-                                            </thead>
-                                            <tbody>
-                                                <?php $no = 1; foreach ($pengiriman as $p) {?>
-                                                <tr>
-                                                    <td class="col-1"><?= $no++ ?></td>
-                                                    <td><?= $p['nama_barang'] ?></td>
-                                                    <td><?= $p['jumlah_kirim'] ?></td>
-                                                    <td><?= 'Status' ?></td>
-                                                </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                        <div class="pull-right">
-                                            <?php echo $this->pagination->create_links(); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="container-fluid">
@@ -211,7 +163,7 @@
                                                         $satuan = $barang['satuan'];
 
                                                         if ($jumlah_pesanan < $jumlah) {
-                                                            echo '<span class="badge badge-success"><span class="fa fa-check">&nbsp</span><h6>Stok Ada</h6></div>';
+                                                            echo '<span class="badge badge-success"><h6>Stok Ada</h6></div>';
                                                         } else if ($jumlah_pesanan > $jumlah) {
                                                             echo '<span class="badge badge-warning">' . '<h6> Stok Kurang </h6>' . '</div>';
                                                         } else {
@@ -226,6 +178,89 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <div class="row justify-content-between">
+                            <div class="col-md-9">
+                                <h3 class="card-title ">Pengiriman</h3>
+                            </div>
+                            <div class="col-auto">
+                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal"
+                                    data-href="<?php echo site_url('pesanan/cetak_surat_jalan/' . $pesanan['id_pesanan']); ?>">
+                                    <span class="fa fa-print"></span> &nbsp Surat Jalan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <!-- <?php '<pre>'; print_r($pengiriman)?> -->
+                                    <div class="table-responsive">
+                                        <table id="tableKategori" class="table table-hover">
+                                            <thead class="text-primary">
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Tanggal Kirim</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Jumlah yang Dikirim</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // create an empty array to store the grouped rows
+                                                $groupedRows = array();
+
+                                                // loop through the pengiriman data and group the rows by their tanggal_kirim value
+                                                foreach ($pengiriman as $p) {
+                                                $tanggal_kirim = $p['tanggal_kirim'];
+
+                                                // if the group for this tanggal_kirim does not exist, create a new one
+                                                if (!isset($groupedRows[$tanggal_kirim])) {
+                                                    $groupedRows[$tanggal_kirim] = array();
+                                                }
+
+                                                // add the current row to the group for this tanggal_kirim
+                                                $groupedRows[$tanggal_kirim][] = $p;
+                                                }
+
+                                                // loop through the grouped rows and display them in the table
+                                                $no = 1;
+                                                foreach ($groupedRows as $tanggal_kirim => $rows) {
+                                                $rowspan = count($rows);
+                                                echo '<tr>';
+                                                echo '<td rowspan="' . $rowspan . '">' . $no++ . '</td>';
+                                                echo '<td rowspan="' . $rowspan . '">' . $tanggalConverted = date_format(date_create($tanggal_kirim), 'd F Y') . '</td>';
+                                                echo '<td>' . $rows[0]['nama_barang'] . '</td>';
+                                                echo '<td>' . $rows[0]['jumlah_kirim'] . '&nbsp' . $rows[0]['satuan'] . '</td>';
+                                                echo '</tr>';
+                                                for ($i = 1; $i < $rowspan; $i++) {
+                                                    echo '<tr>';
+                                                    echo '<td>' . $rows[$i]['nama_barang'] . '</td>';
+                                                    echo '<td>' . $rows[$i]['jumlah_kirim'] . '&nbsp' . $rows[$i]['satuan'] . '</td>';
+                                                    echo '</tr>';
+                                                }
+                                                }
+                                                ?>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="pull-right">
+                                            <?php echo $this->pagination->create_links(); ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

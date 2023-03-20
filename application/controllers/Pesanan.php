@@ -90,7 +90,8 @@ class Pesanan extends CI_Controller
             $params = array(
                 'fk_id_pesanan' => $id_pesanan,
                 'fk_id_barang' => $this->input->post('id_barang'),
-                'jumlah' => $this->input->post('jumlah'),
+                'jumlah_kirim' => $this->input->post('jumlah_kirim'),
+                'tanggal_kirim' => $this->input->post('tanggal_kirim'),
             );
 
             // print_r($params);
