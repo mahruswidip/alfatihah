@@ -72,8 +72,10 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="<?php echo site_url('assets/'); ?>js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="<?php echo site_url('resources/js/bootstrap-datetimepicker.min.js'); ?>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 <body class="">
@@ -125,36 +127,12 @@ The above copyright notice and this permission notice shall be included in all c
                             <p>Pesanan (PO)</p>
                         </a>
                     </li>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'keberangkatan/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>keberangkatan/index">
-                            <i class="material-icons">event_available</i>
-                            <p>Keberangkatan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'paket/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>paket/index">
-                            <i class="material-icons">view_kanban</i>
-                            <p>Paket</p>
-                        </a>
-                    </li>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
-                            <i class="material-icons">persons</i>
-                            <p>Jamaah</p>
-                        </a>
-                    </li>
                     <li class="nav-item <?php if ($this->uri->uri_string() == 'scan/index') {
     echo 'active';
 }?>">
                         <a class="nav-link" href="<?php echo site_url(''); ?>scan/index">
                             <i class="material-icons">computer</i>
-                            <p>Scan Kehadiran Manasik</p>
+                            <p>Scan</p>
                         </a>
                     </li>
                     <li class="nav-item">

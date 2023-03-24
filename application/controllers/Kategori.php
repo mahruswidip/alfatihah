@@ -42,7 +42,7 @@ class kategori extends CI_Controller
     {
         if (isset($_POST) && count($_POST) > 0) {
             $params = array(
-                'kategori' => $this->input->post('kategori'),
+                'nama_kategori' => $this->input->post('nama_kategori'),
             );
 
             $id_kategori = $this->Kategori_model->add_kategori($params);
@@ -65,7 +65,7 @@ class kategori extends CI_Controller
         if (isset($data['kategori']['id_kategori'])) {
             if (isset($_POST) && count($_POST) > 0) {
                 $params = array(
-                    'kategori' => $this->input->post('kategori'),
+                    'nama_kategori' => $this->input->post('nama_kategori'),
                 );
 
                 $this->Kategori_model->update_kategori($id_kategori, $params);

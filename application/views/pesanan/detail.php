@@ -23,6 +23,33 @@
         </div>
     </div>
 </div>
+<!-- Selesaikan Modal -->
+<div class="modal fade" id="selesaikanModal" tabindex="-1" role="dialog" aria-labelledby="selesaikanModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="selesaikanModalLabel">Confirmation Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda ingin menyelesaikan Pesanan ?
+                </p>
+                <br>
+                <p>(Menyelesaikan pesanan dilakukan untuk mencetak Invoice sebagai tanda Pesanan telah selesai)</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <a href="<?php echo site_url('pesanan/selesaikan/' . $pesanan['id_pesanan']); ?>"
+                    class="btn btn-danger">
+                    Proses
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Input Modal -->
 <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel"
@@ -78,13 +105,24 @@
                             <div class="col-md-9">
                                 <h3 class="card-title ">Detail Pesanan</h3>
                             </div>
+                            <div class="col-auto">
+                                <?php if ($pesanan['is_selesai']=='1') {
+                                    echo '';
+                                } else {
+                                    echo '<a href="#" class="btn btn-danger" data-toggle="modal" data-target="#selesaikanModal"><span class="fa fa-check"></span> &nbsp SELESAIKAN P.O.</a>';
+                                }
+                                ?>
+
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
                                 <i class="fa fa-book"></i>&nbsp; Nomor Pesanan
-                                <h2><?php echo $pesanan['nomor_pesanan']; ?></h2>
+                                <h2><?php echo $pesanan['nomor_pesanan']; ?>&nbsp<span
+                                        class="badge badge-success">Selesai</span>
+                                </h2>
                             </div>
                         </div>
                         <div class="row">
@@ -137,7 +175,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="table-responsive">
-                                    <table class="table table-hover">
+                                    <table class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nama Barang</th>
@@ -150,7 +188,12 @@
                                         </thead>
                                         <tbody>
                                             <?php foreach ($barang_pesanan as $barang) : ?>
-                                            <tr>
+                                            <tr class="<?php if ($barang['jumlah_pesanan']=='0') {
+                                                    echo 'alert-success';
+                                                } else {
+                                                    echo 'alert-danger';
+                                                }
+                                                ?>">
                                                 <td><?php echo $barang['nama_barang']; ?></td>
                                                 <td><?php echo $barang['jumlah_pesanan'] . '&nbsp' . $barang['satuan'] ?>
                                                 </td>
@@ -196,9 +239,10 @@
                                 <h3 class="card-title ">Pengiriman</h3>
                             </div>
                             <div class="col-auto">
-                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal"
+                                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#confirmModal"
                                     data-href="<?php echo site_url('pesanan/cetak_surat_jalan/' . $pesanan['id_pesanan']); ?>">
-                                    <span class="fa fa-print"></span> &nbsp Surat Jalan
+                                    <span class="fa fa-paper-plane"></span> &nbsp
+                                    Kirim
                                 </a>
                             </div>
                         </div>
@@ -209,7 +253,7 @@
                                 <div class="card-body">
                                     <!-- <?php '<pre>'; print_r($pengiriman)?> -->
                                     <div class="table-responsive">
-                                        <table id="tableKategori" class="table table-hover">
+                                        <table id="tableKategori" class="table">
                                             <thead class="text-primary">
                                                 <tr>
                                                     <th>No.</th>
@@ -223,38 +267,40 @@
                                                 // create an empty array to store the grouped rows
                                                 $groupedRows = array();
 
+                                                $link = site_url("pesanan/detail_pengiriman/" . $pesanan['id_pesanan']);
+
                                                 // loop through the pengiriman data and group the rows by their tanggal_kirim value
                                                 foreach ($pengiriman as $p) {
-                                                $tanggal_kirim = $p['tanggal_kirim'];
+                                                    $tanggal_kirim = $p['tanggal_kirim'];
 
-                                                // if the group for this tanggal_kirim does not exist, create a new one
-                                                if (!isset($groupedRows[$tanggal_kirim])) {
-                                                    $groupedRows[$tanggal_kirim] = array();
-                                                }
+                                                    // if the group for this tanggal_kirim does not exist, create a new one
+                                                    if (!isset($groupedRows[$tanggal_kirim])) {
+                                                        $groupedRows[$tanggal_kirim] = array();
+                                                    }
 
-                                                // add the current row to the group for this tanggal_kirim
-                                                $groupedRows[$tanggal_kirim][] = $p;
+                                                    // add the current row to the group for this tanggal_kirim
+                                                    $groupedRows[$tanggal_kirim][] = $p;
                                                 }
 
                                                 // loop through the grouped rows and display them in the table
                                                 $no = 1;
                                                 foreach ($groupedRows as $tanggal_kirim => $rows) {
-                                                $rowspan = count($rows);
-                                                echo '<tr>';
-                                                echo '<td rowspan="' . $rowspan . '">' . $no++ . '</td>';
-                                                echo '<td rowspan="' . $rowspan . '">' . $tanggalConverted = date_format(date_create($tanggal_kirim), 'd F Y') . '</td>';
-                                                echo '<td>' . $rows[0]['nama_barang'] . '</td>';
-                                                echo '<td>' . $rows[0]['jumlah_kirim'] . '&nbsp' . $rows[0]['satuan'] . '</td>';
-                                                echo '</tr>';
-                                                for ($i = 1; $i < $rowspan; $i++) {
+                                                    $rowspan = count($rows);
                                                     echo '<tr>';
-                                                    echo '<td>' . $rows[$i]['nama_barang'] . '</td>';
-                                                    echo '<td>' . $rows[$i]['jumlah_kirim'] . '&nbsp' . $rows[$i]['satuan'] . '</td>';
-                                                    echo '</tr>';
-                                                }
-                                                }
-                                                ?>
+                                                    echo '<td rowspan="' . $rowspan . '">' . $no++ . '</td>';
+                                                    echo '<td rowspan="' . $rowspan . '">' . $tanggalConverted = date_format(date_create($tanggal_kirim), 'd F Y') . '</td>';
+                                                    echo '<td>' . $rows[0]['nama_barang'] . '</td>';
+                                                    echo '<td>' . $rows[0]['jumlah_kirim'] . '&nbsp' . $rows[0]['satuan'] . '</td>';
+                                                    echo '<td rowspan="' . $rowspan . '"><a href="' . $link  . '?tanggal_kirim=' . urlencode($tanggal_kirim) . '" class="btn btn-warning"><span class="fa fa-print"></span> &nbsp Cetak</a></td>'; // add the print button here
+                                                echo '</tr>';
+                                                for ($i = 1; $i < $rowspan; $i++) { echo '<tr>' ; echo '<td>' .
+                                                    $rows[$i]['nama_barang'] . '</td>' ; echo '<td>' .
+                                                    $rows[$i]['jumlah_kirim'] . '&nbsp' . $rows[$i]['satuan'] . '</td>'
+                                                    ; echo '</tr>' ; } } ?>
                                             </tbody>
+
+
+
                                         </table>
 
                                         <div class="pull-right">
@@ -277,5 +323,6 @@
             $(this).find('.btn-warning').attr('href', $(e.relatedTarget).data('href'));
         });
         $('.select2').select2();
+
     });
     </script>

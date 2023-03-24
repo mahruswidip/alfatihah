@@ -377,7 +377,7 @@ template {
   }
 
   abbr[title]::after {
-    content: " ("attr(title) ")";
+    content: " (" attr(title) ")";
   }
 
   pre {
@@ -14154,13 +14154,13 @@ fieldset[disabled] .form-group .form-control {
   color: #ffffff;
 }
 
-.alert-info,
+/* .alert-info,
 .alert-danger,
 .alert-warning,
 .alert-success,
 .alert-rose {
   color: #ffffff;
-}
+} */
 
 .alert-default a,
 .alert-default .alert-link {

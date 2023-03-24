@@ -97,7 +97,7 @@ class Pesanan extends CI_Controller
             // print_r($params);
             // exit();
 
-            $id_pesanan = $this->Pesanan_model->add_pengiriman($params);
+            $id_pesanan_kirim = $this->Pesanan_model->add_pengiriman($params);
             redirect('pesanan/detail/'.$id_pesanan);
         } else {
             $data['_view'] = 'pesanan/add_surat_jalan';
@@ -144,6 +144,21 @@ class Pesanan extends CI_Controller
         }
     }
 
+    public function selesaikan($id_pesanan)
+    {
+        // check if the pesanan exists before trying to edit it
+        $data['pesanan'] = $this->Pesanan_model->get_pesanan($id_pesanan);
+
+        $params = array(
+            'is_selesai' => '1',
+        );
+        // print_r($params);
+        // exit();
+        
+        $this->Pesanan_model->update_pesanan($id_pesanan, $params);
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
     public function detail($id_pesanan)
     {
         // check if the pesanan exists before trying to edit it
@@ -160,6 +175,26 @@ class Pesanan extends CI_Controller
             }
         } else {
             show_error('The pesanan you are trying to edit does not exist.');
+        }
+    }
+
+    public function detail_pengiriman($id_pesanan)
+    {
+        // check if the pesanan exists before trying to edit it
+        $data['pesanan'] = $this->Pesanan_model->get_pesanan($id_pesanan);
+        $data['barang_pesanan'] = $this->Pesanan_model->get_barang_pesanan($id_pesanan);
+        $data['pengiriman'] = $this->Pesanan_model->get_barang_pengiriman($id_pesanan);
+        $data['detail'] = $this->Pesanan_model->get_barang_pengiriman_grouped($id_pesanan);
+
+        if (isset($data['pesanan']['id_pesanan'])) {
+            if (isset($_POST) && count($_POST) > 0) {
+                redirect('pesanan/index');
+            } else {
+                $data['_view'] = 'pesanan/detail_pengiriman';
+                $this->load->view('layouts/main', $data);
+            }
+        } else {
+            show_error('The pengiriman you are trying to edit does not exist.');
         }
     }
 

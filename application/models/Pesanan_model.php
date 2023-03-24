@@ -108,6 +108,22 @@ class Pesanan_model extends CI_Model
     }
 
     /*
+     * function get data buat di halaman detail pengiriman buat cetak
+     */
+
+    public function get_barang_pengiriman_grouped($id_pesanan)
+{
+    $this->db->select('pengiriman.fk_id_barang, pengiriman.tanggal_kirim, barang.nama_barang, SUM(pengiriman.jumlah_kirim) as jumlah_kirim');
+    $this->db->from('pengiriman');
+    $this->db->join('barang', 'barang.id_barang = pengiriman.fk_id_barang', 'left');
+    $this->db->where('pengiriman.fk_id_pesanan', $id_pesanan);
+    $this->db->group_by('pengiriman.fk_id_barang, pengiriman.tanggal_kirim');
+
+    return $this->db->get()->result_array();
+}
+
+
+    /*
      * function get data barang pesanan
      */
     public function get_barang_pesanan_only($id_barang_pesanan)

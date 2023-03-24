@@ -89,16 +89,20 @@ class Barang extends CI_Controller
 
             $kategori_id = $this->Kategori_model->get_or_add_kategori($kategori);
 
+
+
             // Only add barang if kategori already exists
             if ($kategori_id !== null) {
                 $params = array(
-                    'fk_id_kategori' => $kategori,
+                    'fk_id_kategori' => $kategori_id,
                     'nama_barang' => $nama_barang,
                     'jumlah' => $jumlah,
                     'satuan' => $satuan,
                     'keterangan' => $keterangan,
                 );
 
+                // var_dump($kategori_id);
+                // exit();
                 $this->Barang_model->add_barang($params);
             }
 
