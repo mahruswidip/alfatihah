@@ -15,7 +15,7 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-							<?php } else if($this->session->flashdata('nik2')) {?>
+							<?php } else if ($this->session->flashdata('nik2')) { ?>
 								<div class="alert alert-warning alert-dismissible fade show" role="alert">
 									<strong style="font-weight: bold;">Aduh !</strong> Sepertinya data anda tanpa foto
 									<button type="button" class="close my-2" data-dismiss="alert" aria-label="Close">
@@ -33,7 +33,7 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label class="bmd-label-floating text-danger">Nama Jamaah (KTP)</label>
+										<label class="bmd-label-floating text-danger">Nama Jamaah Sesuai PASPOR</label>
 										<input type="text" name="nama_jamaah" value="<?php echo $this->input->post('nama_jamaah'); ?>" class="form-control" id="nama_jamaah" />
 									</div>
 								</div>
