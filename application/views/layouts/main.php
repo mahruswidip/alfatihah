@@ -22,8 +22,7 @@ The above copyright notice and this permission notice shall be included in all c
     </title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="<?php echo site_url('assets/'); ?>css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
@@ -46,8 +45,7 @@ The above copyright notice and this permission notice shall be included in all c
     <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
     <script src="<?php echo site_url('assets/'); ?>js/plugins/bootstrap-datetimepicker.min.js"></script>
     <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo site_url('assets/'); ?>js/plugins/jquery.dataTables.min.js"></script>
     <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
     <script src="<?php echo site_url('assets/'); ?>js/plugins/bootstrap-tagsinput.js"></script>
     <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
@@ -72,99 +70,96 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="<?php echo site_url('assets/'); ?>js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="<?php echo site_url('resources/js/bootstrap-datetimepicker.min.js'); ?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/lib/js/dataTables.bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 </head>
 
 <body class="">
     <div class="wrapper">
         <!-- <div class="wrapper" style="display: none;"> -->
-        <div class="sidebar" data-color="green" data-background-color="white"
-            data-image="<?php echo site_url('assets/'); ?>img/sidebar-1.jpg">
+        <div class="sidebar" data-color="green" data-background-color="white" data-image="<?php echo site_url('assets/'); ?>img/sidebar-1.jpg">
             <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
                     <br>
                     <h5>
                         <?php echo $this->session->userdata('user_name') ?>
-                        <?php $user_level = $this->session->userdata('user_level')?>
+                        <?php $user_level = $this->session->userdata('user_level') ?>
                     </h5>
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <?php if ($this->session->userdata('user_level') === '1'): ?>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>dashboard/index">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <hr>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'kategori/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>kategori/index">
-                            <i class="material-icons">filter_list</i>
-                            <p>Kategori</p>
-                        </a>
-                    </li>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'barang/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>barang/index">
-                            <i class="material-icons">shopping_basket</i>
-                            <p>Barang</p>
-                        </a>
-                    </li>
-                    <hr>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'pesanan/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>pesanan/index">
-                            <i class="material-icons">shopping_cart_checkout</i>
-                            <p>Pesanan (PO)</p>
-                        </a>
-                    </li>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'scan/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>scan/index">
-                            <i class="material-icons">computer</i>
-                            <p>Scan</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('login/logout'); ?>">
-                            <i class="material-icons">archive</i>
-                            <p>Keluar</p>
-                        </a>
-                    </li>
-                    <?php else: ?>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>dashboard/index">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
-    echo 'active';
-}?>">
-                        <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
-                            <i class="material-icons">persons</i>
-                            <p>Jamaah</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('login/logout'); ?>">
-                            <i class="material-icons">archive</i>
-                            <p>Keluar</p>
-                        </a>
-                    </li>
-                    <?php endif;?>
+                    <?php if ($this->session->userdata('user_level') === '1') : ?>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>dashboard/index">
+                                <i class="material-icons">dashboard</i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'keberangkatan/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>keberangkatan/index">
+                                <i class="material-icons">event_available</i>
+                                <p>Keberangkatan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'paket/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>paket/index">
+                                <i class="material-icons">view_kanban</i>
+                                <p>Paket</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
+                                <i class="material-icons">persons</i>
+                                <p>Jamaah</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'scan/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>scan/index">
+                                <i class="material-icons">computer</i>
+                                <p>Scan Kehadiran Manasik</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('login/logout'); ?>">
+                                <i class="material-icons">archive</i>
+                                <p>Keluar</p>
+                            </a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>dashboard/index">
+                                <i class="material-icons">dashboard</i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item <?php if ($this->uri->uri_string() == 'jamaah/index') {
+                                                echo 'active';
+                                            } ?>">
+                            <a class="nav-link" href="<?php echo site_url(''); ?>jamaah/index">
+                                <i class="material-icons">persons</i>
+                                <p>Jamaah</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('login/logout'); ?>">
+                                <i class="material-icons">archive</i>
+                                <p>Keluar</p>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -173,11 +168,9 @@ The above copyright notice and this permission notice shall be included in all c
                 <div class="container-fluid py-4 px-5">
                     <section class="content">
                         <?php
-if (isset($_view) && $_view) {
-    $this->load->view($_view);
-}
-
-?>
+                        if (isset($_view) && $_view)
+                            $this->load->view($_view);
+                        ?>
                     </section>
                 </div>
             </main>
