@@ -93,6 +93,16 @@ class Keberangkatan extends CI_Controller
             show_error('The keberangkatan you are trying to edit does not exist.');
     }
 
+
+    /*
+     * Nonaktifkan keberangkatan
+     */
+    function deactivate($id_keberangkatan)
+    {
+        $this->Keberangkatan_model->update_keberangkatan($id_keberangkatan, array('is_aktif' => '0'));
+        redirect('keberangkatan/index');
+    }
+
     /*
      * Deleting keberangkatan
      */

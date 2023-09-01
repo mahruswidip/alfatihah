@@ -37,6 +37,7 @@ class Paket_model extends CI_Model
 
     function get_tanggal_keberangkatan()
     {
+        $this->db->where('is_aktif', '1'); // Tambahkan kondisi is_aktif = 1
         $this->db->order_by('keberangkatan.id_keberangkatan', 'desc');
         return $this->db->get('keberangkatan')->result_array();
     }

@@ -35,7 +35,8 @@
 											<option value="">Pilih Tanggal Tersedia</option>
 											<?php
 											foreach ($keberangkatan as $element) {
-												echo '<option value="' . $element['id_keberangkatan'] . '">' . $element['tanggal_keberangkatan'] . '</option>';
+												$formatted_date = date_format(date_create($element['tanggal_keberangkatan']), 'j F Y');
+												echo '<option value="' . $element['id_keberangkatan'] . '">' . $formatted_date . '</option>';
 											}
 											?>
 										</select>

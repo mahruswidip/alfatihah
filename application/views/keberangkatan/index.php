@@ -21,7 +21,7 @@
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class=" text-primary ">
-                            <th></th>
+                            <th>Status</th>
                             <th>Tanggal Keberangkatan</th>
                             <th>Actions</th>
                         </thead>
@@ -32,15 +32,16 @@
                             ?>
                             <?php foreach ($keberangkatan as $p) { ?>
                                 <tr>
-                                    <td><?php if ($p['is_aktif'] == '1') {
-                                            echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-success">.</span>';
-                                        } else {
-                                            echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-danger">.</span>';
-                                        } ?></td>
-                                    <td><?php echo $tanggalConverted = date_format(date_create($p   ['tanggal_keberangkatan']), 'd F Y'); ?></td>
+                                    <td class="col-auto"><?php if ($p['is_aktif'] == '1') {
+                                                                echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-success">Aktif</span>';
+                                                            } else {
+                                                                echo '<span style="font-size:0.75rem;" class="px-3 py-2 badge badge-pill badge-danger">Tidak Aktif</span>';
+                                                            } ?></td>
+                                    <td><?php echo $tanggalConverted = date_format(date_create($p['tanggal_keberangkatan']), 'd F Y'); ?></td>
                                     <td>
                                         <a href="<?php echo site_url('keberangkatan/edit/' . $p['id_keberangkatan']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
                                         <a href="<?php echo site_url('keberangkatan/remove/' . $p['id_keberangkatan']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a>
+                                        <a href="<?php echo site_url('keberangkatan/deactivate/' . $p['id_keberangkatan']); ?>" class="btn btn-warning"><span class="fa fa-times"></span></a>
                                     </td>
                                 </tr>
                             <?php } ?>
