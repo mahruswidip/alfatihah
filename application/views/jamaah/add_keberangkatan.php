@@ -17,7 +17,9 @@
                                             <option value="">Pilih Tanggal Tersedia</option>
                                             <?php
                                             foreach ($getCountries as $key => $element) {
-                                                echo '<option value="' . $element['id_keberangkatan'] . '">' . $element['tanggal_keberangkatan'] . '</option>';
+                                                // Format the date here
+                                                $formattedDate = date('d F Y', strtotime($element['tanggal_keberangkatan']));
+                                                echo '<option value="' . $element['id_keberangkatan'] . '">' . $formattedDate . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -73,7 +75,7 @@
                         options += '<option value="' + json[i].id_paket + '">' + json[i].nama_program + '</option>';
                     }
                     jQuery("select#state-name").html(options);
-                    
+
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

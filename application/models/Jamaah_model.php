@@ -29,6 +29,7 @@ class Jamaah_model extends CI_Model
     {
         $this->db->select(array('c.id_keberangkatan as id_keberangkatan', 'c.tanggal_keberangkatan', 'c.tanggal_keberangkatan'));
         $this->db->from('keberangkatan as c');
+        $this->db->where('c.is_aktif', 1); // Add this line to filter by is_aktif = 1
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -209,7 +210,7 @@ class Jamaah_model extends CI_Model
 
     function remove_record_keberangkatan($id_record)
     {
-        return $this->db->delete('record_keberangkatan',array('id_record'=>$id_record));
+        return $this->db->delete('record_keberangkatan', array('id_record' => $id_record));
     }
 
     function get_hotel_from_record_keberangkatan($id_jamaah)
