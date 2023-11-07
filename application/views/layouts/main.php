@@ -74,11 +74,27 @@ The above copyright notice and this permission notice shall be included in all c
     <script type="text/javascript" src="<?php echo site_url('assets/'); ?>datatables/lib/js/dataTables.bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Tangani klik pada tombol toggle
+            $(".sidebar-toggle-btn").click(function() {
+                // Toggle class 'sidebar-hidden' pada elemen dengan class 'wrapper'
+                $(".wrapper").toggleClass("sidebar-hidden");
+
+                // Ganti ikon tombol toggle sesuai dengan status sidebar
+                if ($(".wrapper").hasClass("sidebar-hidden")) {
+                    $(".sidebar-toggle-btn i").text("menu"); // Ganti dengan ikon menu
+                } else {
+                    $(".sidebar-toggle-btn i").text("close"); // Ganti dengan ikon close atau X
+                }
+            });
+        });
+    </script>
 </head>
 
 <body class="">
     <div class="wrapper">
-        <!-- <div class="wrapper" style="display: none;"> -->
+
         <div class="sidebar" data-color="green" data-background-color="white" data-image="<?php echo site_url('assets/'); ?>img/sidebar-1.jpg">
             <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
                     <br>
@@ -86,9 +102,14 @@ The above copyright notice and this permission notice shall be included in all c
                         <?php echo $this->session->userdata('user_name') ?>
                         <?php $user_level = $this->session->userdata('user_level') ?>
                     </h5>
-                </a></div>
+                </a>
+            </div>
+
             <div class="sidebar-wrapper">
                 <ul class="nav">
+                    <button class="sidebar-toggle-btn">
+                        <i class="material-icons">menu</i>
+                    </button>
                     <?php if ($this->session->userdata('user_level') === '1') : ?>
                         <li class="nav-item <?php if ($this->uri->uri_string() == 'dashboard/index') {
                                                 echo 'active';
