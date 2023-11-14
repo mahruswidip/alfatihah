@@ -31,6 +31,12 @@ class Paket extends CI_Controller
         $this->load->view('layouts/main', $data);
     }
 
+    function view()
+    {
+        $data = $this->Paket_model->get_all_paket(); // Call a method from your model to get data from the database
+        echo json_encode($data);
+    }
+
     function bukatambah()
     {
         $data['_view'] = 'paket/add';
@@ -39,6 +45,7 @@ class Paket extends CI_Controller
         // exit();
         $this->load->view('layouts/main', $data);
     }
+
     function add()
     {
 
@@ -65,6 +72,7 @@ class Paket extends CI_Controller
                 $gambar = $gbr['file_name'];
 
                 $params = array(
+                    'travel' => $this->input->post('travel'),
                     'nama_program' => $this->input->post('nama_program'),
                     'kategori' => $this->input->post('kategori'),
                     'fk_id_keberangkatan' => $this->input->post('fk_id_keberangkatan'),
@@ -78,9 +86,10 @@ class Paket extends CI_Controller
                     'uang_muka' => $this->input->post('uang_muka'),
                     'matauangall' => $this->input->post('matauangall'),
                     'harga_paket' => $this->input->post('harga_paket'),
-                    'sudah_termasuk' => $this->input->post('sudah_termasuk'),
-                    'belum_termasuk' => $this->input->post('belum_termasuk'),
-                    'tampilan' => $this->input->post('tampilan'),
+                    'sudah_termasuk' => 'Tiket Pesawat Economy Class • Asuransi perjalanan & Covid-19 (mengcover resiko Covid-19) • Akomodasi Hotel di Mekkah & Medinah(Sesuai Pilihan Paket Umroh) • 2 kali Umrah, 1x city tour di Mekkah & Medinah (kondisional) • Makan prasmanan 3x sehari (Full Board Hotel / Box). • Transportasi Bus AC. • Muthawif / Pembimbing Ibadah.  Catatan : • Membawa Air Zam-Zam (Liquid) per 18 Mei 2022 sudah tidak diijinkan oleh semua Airlines (mengikuti peraturan dari GACA).',
+                    'belum_termasuk' => 'Biaya Handling Bandara, Fasilitas Ibadah, Manasik • Biaya PCR di Saudi  • Biaya Pengurusan Paspor (Jika belum punya/sudah tidak berlaku) • Biaya Suntik Meningitis. • Biaya Surat Mahram (Bagi wanita usia dibawah 45 Tahun yang berangkat sendirian) • Biaya Pajak Saudi (municipility 5% & VAT 15%) & Biaya Pajak Indonesia (PPN11%).. Jika sudah diberlakukan • Biaya Tour / Makan / Minum diluar program. • Biaya lain-lain yang bersifat pribadi : Telepon, Laundry, Tips, Kelebihan Bagasi, dll.',
+                    'tampilan' => 'Uang Muka',
+                    'publish' => ($this->input->post('publish') === 'on') ? 1 : 0,
                     'created_by' => $user_id,
                 );
 
@@ -127,10 +136,12 @@ class Paket extends CI_Controller
     {
         // check if the luasan exists before trying to edit it
         $data['paket'] = $this->Paket_model->get_paket($id_paket);
+        $data['keberangkatan'] = $this->Paket_model->get_tanggal_keberangkatan();
 
         if (isset($data['paket']['id_paket'])) {
             if (isset($_POST) && count($_POST) > 0) {
                 $params = array(
+                    'fk_id_keberangkatan' => $this->input->post('fk_id_keberangkatan'),
                     'nama_program' => $this->input->post('nama_program'),
                     'lama_hari' => $this->input->post('lama_hari'),
                     'kategori' => $this->input->post('kategori'),
@@ -174,6 +185,15 @@ class Paket extends CI_Controller
         // print_r($data['record']);
         // exit();
         $data['_view'] = 'paket/detail';
+        $this->load->view('layouts/main', $data);
+    }
+
+    public function cetak_label_koper($id_paket)
+    {
+        $data['label'] = $this->Paket_model->get_record_with_this_paket($id_paket);
+        $data['paket'] = $this->Paket_model->get_tanggal_keberangkatan_for_detail($id_paket);
+
+        $data['_view'] = 'paket/cetak_label_koper'; // Change this to the view file for printing labels
         $this->load->view('layouts/main', $data);
     }
 

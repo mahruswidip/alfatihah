@@ -1,152 +1,135 @@
-<div class="col-md">
-    <div class="card">
-        <div class="card-header card-header-primary">
-            <div class="row justify-content-between">
-                <div class="col-md-9">
-                    <h3 class="card-title ">Detail Paket</h3>
+<style>
+    .logo {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 110px;
+        /* Adjust as needed */
+        height: 110px;
+        /* Adjust as needed */
+    }
+</style>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-xl-4 mb-xl-0 mb-4">
+                    <div class="card bg-transparent shadow-xl">
+                        <img src="<?php echo base_url() . 'assets/images/' . $paket[0]['paket_img']; ?>" class="img-fluid border-radius-lg" alt="Responsive image">
+                    </div>
+                </div>
+                <?php
+                function generateStarRating($starCount)
+                {
+                    $output = '';
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($i <= $starCount) {
+                            $output .= '<i class="fas fa-star text-primary"></i>'; // Solid star icon
+                        } else {
+                            $output .= '<i class="far fa-star text-primary"></i>'; // Outline star icon
+                        }
+                    }
+                    return $output;
+                }
+                ?>
+                <div class="col-xl-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body pt-0 p-3 mt-3 mx-2">
+                                    <img class="logo" src="<?php echo base_url() . 'assets/img/logos/' . (($paket[0]['travel'] == 'Rosana Travel') ? 'logoros.png' : 'logonip.png'); ?>" alt="logo">
+                                    <span class="text-xs">Keberangkatan</span>
+                                    <h6 class="mb-0">
+                                        <?php echo $tanggalConverted = date_format(date_create($paket[0]['tanggal_keberangkatan']), 'd F Y'); ?>
+                                    </h6>
+                                    <span class="text-xs">Program</span>
+                                    <h6 class="mb-0"><?php echo $paket[0]['nama_program']; ?></h6>
+                                    <p class="text-bold"><?php echo $paket[0]['paket']; ?></p>
+                                    <span class="text-xs">Lama Hari</span>
+                                    <h6 class=""><?php echo $paket[0]['lama_hari']; ?>&nbsp; Hari</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="text-xs">Hotel Mekkah</span>
+                                            <h6 class=""><?php echo $paket[0]['hotel_mekkah']; ?></h6>
+                                            <h6 class=""><?php echo generateStarRating($paket[0]['bintang_mekkah']); ?>
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <span class="text-xs">Hotel Madinah</span>
+                                            <h6 class=""><?php echo $paket[0]['hotel_madinah']; ?></h6>
+                                            <h6 class=""><?php echo generateStarRating($paket[0]['bintang_madinah']); ?>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <a href="<?php echo site_url() . 'paket/cetak_label_koper/' . $paket[0]['id_paket'] ?>" class="btn btn-primary mt-3" style="position: absolute; bottom: 0px; right: 10px;">Cetak Label
+                                        Koper</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <center>
-                    <div class="col-auto">
-                        <img class="img-fluid" style="max-width: 200px; max-height: 200px; border-radius: 1.5rem;" src="<?php echo base_url() . 'assets/images/' . $paket[0]['paket_img']; ?>" alt="">
+    </div>
+    <div class="row">
+        <div class="col-md-8 mt-4">
+            <div class="card">
+                <div class="card-header pb-0 px-3 mb-0 mx-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6>Daftar Jamaah</h6>
+                            <p class="text-xs">Total Jamaah: <?php echo count($record); ?></p>
+                        </div>
+                        <div class="col-md-3">
+                            <form action="<?php echo site_url() . 'paket/detail/' . $paket[0]['id_paket'] ?>" method="post" enctype="multipart/form-data">
+                                <input type="text" name="link_grup_whatsapp" value="<?php echo $this->input->post('link_grup_whatsapp'); ?>" class="form-control mb-2" placeholder="Link Grup Whatsapp" id="link_grup_whatsapp" />
+                                <button type="submit" class="btn btn-success"><i class="fa fa-gear me-2" aria-hidden="true"></i>Set Link Grup WA</button>
+                            </form>
+                        </div>
                     </div>
-                </center>
-            </div>
-            <br>
-            <div class="table-responsive">
-                <table class="table table-borderless table-striped">
-                    <tbody>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; Tanggal Keberangkatan</td>
-                            <td><?php echo $tanggalConverted = date_format(date_create($paket[0]['tanggal_keberangkatan']), 'd F Y'); ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; Nama Program</td>
-                            <td><?php echo $paket[0]['nama_program']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; Paket</td>
-                            <td><?php echo $paket[0]['paket']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; Lama Hari</td>
-                            <td><?php echo $paket[0]['lama_hari']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; Hotel</td>
-                            <td><?php echo $paket[0]['hotel_mekkah']; ?>
-                                <?php if ($paket[0]['bintang_mekkah'] == '5') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } elseif ($paket[0]['bintang_mekkah'] == '4') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } elseif ($paket[0]['bintang_mekkah'] == '3') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } elseif ($paket[0]['bintang_mekkah'] == '2') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } else {
-                                    echo '&#11088;';
-                                };
-                                ?>
-                                <br>
-                                <?php echo $paket[0]['hotel_madinah']; ?>
-                                <?php if ($paket[0]['bintang_madinah'] == '5') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } elseif ($paket[0]['bintang_madinah'] == '4') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } elseif ($paket[0]['bintang_madinah'] == '3') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } elseif ($paket[0]['bintang_madinah'] == '2') {
-                                    echo '&#11088;';
-                                    echo '&#11088;';
-                                } else {
-                                    echo '&#11088;';
-                                };
-                                ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <hr>
-            <div class="row justify-content-between">
-                <div class="col-md-9">
-                    <h3 class="card-title ">Daftar Jamaah</h3>
                 </div>
-                <div class="col">
-                    <p>Jumlah Jamaah : <?php echo count($record); ?></p>
-                </div>
-                <div class="col">
-                    <form action="<?php echo site_url() . 'paket/detail/' . $paket[0]['id_paket'] ?>" method="post" enctype="multipart/form-data">
-                        <input type="text" name="link_grup_whatsapp" value="<?php echo $this->input->post('link_grup_whatsapp'); ?>" class="form-control" placeholder="Link Grup Whatsapp" id="link_grup_whatsapp" />
-                        <button type="submit" class="btn btn-success pull-right">Tambah</button>
-                    </form>
-                </div>
-            </div>
-            <br>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID RECORD</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Nama Jamaah</th>
-                            <th scope="col">Nomor Paspor</th>
-                            <th scope="col">Nomor HP</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+
+                <div class="card-body pt-4 p-3">
+                    <ul class="list-group" id="jamaahTable">
                         <?php foreach ($record as $jamaah) { ?>
                             <?php $nowa = $str = ltrim($jamaah['nomor_telepon'], '0'); ?>
-                            <tr>
-                                <td><?php echo $jamaah['id_record']; ?></td>
-                                <td>
-                                    <img class="img-fluid" style="max-width: 100px; max-height: 100px;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
-                                </td>
-                                <td><a href="<?php echo site_url() . 'jamaah/detail/' . $jamaah['id_jamaah']; ?>"><?php echo $jamaah['nama_jamaah']; ?></a></td>
-                                <td><?php echo $jamaah['nomor_paspor']; ?></td>
-                                <td><?php echo $jamaah['nomor_telepon']; ?></td>
-                                <td><?php if ($jamaah['nomor_telepon'] != null) {
-                                        echo '<a href="https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') . '" class="btn btn-success"><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</a>';
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                <div class="me-4">
+                                    <img src="<?php echo base_url('assets/images/' . $jamaah['jamaah_img']); ?>" alt="Jamaah Image" class="img-fluid    border-radius-lg" style="max-width: 100px; max-height: 100px;">
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-3 text-sm"><?php echo $jamaah['nama_jamaah']; ?></h6>
+                                    <span class="mb-2 text-xs">Nomor Paspor: <span class="text-dark font-weight-bold ms-sm-2"><?php echo $jamaah['nomor_paspor']; ?></span></span>
+                                    <span class="mb-2 text-xs">Nomor HP: <span class="text-dark ms-sm-2 font-weight-bold"><?php echo $jamaah['nomor_telepon']; ?></span></span>
+                                    <span class="text-xs">ID Record: <span class="text-dark ms-sm-2 font-weight-bold"><?php echo $jamaah['id_record']; ?></span></span>
+                                </div>
+                                <div class="ms-auto text-end">
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="<?php echo site_url('jamaah/remove_record_keberangkatan/' . $jamaah['id_jamaah']); ?>"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    <a class="btn btn-link text-dark px-3 mb-0" href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                    <?php if ($jamaah['nomor_telepon'] != null) {
+                                        echo '<a href="https://wa.me/62' . $nowa . '?text=Gabung%20bersama%20di%20Grup%20Whatsapp%20Keberangkatan%20Umroh%20Anda%0AKlik%20Link%20dibawah%20Ini%20%3A%20' . $this->session->userdata('link') . '" class="btn btn-link text-success px-3 mb-0"><i class="fa fa-whatsapp text-success me-2" aria-hidden="true"></i>Undang</a>';
                                     } else {
-                                        echo '<button class="btn btn-disabled" disabled><span class="fa fa-whatsapp"></span>&nbsp;&nbsp; Undang Grup WA</button>';
+                                        echo '<a class="btn btn-link text-secondary px-3 mb-0"><i class="fa fa-whatsapp text-secondary me-2" aria-hidden="true" disabled></i>Undang</a>';
                                     }
-                                    ?></td>
-                                <td><a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a> <?php if ($jamaah['is_user'] == '0') {
-                                                                                                                                                                                echo '<a href="' . site_url('jamaah/buatuser/') . $jamaah['id_jamaah'] . '" class="btn btn-primary"><span class="fa fa-user"></span></a>';
-                                                                                                                                                                            } else {
-                                                                                                                                                                                echo '';
-                                                                                                                                                                            }
-                                                                                                                                                                            ?></td>
-                                <td><a href="<?php echo site_url('jamaah/remove_record_keberangkatan/' . $jamaah['id_record']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
-                            </tr>
+                                    ?>
+
+                                </div>
+                            </li>
                         <?php } ?>
-                    </tbody>
-                </table>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#jamaahTable').DataTable({
+            "paging": true, // Enable pagination
+            "searching": true, // Enable search functionality
+            "lengthMenu": [5, 10, 25, 50], // Number of records per page options
+            "pageLength": 10 // Default number of records per page
+        });
+    });
+</script>

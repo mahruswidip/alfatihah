@@ -1,49 +1,50 @@
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title">Tambah Grup Keberangkatan</h4>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">Tambah Keberangkatan </p>
+
                     </div>
-                    <div class="card-body">
-                        <form action="<?php echo site_url() . 'jamaah/add_keberangkatan/' . $jamaah['id_jamaah'] ?>" method="post" enctype="multipart/form-data">
-                            <h3>Data Keberangkatan</h3>
-                            <input type="text" name="id_jamaah" value="<?php echo ($this->input->post('id_jamaah') ? $this->input->post('id_jamaah') : $jamaah['id_jamaah']); ?>" class="form-control d-none" id="id_jamaah" />
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <select title="Select Country" name="regcountry" class="form-control" id="country-name">
-                                            <option value="">Pilih Tanggal Tersedia</option>
-                                            <?php
-                                            foreach ($getCountries as $key => $element) {
-                                                // Format the date here
-                                                $formattedDate = date('d F Y', strtotime($element['tanggal_keberangkatan']));
-                                                echo '<option value="' . $element['id_keberangkatan'] . '">' . $formattedDate . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="<?php echo site_url() . 'jamaah/add_keberangkatan/' . $jamaah['id_jamaah'] ?>" method="post" enctype="multipart/form-data">
+                        <input type="text" name="id_jamaah" value="<?php echo ($this->input->post('id_jamaah') ? $this->input->post('id_jamaah') : $jamaah['id_jamaah']); ?>" class="form-control d-none" id="id_jamaah" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Tanggal Keberangkatan</label>
+                                    <select title="Select Country" name="regcountry" class="form-control" id="country-name">
+                                        <option value="">Pilih Tanggal Tersedia</option>
+                                        <?php
+                                        foreach ($getCountries as $key => $element) {
+                                            // Format the date here
+                                            $formattedDate = date('d F Y', strtotime($element['tanggal_keberangkatan']));
+                                            echo '<option value="' . $element['id_keberangkatan'] . '">' . $formattedDate . '</option>';
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <select title="Select State" name="id_paket" class="form-control" id="state-name">
-                                            <option value="">Pilih Paket</option>
-                                        </select>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Paket</label>
+                                    <select title="Select State" name="id_paket" class="form-control" id="state-name">
+                                        <option value="">Pilih Paket Tersedia</option>
+                                    </select>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success pull-right">Tambah</button>
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
+                        </div>
+                        <hr class="horizontal dark mt-0">
+                        <button class="btn btn-primary btn-sm ms-auto" type="submit">Tambah</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         // get state 

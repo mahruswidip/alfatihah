@@ -1,108 +1,176 @@
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<div class="row">
-    <div class="col">
-        <div style="margin-top: 20px;">
-            <button type="button" id="btn_convert" class="btn btn-success"><span class="fa fa-download"></span> Halaman Depan Label Koper</button>
-        </div>
-        <div id="html-content-holder" style="width: 639px; height: 1016px;">
-            <img src="<?php echo base_url() . 'assets/images/id_card_template/labelkoper/depan.png'; ?>">
-            <img class="img-fluid" style="border-radius: 20px; width: 280px; object-fit: cover; height: 390px; margin-top: -977px; margin-left: 180px;" src="<?php echo base_url() . 'assets/images/' . $record[0]['jamaah_img']; ?>">
-            <table style="position:relative; color:black; width: 524px; height: 200px; margin-top: -330px; font-size: 2.5rem; text-align: center; font-weight: bold; line-height: 2.4rem;" align="center">
-                <tr>
-                    <td>
-                        <p><?php echo $record[0]['nama_jamaah'] ?></p>
-                        <br>
-                        <p style="font-size: 1.5rem; text-align: center; font-weight: bold; line-height: 0rem;">Passport No. <?php echo $record[0]['nomor_paspor'] ?></p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+<style>
+    .a4-size {
+        height: 210mm;
+        width: 297mm;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        <div id="previewImg" style="display: none;">
+    .nama,
+    .paspor,
+    .alamat,
+    .hotelmadinah,
+    .hotelmekkah,
+    .foto {
+        position: absolute;
+        text-align: center;
+    }
+
+    .nama {
+        margin-top: -140px;
+        margin-left: 115px;
+    }
+
+    .paspor {
+        margin-top: -120px;
+        margin-left: 115px;
+    }
+
+    .alamat {
+        margin-top: -95px;
+        margin-left: 115px;
+        text-align: left;
+    }
+
+    .hotelmekkah {
+        margin-top: -180px;
+        margin-left: 115px;
+        text-align: left;
+    }
+
+    .hotelmadinah {
+        margin-top: -161px;
+        margin-left: 115px;
+        text-align: left;
+    }
+
+    .foto {
+        margin-top: 80px;
+        margin-left: -326px;
+        width: 70px;
+    }
+
+    table,
+    th,
+    td {
+        border: 3px solid grey;
+    }
+</style>
+
+<!-- Include html2canvas library -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<div class="container-fluid" id="kartudepan">
+    <div class="card" id="cardGroup_depan">
+        <div class="card-body">
+            <?php
+            // Assuming $label is your array of data
+            $numItems = count($label);
+            $itemsPerRow = 3; // Number of items per row
+            $itemsPerColumn = 3; // Number of items per column
+
+            for ($i = 0; $i < $numItems; $i += $itemsPerRow * $itemsPerColumn) {
+                echo '<div class="container a4-size */bg-dark" id="myTable' . $i . '">';
+                echo '<table style="margin: 0 auto;">';
+
+                for ($row = 0; $row < $itemsPerColumn; $row++) {
+                    echo '<tr>';
+
+                    for ($col = 0; $col < $itemsPerRow; $col++) {
+                        $index = $i + $row * $itemsPerRow + $col;
+
+                        if ($index < $numItems) {
+                            echo '<td>';
+                            echo '<img src="' . base_url('assets/img/labelkoper/depan.jpg') . '" style="width: 350px;">';
+                            echo '<img src="' . (isset($label[$index]['jamaah_img']) ? base_url('assets/images/' . $label[$index]['jamaah_img']) : '') . '" class="foto">';
+                            echo '<h4 class="nama text-dark" style="font-weight:bold;font-size: medium">' . (isset($label[$index]['nama_jamaah']) ? $label[$index]['nama_jamaah'] : '') . '</h4>';
+                            echo '<h5 class="paspor text-dark" style="font-weight:normal;font-size: medium">No. Paspor &nbsp;<strong>' . (isset($label[$index]['nomor_paspor']) ? $label[$index]['nomor_paspor'] : '') . '</strong></h5>';
+                            echo '<p class="alamat text-dark" style="font-weight:normal;font-size: small">Jl. Dr. Setia Budi No. 20 <br>Pasuruan City - Jawa Timur <br>Indonesia</p>';
+                            echo '</td>';
+                        } else {
+                            echo '<td>';
+                            echo '<img src="' . base_url('assets/img/labelkoper/depan.jpg') . '" style="width: 350px;">';
+                            echo '</td>';
+                        }
+                    }
+
+                    echo '</tr>';
+                }
+
+                echo '</table>';
+                echo '</div>';
+                echo '<button onclick="printToJpg(\'myTable' . $i . '\')">Print to jpg</button>';
+            }
+            ?>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container-fluid" id="kartubelakang">
+    <div class="card" id="cardGroup_belakang">
+        <div class="card-body">
+            <?php
+            // Assuming $paket is your array of data for the back side
+            $numItemsBelakang = count($paket);
+            $itemsPerRowBelakang = 3; // Number of items per row for the back side
+            $itemsPerColumnBelakang = 3; // Number of items per column for the back side
+
+            for ($i = 0; $i < $numItemsBelakang; $i += $itemsPerRowBelakang * $itemsPerColumnBelakang) {
+                echo '<div class="container a4-size */bg-dark" id="myTableBelakang' . $i . '">';
+                echo '<table style="margin: 0 auto;">';
+
+                for ($row = 0; $row < $itemsPerColumnBelakang; $row++) {
+                    echo '<tr>';
+
+                    for ($col = 0; $col < $itemsPerRowBelakang; $col++) {
+                        $indexBelakang = $i + $row * $itemsPerRowBelakang + $col;
+
+                        if ($indexBelakang < $numItemsBelakang) {
+                            echo '<td>';
+                            echo '<img src="' . base_url('assets/img/labelkoper/belakang.jpg') . '" style="width: 350px;">';
+                            echo '<h4 class="hotelmekkah text-dark" style="font-weight:bold;font-size: medium">' . (isset($paket[$indexBelakang]['hotel_mekkah']) ? $paket[$indexBelakang]['hotel_mekkah'] : '') . '</h4>';
+                            echo '<h4 class="hotelmadinah text-dark" style="font-weight:bold;font-size: medium">' . (isset($paket[$indexBelakang]['hotel_madinah']) ? $paket[$indexBelakang]['hotel_madinah'] : '') . '</h4>';
+                            echo '</td>';
+                        } else {
+                            echo '<td>';
+                            echo '<img src="' . base_url('assets/img/labelkoper/belakang.jpg') . '" style="width: 350px;">';
+                            echo '<h4 class="hotelmekkah text-dark" style="font-weight:bold;font-size: medium">' . $paket[0]['hotel_mekkah']  . '</h4>';
+                            echo '<h4 class="hotelmadinah text-dark" style="font-weight:bold;font-size: medium">' . $paket[0]['hotel_madinah'] . '</h4>';
+                            echo '</td>';
+                        }
+                    }
+
+                    echo '</tr>';
+                }
+
+                echo '</table>';
+                echo '</div>';
+                echo '<button onclick="printToJpg(\'myTableBelakang' . $i . '\')">Print to jpg</button>';
+            }
+            ?>
         </div>
     </div>
 </div>
 
 <script>
-    document.getElementById("btn_convert").addEventListener("click", function() {
-        html2canvas(document.getElementById("html-content-holder"), {
-            allowTaint: true,
-            useCORS: true
-        }).then(function(canvas) {
+    function printToJpg(tableId) {
+        // Use html2canvas to convert the specified table to an image
+        html2canvas(document.getElementById(tableId)).then(canvas => {
+            // Create an anchor tag to trigger the download
             var anchorTag = document.createElement("a");
             document.body.appendChild(anchorTag);
-            document.getElementById("previewImg").appendChild(canvas);
-            anchorTag.download = "<?php echo $record[0]['nama_jamaah'] . '_LabelDepan' ?>.png";
-            anchorTag.href = canvas.toDataURL();
-            anchorTag.target = '_blank';
+
+            // Set the download attributes
+            anchorTag.download = "table_image.jpg";
+            anchorTag.href = canvas.toDataURL('image/jpeg');
+
+            // Trigger the download
             anchorTag.click();
+
+            // Remove the temporary anchor tag
+            document.body.removeChild(anchorTag);
         });
-    });
-</script> -->
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-<div class="row">
-    <div class="col">
-        <div style="margin-top: 20px;">
-            <button type="button" id="btn_preview" class="btn btn-primary">
-                <span class="fa fa-eye"></span> Preview All Labels
-            </button>
-            <button type="button" id="btn_download" class="btn btn-success" style="display: none;">
-                <span class="fa fa-download"></span> Download All Labels
-            </button>
-        </div>
-        <div id="html-content-holder" style="width: 639px; height: auto;"></div>
-        <div id="previewImg"></div>
-    </div>
-</div>
-
-<script>
-    document.getElementById("btn_preview").addEventListener("click", function() {
-        var container = document.getElementById("html-content-holder");
-        var previewContainer = document.getElementById("previewImg");
-
-        <?php foreach ($record as $index => $data) : ?>
-            var labelDiv<?php echo $index; ?> = document.createElement("div");
-            labelDiv<?php echo $index; ?>.style.marginTop = "80px";
-
-            var labelContent<?php echo $index; ?> = `
-            <img src="<?php echo base_url() . 'assets/images/id_card_template/labelkoper/depan.png'; ?>">
-            <img class="img-fluid" style="border-radius: 20px; width: 280px; object-fit: cover; height: 390px; margin-top: -977px; margin-left: 180px;" src="<?php echo base_url() . 'assets/images/' . $data['jamaah_img']; ?>">
-            <table style="position:relative; color:black; width: 524px; height: 200px; margin-top: -330px; font-size: 2.5rem; text-align: center; font-weight: bold; line-height: 2.4rem;" align="center">
-                <tr>
-                    <td>
-                        <p><?php echo $data['nama_jamaah'] ?></p>
-                        <br>
-                        <p style="font-size: 1.5rem; text-align: center; font-weight: bold; line-height: 0rem;">Passport No. <?php echo $data['nomor_paspor'] ?></p>
-                    </td>
-                </tr>
-            </table>
-        `;
-
-            labelDiv<?php echo $index; ?>.innerHTML = labelContent<?php echo $index; ?>;
-            container.appendChild(labelDiv<?php echo $index; ?>);
-        <?php endforeach; ?>
-
-        container.style.display = 'block'; // Make the container visible
-        html2canvas(container, {
-            allowTaint: true,
-            useCORS: true
-        }).then(function(canvas) {
-            previewContainer.innerHTML = '';
-            previewContainer.appendChild(canvas);
-            container.style.display = 'none'; // Hide the container again
-            document.getElementById("btn_download").style.display = 'block';
-        });
-    });
-
-    document.getElementById("btn_download").addEventListener("click", function() {
-        var anchorTag = document.createElement("a");
-        document.body.appendChild(anchorTag);
-        anchorTag.download = "All_Labels.png";
-        anchorTag.href = document.getElementById("previewImg").querySelector("canvas").toDataURL();
-        anchorTag.target = '_blank';
-        anchorTag.click();
-    });
+    }
 </script>

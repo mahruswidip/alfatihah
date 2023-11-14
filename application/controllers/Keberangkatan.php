@@ -53,7 +53,7 @@ class Keberangkatan extends CI_Controller
         if (isset($_POST) && count($_POST) > 0) {
             $params = array(
                 'tanggal_keberangkatan' => $this->input->post('tanggal_keberangkatan'),
-                'is_aktif' => $this->input->post('is_aktif'),
+                'is_aktif' => '1',
                 'tanggal_manasik' => $this->input->post('tanggal_manasik'),
             );
 
@@ -70,28 +70,46 @@ class Keberangkatan extends CI_Controller
      */
 
 
-    function edit($id_keberangkatan)
+    public function edit($id_keberangkatan)
     {
-        // check if the keberangkatan exists before trying to edit it
+        // Memeriksa apakah keberangkatan ada sebelum mencoba mengeditnya
         $data['keberangkatan'] = $this->Keberangkatan_model->get_keberangkatan($id_keberangkatan);
 
         if (isset($data['keberangkatan']['id_keberangkatan'])) {
-            if (isset($_POST) && count($_POST) > 0) {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Mendapatkan data dari formulir edit
+                $tanggal_keberangkatan = $this->input->post('tanggal_keberangkatan');
+                $is_aktif = ($this->input->post('is_aktif') == 'on') ? 1 : 0;
+                $tanggal_manasik = $this->input->post('tanggal_manasik');
+
+                // Menyiapkan data untuk diperbarui
                 $params = array(
-                    'tanggal_keberangkatan' => $this->input->post('tanggal_keberangkatan'),
-                    'is_aktif' => $this->input->post('is_aktif'),
-                    'tanggal_manasik' => $this->input->post('tanggal_manasik'),
+                    'tanggal_keberangkatan' => $tanggal_keberangkatan,
+                    'is_aktif' => $is_aktif,
+                    'tanggal_manasik' => $tanggal_manasik,
                 );
 
+                // Memperbarui data keberangkatan berdasarkan ID
                 $this->Keberangkatan_model->update_keberangkatan($id_keberangkatan, $params);
+
+                // Mengalihkan pengguna ke halaman index setelah pembaruan
                 redirect('keberangkatan/index');
             } else {
+                // Menampilkan halaman edit dengan data keberangkatan
                 $data['_view'] = 'keberangkatan/edit';
                 $this->load->view('layouts/main', $data);
             }
-        } else
+        } else {
             show_error('The keberangkatan you are trying to edit does not exist.');
+        }
     }
+
+    function view()
+    {
+        $data = $this->Keberangkatan_model->get_all_keberangkatan(); // Call a method from your model to get data from the database
+        echo json_encode($data);
+    }
+
 
 
     /*

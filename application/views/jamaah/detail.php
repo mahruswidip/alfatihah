@@ -1,90 +1,75 @@
-<div class="col-md">
-    <div class="card">
-        <div class="card-header card-header-primary">
-            <div class="row justify-content-between">
-                <div class="col">
-                    <h3 class="card-title ">Detail Jamaah</h3>
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-xl-2 mb-xl-0 mb-4">
+                    <div class="card bg-transparent shadow-xl">
+                        <img src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" class="img-fluid border-radius-lg" alt="Responsive image">
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <a href="<?php echo site_url('jamaah/cetak_id_card/' . $jamaah['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span> ID Card</a>
-                    <a href="<?php echo site_url('jamaah/cetak_label_koper/' . $jamaah['id_jamaah']); ?>" class="btn btn-warning"><span class="fa fa-print"></span> Label</a>
-                    <a href="<?php echo site_url('jamaah/edit/' . $jamaah['id_jamaah']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span></a>
+                <?php
+                function generateStarRating($starCount)
+                {
+                    $output = '';
+                    for ($i = 1; $i <= 5; $i++) {
+                        if ($i <= $starCount) {
+                            $output .= '<i class="fas fa-star text-primary"></i>'; // Solid star icon
+                        } else {
+                            $output .= '<i class="far fa-star text-primary"></i>'; // Outline star icon
+                        }
+                    }
+                    return $output;
+                }
+                ?>
+                <div class="col-xl-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body pt-0 p-3 mt-3 mx-2">
+                                    <span class="text-xs">Nama Jamaah</span>
+                                    <h6 class="mb-0"><?php echo $jamaah['nama_jamaah']; ?></h6>
+                                    <span class="text-xs">NIK</span>
+                                    <h6 class="mb-0"><?php echo $jamaah['nik']; ?></h6>
+                                    <span class="text-xs">Nomor Paspor</span>
+                                    <h6 class="mb-0"><?php echo $jamaah['nomor_paspor'] ?></h6>
+                                    <span class="text-xs">Nomor Telepon</span>
+                                    <h6 class="mb-0"><?php echo $jamaah['nomor_telepon'] ?></h6>
+                                    <span class="text-xs">Email</span>
+                                    <h6 class="mb-0"><?php echo $jamaah['email'] ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <center>
-                    <div class="col-auto">
-                        <img class="img-fluid" style="max-width: 200px; max-height: 200px; border-radius: 1.5rem;" src="<?php echo base_url() . 'assets/images/' . $jamaah['jamaah_img']; ?>" alt="">
+    </div>
+    <div class="row">
+        <div class="col-md-7 mt-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex align-items-center">
+                        <h6>Riwayat Keberangkatan</h6>
+                        <a href="<?php echo site_url('jamaah/add_keberangkatan/') . $jamaah['id_jamaah']; ?>" class="btn bg-gradient-primary btn-sm ms-auto"><span class="fa fa-plus me-2"></span> Tambah Keberangkatan</a>
                     </div>
-                </center>
-            </div>
-            <br>
-            <div class="table-responsive">
-                <table class="table table-borderless table-striped">
-                    <tbody>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; No. KTP</td>
-                            <td><?php echo $jamaah['nik']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-book"></i>&nbsp; No. Paspor/Passport Number</td>
-                            <td><?php echo $jamaah['nomor_paspor']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-user"></i>&nbsp; Nama/Name</td>
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-phone"></i>&nbsp; Nomor HP</td>
-                            <td><?php echo $jamaah['nomor_telepon']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-map-marker"></i>&nbsp; Alamat</td>
-                            <td><?php echo $jamaah['alamat']; ?></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa fa-map-marker"></i>&nbsp; Email</td>
-                            <td><?php echo $jamaah['email']; ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <hr>
-            <div class="row justify-content-between">
-                <div class="col-md-9">
-                    <h3 class="card-title ">Riwayat Keberangkatan</h3>
                 </div>
-                <div class="col-auto">
-                    <a href="<?php echo site_url('jamaah/add_keberangkatan/' . $jamaah['id_jamaah']); ?>" class="btn btn-success"><span class="fa fa-plus"></span></a>
-                </div>
-            </div>
-            <br>
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tanggal Keberangkatan</th>
-                            <th scope="col">Paket</th>
-                            <th scope="col">Lama Hari</th>
-                            <th scope="col">Tanggal Manasik</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="card-body pt-4 p-3">
+                    <ul class="list-group">
                         <?php foreach ($record as $j) { ?>
-                            <tr>
-                                <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_keberangkatan']), 'd F Y'); ?></td>
-                                <td><?php echo $j['paket']; ?></td>
-                                <td><?php echo $j['lama_hari']; ?></td>
-                                <td><?php echo $tanggalConverted = date_format(date_create($j['tanggal_manasik']), 'd F Y'); ?></td>
-                                <td><a href="<?php echo site_url('jamaah/remove_record_keberangkatan/' . $j['id_record']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
-                            </tr>
+                            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                                <div class="d-flex flex-column">
+                                    <h6 class="mb-3 text-sm"><?php echo $tanggalConverted = date_format(date_create($j['tanggal_keberangkatan']), 'd F Y'); ?></h6>
+                                    <span class="mb-2 text-xs">Paket: <span class="text-dark font-weight-bold ms-sm-2"><?php echo $j['paket']; ?></span></span>
+                                    <span class="mb-2 text-xs">Lama Hari: <span class="text-dark ms-sm-2 font-weight-bold"><?php echo $j['lama_hari']; ?></span></span>
+                                    <span class="text-xs">Tanggal Manasik: <span class="text-dark ms-sm-2 font-weight-bold"><?php echo $tanggalConverted = date_format(date_create($j['tanggal_manasik']), 'd F Y'); ?></span></span>
+                                </div>
+                                <div class="ms-auto text-end">
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="<?php echo site_url('jamaah/remove_record_keberangkatan/' . $jamaah['id_jamaah']); ?>"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                </div>
+                            </li>
                         <?php } ?>
-                    </tbody>
-                </table>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

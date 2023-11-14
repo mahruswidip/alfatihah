@@ -19,12 +19,6 @@ class Paket_model extends CI_Model
         return $this->db->get_where('paket', array('id_paket' => $id_paket))->row_array();
     }
 
-    // function get_all_data_paket($id_paket)
-    // {
-    //     $this->db->get_where('paket', array('id_paket' => $id_paket))->row_array();
-    //     $this->db->join('keberangkatan', 'keberangkatan.id_keberangkatan=paket.fk_id_keberangkatan', 'left');
-    //     return $this->db->get('paket')->result_array();
-    // }
 
     /*
      * Get all paket count
@@ -55,6 +49,7 @@ class Paket_model extends CI_Model
         $this->db->where('record_keberangkatan.id_paket', $id_paket);
         return $this->db->get('record_keberangkatan')->result_array();
     }
+
     /*
      * Get all paket
      */
@@ -74,6 +69,7 @@ class Paket_model extends CI_Model
      */
     function add_paket($params, $gambar)
     {
+        $this->db->set('travel', $params['travel']);
         $this->db->set('nama_program', $params['nama_program']);
         $this->db->set('fk_id_keberangkatan', $params['fk_id_keberangkatan']);
         $this->db->set('lama_hari', $params['lama_hari']);
@@ -91,6 +87,7 @@ class Paket_model extends CI_Model
         $this->db->set('belum_termasuk', $params['belum_termasuk']);
         $this->db->set('paket_img', $gambar);
         $this->db->set('created_by', $params['created_by']);
+        $this->db->set('publish', $params['publish']);
         $this->db->insert('paket');
     }
 
