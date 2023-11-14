@@ -74,7 +74,7 @@
 						</div>
 						<button type="submit" class="btn btn-info pull-right">Simpan</button>
 						<div class="clearfix"></div>
-						<?php echo form_close(); ?>
+
 					</div>
 				</div>
 			</div>

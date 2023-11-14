@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <td><i class="fa fa-user"></i>&nbsp; Nama/Name</td>
-                            <td><?php echo $jamaah['nama_jamaah']; ?></td>
+                            <td> </td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-phone"></i>&nbsp; Nomor HP</td>

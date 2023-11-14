@@ -57,7 +57,6 @@ class Jamaah extends CI_Controller
 
     function view()
     {
-
         $search = $_POST['search']['value']; // Ambil data yang di ketik user pada textbox pencarian
         $limit = $_POST['length']; // Ambil data limit per page
         $start = $_POST['start']; // Ambil data start
@@ -374,7 +373,7 @@ class Jamaah extends CI_Controller
         );
 
         $this->Jamaah_model->update_jamaah($id_jamaah, $params);
-        redirect('jamaah/cetak_id_card/'.$id_jamaah);
+        redirect('jamaah/cetak_id_card/' . $id_jamaah);
     }
 
     function cetak_id_card($id_jamaah)

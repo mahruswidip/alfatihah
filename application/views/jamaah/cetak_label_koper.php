@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col">
             <!-- <?php
-            echo '<pre>';
-            print_r($hotel);
-            ?> -->
+                    echo '<pre>';
+                    print_r($hotel);
+                    ?> -->
             <div style="margin-top: 20px;">
                 <button type="button" id="btn_convert" class="btn btn-success"><span class="fa fa-download"></span> Halaman Depan Label Koper</button>
             </div>
